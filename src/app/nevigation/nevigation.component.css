@@ -1,0 +1,18 @@
+.mat-button, .siteName  {
+    color: white;
+    font-family: 'Alegreya Sans SC', sans-serif;
+}
+.siteLink, .siteName {
+    text-decoration-line: none;
+    font-size: 20pt;
+}
+.siteName:hover {
+    opacity: 0.7;
+}
+.mat-button {
+    font-size: 14pt;
+}
+
+.mat-toolbar {
+    background-color: #ffa726;
+}

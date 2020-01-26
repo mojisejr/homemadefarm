@@ -1,0 +1,10 @@
+.footer-wrapper {
+    background-color: #ffa726; 
+    margin-top: 3px;
+    height: 300px;
+}
+p, .mat-button{
+    color: white;
+    font-size: 16pt;
+    font-family: 'Alegreya Sans SC', sans-serif;
+}

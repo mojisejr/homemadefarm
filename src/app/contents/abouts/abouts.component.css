@@ -1,0 +1,37 @@
+.farm-qoute, .item-name {
+    font-family: 'Kanit', sans-serif;
+    font-size: large;
+}
+.font-qoute {
+    color: lightsalmon;
+}
+.item-name {
+    margin-right: 1rem;
+    max-width: 600px;
+    text-align: right;
+}
+.about-card {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    max-width: 700px;
+}
+.filmav {
+    background-image: url("../../../assets/filmavatar.jpg");
+    background-size: cover;
+}
+.numav {
+    background-image: url("../../../assets/numavatar.jpg");
+    background-size: cover;
+}
+.toonav {
+    background-image: url("../../../assets/toonavatar.jpg");
+    background-size: cover;
+}
+.dardarav {
+    background-image: url("../../../assets/dardaravatar.jpg");
+    background-size: cover;
+}
+.mayavatar {
+    background-image: url("../../../assets/mayavatar.jpg");
+    background-size: cover;
+}
