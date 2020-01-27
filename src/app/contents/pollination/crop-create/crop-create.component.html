@@ -1,0 +1,21 @@
+<div class="formWrapper" fxLayout="column">
+    <h3>Create New Crop</h3>
+    <form [formGroup]="cropForm" (ngSubmit)="onSubmit()" fxLayout="column">
+        <mat-form-field>
+            <input 
+            matInput
+            formControlName="cropId"  
+            placeholder="CROP-ID">
+            <mat-error>Must not be empty</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <input 
+            matInput
+            type="date"
+            formControlName="createdAt" 
+            placeholder="Created at">
+            <mat-error>Must not be empty</mat-error>
+        </mat-form-field>
+        <button type="submit" mat-raised-button color="primary">Create</button>
+    </form>
+</div>

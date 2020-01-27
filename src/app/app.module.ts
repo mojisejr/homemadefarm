@@ -24,6 +24,7 @@ import { ProductchartsComponent } from './contents/productcharts/productcharts.c
 import { PollinationComponent } from './contents/pollination/pollination.component';
 import { PollinationCreateComponent } from './contents/pollination/pollination-create/pollination-create.component'
 import { PollinationListComponent } from './contents/pollination/pollination-list/pollination-list.component'
+import { CropCreateComponent } from './contents/pollination/crop-create/crop-create.component'
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { PollinationListComponent } from './contents/pollination/pollination-lis
     PollinationComponent,
     PollinationCreateComponent,
     PollinationListComponent,
+    CropCreateComponent
   ],
   imports: [
     BrowserModule,

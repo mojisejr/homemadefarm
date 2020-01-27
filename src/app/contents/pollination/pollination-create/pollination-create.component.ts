@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core'
 import { FormGroup, FormControl, Validators } from '@angular/forms'
 import { PollinationService } from '../pollination.service'
 import { pollination } from '../pollination.model'
+import { Crop } from '../crop.model'
 import { MatSnackBar } from '@angular/material/snack-bar'
 
 @Component({
@@ -12,6 +13,7 @@ import { MatSnackBar } from '@angular/material/snack-bar'
 
 export class PollinationCreateComponent implements OnInit {
     pollinationForm: FormGroup;
+    cropsList: Crop[] = [];
 
     constructor(private plService: PollinationService, private snackbar: MatSnackBar ) {}
 
@@ -20,6 +22,10 @@ export class PollinationCreateComponent implements OnInit {
             "cropId": new FormControl(null, [Validators.required]),
             "tagColor": new FormControl(null, [Validators.required]),
             "createdAt": new FormControl(null, [Validators.required]),
+        })
+
+        this.plService.cropsRef.valueChanges().subscribe(data => {
+            this.cropsList = data;
         })
     }
 

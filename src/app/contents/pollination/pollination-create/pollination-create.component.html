@@ -2,11 +2,11 @@
     <h3>Add Pollination</h3>
     <form [formGroup]="pollinationForm" (ngSubmit)="onSubmit()">
         <mat-form-field>
-            <input 
-            matInput
-            formControlName="cropId"  
-            placeholder="CROP-ID">
-            <mat-error>Must not be empty</mat-error>
+            <mat-select>
+                <mat-option *ngFor="let crop of cropsList" [value]="crop.cropId">
+                    {{ crop.cropId }}
+                </mat-option>
+            </mat-select>
         </mat-form-field>
         <mat-form-field>
             <input 

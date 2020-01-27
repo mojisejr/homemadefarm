@@ -13,7 +13,8 @@ import {
     MatInputModule,
     MatSnackBarModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatSelectModule
 } from '@angular/material';
 
 const MaterialComponents = [
@@ -30,7 +31,8 @@ const MaterialComponents = [
     MatInputModule,
     MatSnackBarModule,
     MatTableModule,    
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatSelectModule
 ];
 
 @NgModule ({

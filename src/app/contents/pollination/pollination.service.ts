@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core'
 import { pollination } from './pollination.model'
+import { Crop } from './crop.model'
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore'
 
 @Injectable({
@@ -7,17 +8,27 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/fire
 })
 export class PollinationService {
 
-    private dbPath ="/pollination";
+    private pollinationPath ="/pollination";
+    private cropsPath = "/crops";
 
     pollinationRef: AngularFirestoreCollection<pollination> = null;
+    cropsRef: AngularFirestoreCollection<Crop> = null;
 
 
     constructor(private db: AngularFirestore) {
-        this.pollinationRef = db.collection(this.dbPath);
+        this.pollinationRef = db.collection(this.pollinationPath);
+        this.cropsRef = db.collection(this.cropsPath);
     }
 
     addPollination(pollination: pollination) {
         this.pollinationRef.add({ ...pollination });
+    }
+
+    addCrop(crop: Crop) {
+        this.cropsRef.add({ 
+            ...crop,
+            status: 'Initial'
+         });
     }
 
     deleteTag(id: string) {
@@ -27,5 +38,8 @@ export class PollinationService {
 
     getPollinationList(): AngularFirestoreCollection<pollination> {
         return this.pollinationRef;
+    }
+    getCropsList(): AngularFirestoreCollection<Crop> {
+        return this.cropsRef;
     }
 }
