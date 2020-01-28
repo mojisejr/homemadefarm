@@ -26,6 +26,9 @@ import { PollinationCreateComponent } from './contents/pollination/pollination-c
 import { PollinationListComponent } from './contents/pollination/pollination-list/pollination-list.component'
 import { CropCreateComponent } from './contents/pollination/crop-create/crop-create.component'
 
+//entry component
+import { DeleteDialogComponent } from './contents/pollination/pollination-list/delete-dialog.component' 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,7 +42,8 @@ import { CropCreateComponent } from './contents/pollination/crop-create/crop-cre
     PollinationComponent,
     PollinationCreateComponent,
     PollinationListComponent,
-    CropCreateComponent
+    CropCreateComponent,
+    DeleteDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -53,6 +57,7 @@ import { CropCreateComponent } from './contents/pollination/crop-create/crop-cre
     HttpClientModule
   ],
   providers: [{provide: FirestoreSettingsToken, useValue: {}}],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [DeleteDialogComponent]
 })
 export class AppModule { }

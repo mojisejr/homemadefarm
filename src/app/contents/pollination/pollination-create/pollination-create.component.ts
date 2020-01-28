@@ -35,6 +35,7 @@ export class PollinationCreateComponent implements OnInit {
             this.snackbar.open(`Crop: ${ this.pollinationForm.value.cropId } was successfully created!`, null, { duration: 2000 });
             this.pollinationForm.reset();
         } else {
+            console.log(this.pollinationForm.value);
             this.snackbar.open(`Something went wrong.. try again`, null, { duration: 2000 });
         }
     }

@@ -33,7 +33,13 @@ export class PollinationService {
 
     deleteTag(id: string) {
         this.db.doc('/pollination/' + id)
-        .delete();
+        .delete()
+        .then(data => {
+            console.log("delete done")
+        })
+        .catch(err => {
+            console.log(err);
+        })
     }
 
     getPollinationList(): AngularFirestoreCollection<pollination> {

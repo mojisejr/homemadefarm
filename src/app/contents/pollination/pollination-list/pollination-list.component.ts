@@ -6,10 +6,14 @@ import { MatTableDataSource } from '@angular/material/table'
 import { Observable } from 'rxjs'
 import { map } from 'rxjs/operators'
 
+
+import { MatDialog } from '@angular/material/dialog'
+import { DeleteDialogComponent } from "./delete-dialog.component"
+
 @Component({
     selector: 'app-pollination-list',
     templateUrl: './pollination-list.component.html',
-    styleUrls: ['./pollination-list.component.css']
+    styleUrls: ['./pollination-list.component.css'],
 })
 
 export class PollinationListComponent implements OnInit {
@@ -20,7 +24,7 @@ export class PollinationListComponent implements OnInit {
 
     @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
-    constructor(private plService: PollinationService) {}
+    constructor(private plService: PollinationService, public dialog: MatDialog) {}
 
     ngOnInit() {
         this.plService.getPollinationList().snapshotChanges()
@@ -37,7 +41,19 @@ export class PollinationListComponent implements OnInit {
         })
     }
 
-    onDelete(id: string)  {
-        this.plService.deleteTag(id);
+    onDelete(data: pollination)  {
+        // this.plService.deleteTag(id);
+        const dialogRef = this.dialog.open(DeleteDialogComponent, {
+            data: {
+                id: data.id,
+                cropId: data.cropId,
+                tagColor: data.tagColor
+            }
+        });
+        dialogRef.afterClosed().subscribe(dataFromDialog => {
+            if(dataFromDialog) {
+                this.plService.deleteTag(dataFromDialog);
+            }
+        })
     }
 }
