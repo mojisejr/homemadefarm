@@ -3,14 +3,13 @@
     <div fxHide.xs fxFlex="1 1" fxLayout="row" fxLayoutAlign="flex-end" class="menu-wrapper">
         <a mat-button routerLink="/about">about</a>
         <a mat-button routerLink="/pollination">Pollination</a>
-        <a mat-button href="/productcharts">product charts</a>
         <a mat-button routerLink="/location">location</a>
     </div>
     <div fxHide.gt-xs fxFlex="1 1" fxLayoutAlign="flex-end" class="menu-wrapper">
             <button mat-button [matMenuTriggerFor]="appMenu"><mat-icon>menu</mat-icon></button>
         <mat-menu #appMenu="matMenu">
             <a mat-menu-item routerLink="/about"><mat-icon>announcement</mat-icon>about</a>
-            <a mat-menu-item href="/productcharts"><mat-icon>equalizer</mat-icon>product charts</a>
+            <a mat-menu-item routerLink="/pollination"><mat-icon>equalizer</mat-icon>pollination</a>
             <a mat-menu-item routerLink="/location"><mat-icon>search</mat-icon>location</a>
         </mat-menu>
     </div>

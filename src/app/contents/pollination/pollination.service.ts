@@ -35,7 +35,7 @@ export class PollinationService {
         this.db.doc('/pollination/' + id)
         .delete()
         .then(data => {
-            console.log("delete done")
+            // console.log("delete done")
         })
         .catch(err => {
             console.log(err);

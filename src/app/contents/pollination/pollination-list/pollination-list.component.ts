@@ -20,7 +20,7 @@ export class PollinationListComponent implements OnInit {
     isLoaded = false;
     pollinations: pollination[];
     dataSource: any;
-    displayedColumns: string[] = ['cropId', 'tagColor', 'createdAt', 'action'];
+    displayedColumns: string[] = ['cropId', 'tagColor', 'createdAt', 'dayCount', 'action'];
 
     @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
@@ -32,9 +32,11 @@ export class PollinationListComponent implements OnInit {
             this.pollinations = data.map(e => {
                 return {
                     id: e.payload.doc.id,
-                    ...e.payload.doc.data()
+                    ...e.payload.doc.data(),
+                    dayCount: this.dateCalc(e.payload.doc.data().createdAt)
                 } as pollination;
             })
+            console.log(this.pollinations);
             this.isLoaded = true;
             this.dataSource = new MatTableDataSource<pollination>(this.pollinations);
             this.dataSource.paginator = this.paginator;
@@ -55,5 +57,26 @@ export class PollinationListComponent implements OnInit {
                 this.plService.deleteTag(dataFromDialog);
             }
         })
+    }
+
+    dateCalc (in_date: Date) {
+        const onedayMs = 1000*60*60*24;
+
+        //cannot use in_date directly
+        const in_dateStr = in_date.toString();
+        const newDate = new Date(in_dateStr);
+
+        
+
+        const diff = new Date().getTime() - newDate.getTime();
+
+        return Math.round(diff/onedayMs);
+    }
+
+    applyFilter(filterValue: String) {
+        this.dataSource.filter = filterValue.trim().toLowerCase();
+    }
+    showDetails(value: any) {
+        console.log(value);
     }
 }

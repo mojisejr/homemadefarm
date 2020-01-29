@@ -8,7 +8,10 @@
         </div>
     </mat-tab>
     <mat-tab label="Crops">
-        <div class="crop-container" fxLayout="column" fxLayout.gt-xs="row" fxLayoutAlign.gt-sx="center center">
+        <div class="crop-container" fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap.gt-xs="20px" fxLayoutAlign.gt-sx="center center">
+            <mat-card>
+                <app-crop-create></app-crop-create>
+            </mat-card>
             <mat-card>
                 <app-crop-create></app-crop-create>
             </mat-card>

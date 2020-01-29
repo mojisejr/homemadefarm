@@ -1,6 +1,7 @@
 export interface pollination {
     id?: string,
-    corpId: string,
+    cropId: string,
     tagColor: string,
+    dayCount?: number,
     createdAt: Date
 }

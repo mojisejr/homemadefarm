@@ -1,6 +1,6 @@
 <div>
     <mat-form-field fxFlex="100%">
-        <input matInput type="search" placeholder="filter">
+        <input matInput type="search" (keyup)="applyFilter($event.target.value)" placeholder="Filter">
     </mat-form-field>
 </div>
 <div *ngIf="!isLoaded">Loading ... </div>
@@ -20,6 +20,11 @@
         <mat-cell *matCellDef="let element"> {{ element.createdAt }}</mat-cell>
     </ng-container>
 
+    <ng-container matColumnDef="dayCount">
+        <mat-header-cell *matHeaderCellDef>Count</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{ element.dayCount }}</mat-cell>
+    </ng-container>
+
     <ng-container matColumnDef="action">
         <mat-header-cell *matHeaderCellDef>Action</mat-header-cell>
         <mat-cell *matCellDef="let element">
@@ -28,6 +33,6 @@
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    <mat-row (click)="showDetails(row)" *matRowDef="let row; columns: displayedColumns;"></mat-row>
 </table>
 <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
