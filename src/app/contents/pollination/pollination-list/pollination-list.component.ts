@@ -36,7 +36,7 @@ export class PollinationListComponent implements OnInit {
                     dayCount: this.dateCalc(e.payload.doc.data().createdAt)
                 } as pollination;
             })
-            console.log(this.pollinations);
+            // console.log(this.pollinations);
             this.isLoaded = true;
             this.dataSource = new MatTableDataSource<pollination>(this.pollinations);
             this.dataSource.paginator = this.paginator;
@@ -76,7 +76,9 @@ export class PollinationListComponent implements OnInit {
     applyFilter(filterValue: String) {
         this.dataSource.filter = filterValue.trim().toLowerCase();
     }
-    showDetails(value: any) {
-        console.log(value);
+    showDetails() {
+        this.plService.getFullList().subscribe(data => {
+            console.log(data);
+        })
     }
 }
