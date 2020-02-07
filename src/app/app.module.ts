@@ -26,6 +26,8 @@ import { PollinationCreateComponent } from './contents/pollination/pollination-c
 import { PollinationListComponent } from './contents/pollination/pollination-list/pollination-list.component'
 import { CropCreateComponent } from './contents/pollination/crop-create/crop-create.component'
 
+import { CropListComponent } from './contents/pollination/crop-list/crop-list.component'
+
 //entry component
 import { DeleteDialogComponent } from './contents/pollination/pollination-list/delete-dialog.component' 
 
@@ -43,7 +45,8 @@ import { DeleteDialogComponent } from './contents/pollination/pollination-list/d
     PollinationCreateComponent,
     PollinationListComponent,
     CropCreateComponent,
-    DeleteDialogComponent
+    DeleteDialogComponent,
+    CropListComponent
   ],
   imports: [
     BrowserModule,

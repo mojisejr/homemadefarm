@@ -77,8 +77,5 @@ export class PollinationListComponent implements OnInit {
         this.dataSource.filter = filterValue.trim().toLowerCase();
     }
     showDetails() {
-        this.plService.getFullList().subscribe(data => {
-            console.log(data);
-        })
     }
 }

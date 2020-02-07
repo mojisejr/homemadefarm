@@ -1,0 +1,21 @@
+<div>
+    <mat-form-field>
+        <mat-label>Crop Select</mat-label>
+        <mat-select *ngIf="isLoaded" [(value)] = "selectedCrop" (selectionChange)="onChange()">
+            <mat-option *ngFor="let c of cropList" [value]="c.cropId">
+                {{ c.cropId }}
+            </mat-option>
+        </mat-select>
+        <mat-spinner *ngIf="!isLoaded"></mat-spinner>
+    </mat-form-field>
+    <mat-form-field *ngIf="typeArray.length > 0">
+        <mat-label>Specie Select</mat-label>
+        <mat-select [(value)] ="selectedType">
+            <mat-option *ngFor="let t of typeArray" [value] = 't'>
+                {{ t }}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+</div>
+
+{{selectedType}}
