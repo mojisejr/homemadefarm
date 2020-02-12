@@ -19,7 +19,7 @@
         </mat-card-content>
         <mat-divider></mat-divider>
         <mat-card-actions fxLayoutAlign="end">
-            <button mat-raised-button color="primary">Details</button>
+            <button (click)="onDetail(data)" [routerLink]="['/pollination', data.cropId]" mat-raised-button color="primary">Details</button>
         </mat-card-actions>
     </mat-card>
 </div>

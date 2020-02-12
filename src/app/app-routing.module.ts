@@ -7,6 +7,7 @@ import { AboutsComponent } from './contents/abouts/abouts.component';
 import { ReserveOrderComponent } from './contents/reserve-order/reserve-order.component';
 import { ProductchartsComponent } from './contents/productcharts/productcharts.component';
 import { PollinationComponent } from './contents/pollination/pollination.component';
+import { CropDetailsComponent } from './contents/pollination/crop-details/crop-details.component';
 
 const appRoutes: Routes = [
     { path: '', component: MainComponent },
@@ -15,7 +16,8 @@ const appRoutes: Routes = [
     { path: 'about', component: AboutsComponent},
     { path: 'order', component: ReserveOrderComponent},
     { path: 'productcharts', component: ProductchartsComponent},
-    { path: 'pollination', component: PollinationComponent}
+    { path: 'pollination', component: PollinationComponent},
+    { path: 'pollination/:id', component: CropDetailsComponent}
 ];
 
 

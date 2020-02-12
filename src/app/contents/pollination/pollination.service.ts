@@ -3,7 +3,7 @@ import { pollination } from './pollination.model'
 import { Crop } from './crop.model'
 import { Melon } from './melon.model'
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore'
-import { Observable, of, combineLatest } from 'rxjs';
+import { Observable, of, combineLatest, Subject } from 'rxjs';
 import { switchMap, map } from 'rxjs/operators'
 import { uniq } from 'lodash'
 
@@ -11,6 +11,7 @@ import { uniq } from 'lodash'
     providedIn: 'root',
 })
 export class PollinationService {
+    cropChanged = new Subject<any>();
 
     private pollinationPath ="/pollination";
     private cropsPath = "/crops";

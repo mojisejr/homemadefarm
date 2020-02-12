@@ -28,4 +28,8 @@ export class CropListComponent implements OnInit {
             this.isLoaded = true;
         })
     }
+
+    onDetail(data) {
+        this.plService.cropChanged.next( ...data);
+    }
 }
