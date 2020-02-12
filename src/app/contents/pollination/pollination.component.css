@@ -1,3 +1,10 @@
-.add-p-container, .crop-container {
+/* .add-p-container, .crop-container {
     margin: 20px;
+} */
+.header {
+    padding: 1rem;
+}
+.container {
+    height: 100vh;
+    /* background-color: lightblue; */
 }

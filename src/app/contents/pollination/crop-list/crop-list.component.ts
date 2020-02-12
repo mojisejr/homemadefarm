@@ -13,9 +13,6 @@ import { Crop } from '../crop.model'
 export class CropListComponent implements OnInit {
     isLoaded = false;
     cropList: Crop[];
-    selectedCrop = null;
-    typeArray = [];
-    selectedType = null;
     constructor(private plService: PollinationService) {}
 
     ngOnInit() {
@@ -27,19 +24,8 @@ export class CropListComponent implements OnInit {
                     ...e.payload.doc.data()
                 } as Crop;
             })
+            console.log(this.cropList);
             this.isLoaded = true;
         })
-    }
-
-    onChange() {
-        if(this.selectedCrop != null) {
-            this.plService.getCropDetails(this.selectedCrop)
-            .subscribe(data => {
-                console.log(data);
-                data[0]['species'].forEach(element => {
-                    this.typeArray.push(element);
-                });
-            })
-        }
     }
 }

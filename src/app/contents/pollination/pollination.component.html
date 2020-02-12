@@ -1,5 +1,5 @@
-<mat-tab-group>
-    <!-- <mat-tab label="Pollination">
+<!-- <mat-tab-group>
+    <mat-tab label="Pollination">
         <div class="add-p-container" fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap.gt-xs="20px" fxLayoutAlign.gt-xs="start center">
             <mat-card>
             <app-pollination-create fxFlex="100%" fxFlex.gt-xs="300px"></app-pollination-create>
@@ -13,7 +13,7 @@
                 <app-crop-create></app-crop-create>
             </mat-card>
         </div>
-    </mat-tab> -->
+    </mat-tab>
     <mat-tab label="Testing">
         <div class="crop-container" fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap.gt-xs="20px" fxLayoutAlign.gt-sx="center center">
             <mat-card>
@@ -21,4 +21,8 @@
             </mat-card>
         </div>
     </mat-tab>
-</mat-tab-group>
+</mat-tab-group> -->
+<div fxLayout="column" class="container">
+    <div fxLayout="row" fxLayoutAlign="space-between" class="header"><h1>Crop List</h1><button fxFlexAlign="center" mat-fab color="primary">New</button></div>
+    <app-crop-list></app-crop-list>
+</div>
