@@ -21,15 +21,12 @@ export class CropListComponent implements OnInit {
         .subscribe(list => {
             this.cropList = list.map(e => {
                 return {
+                    id: e.payload.doc.id,
                     ...e.payload.doc.data()
                 } as Crop;
             })
             console.log(this.cropList);
             this.isLoaded = true;
         })
-    }
-
-    onDetail(data) {
-        this.plService.cropChanged.next( ...data);
     }
 }

@@ -1,10 +1,10 @@
-import { Component, OnInit, OnDestroy } from '@angular/core'
+import { Component, OnInit} from '@angular/core'
 import { Melon } from '../melon.model'
 import { pollination } from '../pollination.model'
 import { Crop } from '../crop.model'
 import { PollinationService } from '../pollination.service'
 import { ActivatedRoute } from '@angular/router'
-import { Subscription } from 'rxjs'
+import { Observable } from 'rxjs'
 
 
 @Component({
@@ -13,29 +13,25 @@ import { Subscription } from 'rxjs'
     styleUrls: ['./crop-details.component.css']
 })
 
-export class CropDetailsComponent implements OnInit, OnDestroy {
+export class CropDetailsComponent implements OnInit {
 
     isLoaded = false;
     melon: Melon[];
     types: pollination[];
-    cropId = null;
-    cropDetails: Crop[];
-    cropSub: Subscription;
+    docId = null;
+    cropDetails: Observable<Crop>;
     constructor(private ps: PollinationService,
         private route: ActivatedRoute) {}
 
     ngOnInit() {
         this.route.params.subscribe(id => {
-            this.cropId = id['id'];
+            this.docId = id['id'];
         })
-        this.cropSub = this.ps.cropChanged.subscribe(crop => {
-            console.log(crop);
-        })
+        if(this.docId != null) {
+            this.cropDetails = this.ps.getCropById(this.docId);
+        } else {
+            this.isLoaded = false;
+        }
         this.isLoaded = true;
     }
-
-    ngOnDestroy() {
-        this.cropSub.unsubscribe();
-    }
-
 }

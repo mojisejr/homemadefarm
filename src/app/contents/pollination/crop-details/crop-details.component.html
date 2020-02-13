@@ -1,14 +1,50 @@
-<div fxLayout="column" class="container">
-    <div class="header">
-        <h1>Room: {{ cropId }}</h1>
+<div *ngIf="isLoaded" fxLayout="column" class="container">
+    <div fxLayoutAlign="space-between center" class="header">
+        <div class="header-details">
+            <h1>Room: {{ (cropDetails | async)?.room }}</h1>
+            <h3>Crop: {{ (cropDetails | async)?.crop }}</h3>
+        </div>
+        <div class="header-menu">
+            <button routerLink="/pollination" mat-fab>back</button>
+        </div>
     </div>
-    <div class="dashboard">
-        <div class="crop-details">crop details</div>
-        <div class="totray">totray</div>
-        <div class="tobag">tobag</div>
+    <div fxLayout="row wrap" fxLayoutGap="1rem" fxLayoutAlign="center center" class="dashboard">
+        <div class="crop-details">
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title>Crop details</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    content
+                </mat-card-content>
+            </mat-card>
+        </div>
+        <div class="totray">
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title>Crop details</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    content
+                </mat-card-content>
+            </mat-card>
+        </div>
+        <div class="tobag">
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title>Crop details</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    content
+                </mat-card-content>
+            </mat-card>
+        </div>
         <div class="tagTable">
             <div class="tagTable-selector">selector</div>
             <div class="tagTable-table">table</div>
         </div>
     </div>
+</div>
+<div *ngIf="!isLoaded" fxLayoutAlign="center center" class="spinner">
+    <mat-spinner></mat-spinner>
 </div>
