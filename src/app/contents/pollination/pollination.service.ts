@@ -15,6 +15,7 @@ export class PollinationService {
 
     private pollinationPath ="/pollination";
     private cropsPath = "/crops";
+    private melonPath = "/melon";
 
     pollinationRef: AngularFirestoreCollection<pollination> = null;
     cropsRef: AngularFirestoreCollection<Crop> = null;
@@ -24,6 +25,7 @@ export class PollinationService {
     constructor(private db: AngularFirestore) {
         this.pollinationRef = db.collection(this.pollinationPath);
         this.cropsRef = db.collection(this.cropsPath);
+        this.melonRef = db.collection(this.melonPath);
     }
 
     addPollination(pollination: pollination) {

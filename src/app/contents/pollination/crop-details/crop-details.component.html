@@ -1,14 +1,14 @@
-<div *ngIf="isLoaded" fxLayout="column" class="container">
+<div *ngIf="cropDetails | async; else loading; let crop" fxLayout="column" class="container">
     <div fxLayoutAlign="space-between center" class="header">
         <div class="header-details">
-            <h1>Room: {{ (cropDetails | async)?.room }}</h1>
-            <h3>Crop: {{ (cropDetails | async)?.crop }}</h3>
+            <h1>Room: {{ crop.room }}</h1>
+            <h3>Crop: {{ crop.crop }}</h3>
         </div>
         <div class="header-menu">
             <button routerLink="/pollination" mat-fab>back</button>
         </div>
     </div>
-    <div fxLayout="column" fxLayoutGap="1rem" fxLayoutAlign="center center" class="dashboard">
+    <div fxLayout="column" fxLayoutGap="1rem" fxLayoutAlign="center" class="dashboard">
         <div fxLayout="row wrap" fxLayoutGap="1rem" class="row-content-1">
             <div class="crop-details">
                 <mat-card>
@@ -16,7 +16,7 @@
                         <mat-card-title>Created At</mat-card-title>
                     </mat-card-header>
                     <mat-card-content>
-                        {{ (cropDetails | async)?.createdAt}}
+                        {{ crop.createdAt }}
                     </mat-card-content>
                 </mat-card>
             </div>
@@ -25,8 +25,8 @@
                     <mat-card-header>
                         <mat-card-title>toTrayAt</mat-card-title>
                     </mat-card-header>
-                    <mat-card-content>
-                        {{ (cropDetails | async)?.toTrayAt}}
+                    <mat-card-content *ngIf="crop.toTrayAt != null; else trayUpdate;">
+                       {{ crop.toTrayAt }}
                     </mat-card-content>
                 </mat-card>
             </div>
@@ -35,8 +35,8 @@
                     <mat-card-header>
                         <mat-card-title>toBagAt</mat-card-title>
                     </mat-card-header>
-                    <mat-card-content>
-                        {{ (cropDetails | async)?.toBagAt}}
+                    <mat-card-content *ngIf="crop.toBagAt != null; else bagUpdate;">
+                        {{ crop.toBagAt }}
                     </mat-card-content>
                 </mat-card>
             </div>
@@ -46,18 +46,66 @@
                 <mat-form-field>
                     <mat-label>Type select:</mat-label>
                     <mat-select (selectionChange) = "onTypeSelectionChange($event)">
-                        <mat-option *ngFor="let item of (cropDetails | async)?.species" [value]="item"> {{ item }}</mat-option>
+                        <mat-option *ngFor="let item of crop.species" [value]="item"> {{ item }}</mat-option>
                     </mat-select>
                 </mat-form-field>
+                <!-- <ng-container *ngIf="all$ | async; else loading; let all">
+                    <ul>
+                        <li *ngFor = "let type of all">{{ type.tagColor }} est: {{ type.estHarvestDate }}</li>
+                    </ul>
+                </ng-container> -->
             </div>
-            <div class="tagTable-table">
-                <ul>
-                    <li *ngFor = "let tagColor of (types | async)">{{ tagColor?.tagColor }}, {{ tagColor?.createdAt }}</li>
-                </ul>
+            <div *ngIf="all$ | async; let dataSource" class="tagTable-table">
+                <mat-table [dataSource]="dataSource">
+                    <ng-container matColumnDef="tagColor">
+                        <mat-header-cell *matHeaderCellDef>tagColor</mat-header-cell>
+                        <mat-cell *matCellDef="let element">{{ element.tagColor }}</mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="createdAt">
+                        <mat-header-cell *matHeaderCellDef>createdAt</mat-header-cell>
+                        <mat-cell *matCellDef="let element">{{ element.createdAt }}</mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="currentDay">
+                        <mat-header-cell *matHeaderCellDef>currentDay</mat-header-cell>
+                        <mat-cell *matCellDef="let element">{{ element.currentDay }}</mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="dayLeft">
+                        <mat-header-cell *matHeaderCellDef>dayLeft</mat-header-cell>
+                        <mat-cell *matCellDef="let element">{{ element.dayLeft }}</mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="estHarvestDate">
+                        <mat-header-cell *matHeaderCellDef>estHarvestDate</mat-header-cell>
+                        <mat-cell *matCellDef="let element">{{ element.estHarvestDate }}</mat-cell>
+                    </ng-container>
+
+                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                </mat-table>
             </div>
         </div>
     </div>
 </div>
-<div *ngIf="!isLoaded" fxLayoutAlign="center center" class="spinner">
-    <mat-spinner></mat-spinner>
-</div>
+
+<ng-template #loading>
+    <div class="spinner" fxLayoutAlign="center center">
+        <mat-spinner></mat-spinner>
+    </div>
+</ng-template>
+
+<ng-template #trayUpdate>
+    <mat-form-field>
+        <input type="date" matInput>
+    </mat-form-field>
+    <button mat-button color="primary">Add</button>
+</ng-template>
+
+<ng-template #bagUpdate>
+    <mat-form-field>
+        <input type="date" matInput>
+    </mat-form-field>
+    <button mat-button color="primary">Add</button>
+</ng-template>
