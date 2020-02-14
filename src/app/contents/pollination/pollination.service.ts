@@ -51,11 +51,17 @@ export class PollinationService {
     getPollinationList(): AngularFirestoreCollection<pollination> {
         return this.pollinationRef;
     }
+    getTagColorById(docId) {
+        return this.db.collection<pollination>('/pollination', ref => ref.where('docId', "==", docId)).valueChanges();
+    }
     getCropsList(): AngularFirestoreCollection<Crop> {
         return this.cropsRef;
     }
     getCropById(docId: string) {
         return this.cropsRef.doc<Crop>(docId).valueChanges();
+    }
+    getMelonById(melon) {
+        return this.melonRef.doc<Melon>(melon).valueChanges();
     }
     // getCropDetails(cropId) {
     //     return this.db.collection<Crop>('crops', ref => ref.where('cropId', "==", cropId)).valueChanges()

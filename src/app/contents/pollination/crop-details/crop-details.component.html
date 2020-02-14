@@ -8,40 +8,53 @@
             <button routerLink="/pollination" mat-fab>back</button>
         </div>
     </div>
-    <div fxLayout="row wrap" fxLayoutGap="1rem" fxLayoutAlign="center center" class="dashboard">
-        <div class="crop-details">
-            <mat-card>
-                <mat-card-header>
-                    <mat-card-title>Crop details</mat-card-title>
-                </mat-card-header>
-                <mat-card-content>
-                    content
-                </mat-card-content>
-            </mat-card>
-        </div>
-        <div class="totray">
-            <mat-card>
-                <mat-card-header>
-                    <mat-card-title>Crop details</mat-card-title>
-                </mat-card-header>
-                <mat-card-content>
-                    content
-                </mat-card-content>
-            </mat-card>
-        </div>
-        <div class="tobag">
-            <mat-card>
-                <mat-card-header>
-                    <mat-card-title>Crop details</mat-card-title>
-                </mat-card-header>
-                <mat-card-content>
-                    content
-                </mat-card-content>
-            </mat-card>
+    <div fxLayout="column" fxLayoutGap="1rem" fxLayoutAlign="center center" class="dashboard">
+        <div fxLayout="row wrap" fxLayoutGap="1rem" class="row-content-1">
+            <div class="crop-details">
+                <mat-card>
+                    <mat-card-header>
+                        <mat-card-title>Created At</mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content>
+                        {{ (cropDetails | async)?.createdAt}}
+                    </mat-card-content>
+                </mat-card>
+            </div>
+            <div class="totray">
+                <mat-card>
+                    <mat-card-header>
+                        <mat-card-title>toTrayAt</mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content>
+                        {{ (cropDetails | async)?.toTrayAt}}
+                    </mat-card-content>
+                </mat-card>
+            </div>
+            <div class="tobag">
+                <mat-card>
+                    <mat-card-header>
+                        <mat-card-title>toBagAt</mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content>
+                        {{ (cropDetails | async)?.toBagAt}}
+                    </mat-card-content>
+                </mat-card>
+            </div>
         </div>
         <div class="tagTable">
-            <div class="tagTable-selector">selector</div>
-            <div class="tagTable-table">table</div>
+            <div class="tagTable-selector">
+                <mat-form-field>
+                    <mat-label>Type select:</mat-label>
+                    <mat-select (selectionChange) = "onTypeSelectionChange($event)">
+                        <mat-option *ngFor="let item of (cropDetails | async)?.species" [value]="item"> {{ item }}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="tagTable-table">
+                <ul>
+                    <li *ngFor = "let tagColor of (types | async)">{{ tagColor?.tagColor }}, {{ tagColor?.createdAt }}</li>
+                </ul>
+            </div>
         </div>
     </div>
 </div>

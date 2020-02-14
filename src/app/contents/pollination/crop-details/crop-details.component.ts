@@ -4,7 +4,8 @@ import { pollination } from '../pollination.model'
 import { Crop } from '../crop.model'
 import { PollinationService } from '../pollination.service'
 import { ActivatedRoute } from '@angular/router'
-import { Observable } from 'rxjs'
+import { Observable, of } from 'rxjs'
+import { switchMap, map, combineLatest } from 'rxjs/operators'
 
 
 @Component({
@@ -17,7 +18,8 @@ export class CropDetailsComponent implements OnInit {
 
     isLoaded = false;
     melon: Melon[];
-    types: pollination[];
+    types: Observable<pollination[]>;
+    all$: Observable<{types: pollination[], melon: Melon[]}>;
     docId = null;
     cropDetails: Observable<Crop>;
     constructor(private ps: PollinationService,
@@ -33,5 +35,18 @@ export class CropDetailsComponent implements OnInit {
             this.isLoaded = false;
         }
         this.isLoaded = true;
+    }
+
+    onTypeSelectionChange({ value }) {
+        if(value != null && this.docId != null) {
+            this.all$ = combineLatest(
+                this.ps.getTagColorById(this.docId),
+                this.ps.getMelonById(value)
+            ).pipe(
+                map(([types, melon]) => {
+                    return {types, melon}
+                })
+            )
+        }
     }
 }
