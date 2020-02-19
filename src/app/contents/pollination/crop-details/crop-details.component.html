@@ -41,7 +41,15 @@
                 </mat-card>
             </div>
         </div>
-        <div class="tagTable">
+        <mat-card>
+            <mat-card-header>
+                <mat-card-title>Status</mat-card-title>
+            </mat-card-header>
+            <mat-card-content fxLayoutAlign="center center">
+                <h3>{{ crop.status }}</h3>
+            </mat-card-content>
+        </mat-card>
+        <mat-card class="tagTable">
             <div class="tagTable-selector">
                 <mat-form-field>
                     <mat-label>Type select:</mat-label>
@@ -56,7 +64,17 @@
                 </ng-container> -->
             </div>
             <div *ngIf="all$ | async; let dataSource" class="tagTable-table">
-                <mat-table [dataSource]="dataSource">
+                <form *ngIf="crop.status != 'postPollination'" [formGroup]="tagCreateForm" (ngSubmit)="onTagCreate()">
+                    <mat-form-field >
+                        <input
+                        type="text"
+                        formControlName="tagColor"
+                        placeholder="TagColor"
+                        matInput>
+                    </mat-form-field>
+                    <button mat-button type="submit" color="primary">Create</button>
+                </form>
+                <mat-table *ngIf="dataSource.length > 0" [dataSource]="dataSource">
                     <ng-container matColumnDef="tagColor">
                         <mat-header-cell *matHeaderCellDef>tagColor</mat-header-cell>
                         <mat-cell *matCellDef="let element">{{ element.tagColor }}</mat-cell>
@@ -85,10 +103,19 @@
                     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
                     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
                 </mat-table>
+                <div *ngIf="dataSource.length === 0">no data please create one.</div>
+                <div class="pollinationFinish" *ngIf="dataSource.length > 0 && crop.status != 'postPollination'">
+                    <button (click)="onFinish()"  mat-raised-button color="warn">Finish ?</button>
+                    <!-- TODO: add confirm dialog -->
+                </div>
             </div>
-        </div>
+        </mat-card>
+        <!-- TODO: melon info list -->
     </div>
 </div>
+
+
+
 
 <ng-template #loading>
     <div class="spinner" fxLayoutAlign="center center">
@@ -97,15 +124,29 @@
 </ng-template>
 
 <ng-template #trayUpdate>
-    <mat-form-field>
-        <input type="date" matInput>
-    </mat-form-field>
-    <button mat-button color="primary">Add</button>
+    <form [formGroup]="toTrayForm" (ngSubmit)="onUpdate()">
+        <mat-form-field>
+            <input 
+            type="date"
+            formControlName="toTrayAt" 
+            matInput>
+        </mat-form-field>
+        <button mat-button type="submit" color="primary">Add</button>
+    </form>
 </ng-template>
 
 <ng-template #bagUpdate>
-    <mat-form-field>
-        <input type="date" matInput>
-    </mat-form-field>
-    <button mat-button color="primary">Add</button>
+    <form [formGroup]="toBagForm" (ngSubmit)="onUpdate()">
+        <mat-form-field>
+            <input 
+            type="date" 
+            formControlName="toBagAt"
+            matInput>
+        </mat-form-field>
+        <button mat-button type="submit" color="primary">Add</button>
+    </form>
+</ng-template>
+
+<ng-template #typeCreate>
+
 </ng-template>

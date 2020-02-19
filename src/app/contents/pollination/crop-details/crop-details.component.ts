@@ -5,7 +5,11 @@ import { Crop } from '../crop.model'
 import { PollinationService } from '../pollination.service'
 import { ActivatedRoute } from '@angular/router'
 import { Observable, combineLatest } from 'rxjs'
-import {  map } from 'rxjs/operators'
+import { map } from 'rxjs/operators'
+import { DatePipe } from '@angular/common'
+import { FormControl, FormGroup, Validators } from '@angular/forms'
+import { MatDialog } from '@angular/material/dialog'
+import { ConfirmDialogComponent } from './confirm-dialog.component'
 
 
 @Component({
@@ -24,10 +28,18 @@ export class CropDetailsComponent implements OnInit {
     cropDetails: Observable<Crop>;
 
 
+    toTrayForm: FormGroup;
+    toBagForm: FormGroup;
+    tagCreateForm: FormGroup;
+
+
+
     displayedColumns = ['tagColor', 'createdAt', 'currentDay', 'dayLeft', 'estHarvestDate'];
 
     constructor(private ps: PollinationService,
-        private route: ActivatedRoute) {}
+        private route: ActivatedRoute,
+        private dp: DatePipe,
+        public confirmDialog: MatDialog) {}
 
     ngOnInit() {
         this.route.params.subscribe(id => {
@@ -36,6 +48,17 @@ export class CropDetailsComponent implements OnInit {
         if(this.docId != null) {
             this.cropDetails = this.ps.getCropById(this.docId);
         }
+
+        this.toTrayForm = new FormGroup({
+            "toTrayAt": new FormControl(null, [Validators.required])
+        })
+
+        this.toBagForm = new FormGroup({
+            "toBagAt": new FormControl(null, [Validators.required])
+        })
+        this.tagCreateForm = new FormGroup({
+            "tagColor": new FormControl(null, [Validators.required])
+        })
     }
 
     onTypeSelectionChange({ value }) {
@@ -58,6 +81,72 @@ export class CropDetailsComponent implements OnInit {
         }
     }
 
+    onUpdate() {
+        if(this.toTrayForm.valid) {
+            const value = new Object();
+            Object.assign(value, this.toTrayForm.value, {status: "toTray"})
+            this.ps.updateDetail(this.docId, value, "UPDATE_CROP_DETAIL").then(result => {
+                console.log("toTrayAdding Done");
+                //TODO: ADD CONFIRM DIALOG ? SNACKBAR
+            })
+            .catch(err => {
+                console.log("onTS toTray error");
+                console.error(err);
+                //TODO: ERROR HANDLING
+            })
+        }
+        if(this.toBagForm.valid) {
+            const value = new Object();
+            Object.assign(value, this.toBagForm.value, {status: "toBag"})
+            console.log(value);
+            this.ps.updateDetail(this.docId, value, "UPDATE_CROP_DETAIL").then(result => {
+                console.log("toBagAdding Done");
+                //TODO: ADD CONFIRM DIALOG ? SNACKBAR
+            })
+            .catch(err => {
+                console.log("onTS toBag error");
+                console.error(err);
+                //TODO: ERROR HANDLING
+            })
+        }
+    }
+
+    onTagCreate() {
+        const value = new Object();
+        Object.assign(value, this.tagCreateForm.value,
+            { 
+                docId: this.docId,
+                createdAt: this.dp.transform(new Date(), "yyyy-MM-dd")
+            } 
+        );
+        if(this.tagCreateForm.valid) {
+            this.ps.addPollination(value).then(result => {
+                if(result) {
+                    this.ps.updateCropStatus(this.docId, 'pollination').then(result => {
+                        console.log("status updated done");
+                    })
+                }
+            })
+        }
+    }
+
+    onFinish() {
+        const dialogRef = this.confirmDialog.open(ConfirmDialogComponent, {
+            data: {
+                id: this.docId,
+                dialogHeader: "Finish Pollination Phase",
+                dialogContent: "Do you want to finish the pollination phase now ?"
+            }
+        })
+
+        dialogRef.afterClosed().subscribe(docId => {
+            if(docId) {
+                this.ps.updateDetail(docId, {status: 'postPollination'}, 'UPDATE_CROP_DETAIL');
+            }
+        })
+    }
+
+    //helper class
     estHarvestCalc(createdAt: Date, harvestday: number) {
         const onedayMs = 1000*60*60*24;
 
@@ -67,9 +156,9 @@ export class CropDetailsComponent implements OnInit {
 
         const harvestday_ms = harvestday * onedayMs;
 
-        const harvestdate = new Date(createdAt_ms + harvestday_ms).toLocaleDateString('en-Us');
+        
 
-        return harvestdate;
+        return this.dp.transform(new Date(createdAt_ms + harvestday_ms), "yyyy-MM-dd");
     }
 
     diffTilNow (in_date: Date) {

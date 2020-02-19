@@ -3,9 +3,8 @@ import { pollination } from './pollination.model'
 import { Crop } from './crop.model'
 import { Melon } from './melon.model'
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore'
-import { Observable, of, combineLatest, Subject } from 'rxjs';
-import { switchMap, map } from 'rxjs/operators'
-import { uniq } from 'lodash'
+import { Subject } from 'rxjs';
+
 
 @Injectable({
     providedIn: 'root',
@@ -28,8 +27,8 @@ export class PollinationService {
         this.melonRef = db.collection(this.melonPath);
     }
 
-    addPollination(pollination: pollination) {
-        this.pollinationRef.add({ ...pollination });
+    addPollination(pollination) {
+        return this.pollinationRef.add({ ...pollination });
     }
 
     addCrop(crop: Crop) {
@@ -62,8 +61,23 @@ export class PollinationService {
     getCropById(docId: string) {
         return this.cropsRef.doc<Crop>(docId).valueChanges();
     }
+    updateCropStatus(docId: string, status) {
+        return this.cropsRef.doc<Crop>(docId).update(status);
+    }
+    getMelonList(): AngularFirestoreCollection<Melon> {
+        return this.melonRef;
+    }
     getMelonById(melon) {
         return this.melonRef.doc<Melon>(melon).valueChanges();
+    }
+
+    updateDetail(docId, value, key) {
+        switch (key) {
+            case "UPDATE_CROP_DETAIL":
+                return this.cropsRef.doc<Crop>(docId).update(value);
+            default:
+                break;
+        }
     }
     // getCropDetails(cropId) {
     //     return this.db.collection<Crop>('crops', ref => ref.where('cropId', "==", cropId)).valueChanges()

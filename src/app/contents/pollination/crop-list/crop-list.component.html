@@ -1,4 +1,5 @@
 <div *ngIf="isLoaded" fxLayout="column" fxLayoutAlign="center" fxLayoutGap="2rem" class="card-section">
+    <div fxLayout="row" fxLayoutAlign="space-between" class="header"><h1>Crop List</h1><button routerLink="new" fxFlexAlign="center" mat-fab color="primary">New</button></div>
     <mat-card *ngFor="let data of cropList" class="card">
         <mat-card-header>
             <mat-card-title>Room: {{ data.room }}</mat-card-title>

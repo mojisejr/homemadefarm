@@ -1,21 +1,57 @@
-<div class="formWrapper" fxLayout="column">
-    <h3>Create New Crop</h3>
-    <form [formGroup]="cropForm" (ngSubmit)="onSubmit()" fxLayout="column">
-        <mat-form-field>
-            <input 
-            matInput
-            formControlName="cropId"  
-            placeholder="CROP-ID">
-            <mat-error>Must not be empty</mat-error>
-        </mat-form-field>
-        <mat-form-field>
-            <input 
-            matInput
-            type="date"
-            formControlName="createdAt" 
-            placeholder="Created at">
-            <mat-error>Must not be empty</mat-error>
-        </mat-form-field>
-        <button type="submit" mat-raised-button color="primary">Create</button>
-    </form>
+<div fxLayout="column" fxLayoutAlign="center" class="container">
+    <div fxFlexOffset="1rem" fxLayout="row" fxLayoutAlign="space-between" class="header"><h1>New Crop</h1><button routerLink="/pollination" fxFlexAlign="center" mat-fab color="accent">back</button></div>
+    <div class="formWrapper" fxLayout="column" fxLayoutAlign="center center">
+        <mat-card class="card">
+            <mat-card-content>
+                <form [formGroup]="cropForm" (ngSubmit)="onSubmit()" fxLayout="column">
+                    <mat-form-field>
+                        <input 
+                        matInput
+                        formControlName="cropId"  
+                        placeholder="CROP-ID">
+                    </mat-form-field>
+
+                    <mat-form-field>
+                        <input 
+                        matInput
+                        formControlName="room"  
+                        placeholder="Room">
+                    </mat-form-field>
+
+                    <mat-form-field>
+                        <input 
+                        matInput
+                        formControlName="crop"  
+                        placeholder="Crop">
+                    </mat-form-field>
+
+                    <mat-form-field>
+                        <mat-label>Species</mat-label>
+                        <mat-select
+                        formControlName="species" 
+                        multiple>
+                            <mat-option *ngFor="let type of typeList | async" [value]="type.name">{{ type.name }}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field>
+                        <input 
+                        matInput
+                        type="date"
+                        formControlName="createdAt" 
+                        placeholder="Created at">
+                    </mat-form-field>
+                    <div fxLayout="row" fxLayoutAlign="space-evenly">
+                        <button type="submit" mat-raised-button color="primary">Create</button>
+                        <button (click)="onReset()" mat-raised-button color="warn">Reset</button>
+                    </div>
+                </form>
+            </mat-card-content>
+        </mat-card>
+        
+    </div>
 </div>
+
+<ng-template #loading>
+    <div>loading...</div>
+</ng-template>

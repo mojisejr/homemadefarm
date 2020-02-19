@@ -17,3 +17,7 @@
     border: 1px lightslategray solid;
     border-radius: 3px;
 }
+
+.spinner {
+    margin-top: 3rem;
+}

@@ -1,0 +1,8 @@
+<h1 mat-dialog-title>{{ input.dialogHeader }}</h1>
+<div mat-dialog-content>
+    <p>{{ input.dialogContent }}</p>
+</div>
+<div mat-dialog-actions>
+    <button mat-raised-button [mat-dialog-close] = "false">No</button>
+    <button mat-raised-button [mat-dialog-close] = "input.id">Yes</button>
+</div>

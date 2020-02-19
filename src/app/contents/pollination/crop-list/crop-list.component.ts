@@ -25,7 +25,6 @@ export class CropListComponent implements OnInit {
                     ...e.payload.doc.data()
                 } as Crop;
             })
-            console.log(this.cropList);
             this.isLoaded = true;
         })
     }

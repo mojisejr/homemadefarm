@@ -30,7 +30,9 @@ import { CropListComponent } from './contents/pollination/crop-list/crop-list.co
 import { CropDetailsComponent } from './contents/pollination/crop-details/crop-details.component'
 
 //entry component
-import { DeleteDialogComponent } from './contents/pollination/pollination-list/delete-dialog.component' 
+import { DeleteDialogComponent } from './contents/pollination/pollination-list/delete-dialog.component'
+import { ConfirmDialogComponent } from './contents/pollination/crop-details/confirm-dialog.component' 
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -47,6 +49,7 @@ import { DeleteDialogComponent } from './contents/pollination/pollination-list/d
     PollinationListComponent,
     CropCreateComponent,
     DeleteDialogComponent,
+    ConfirmDialogComponent,
     CropListComponent,
     CropDetailsComponent,
   ],
@@ -61,8 +64,8 @@ import { DeleteDialogComponent } from './contents/pollination/pollination-list/d
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [{provide: FirestoreSettingsToken, useValue: {}}],
+  providers: [{provide: FirestoreSettingsToken, useValue: {}}, DatePipe],
   bootstrap: [AppComponent],
-  entryComponents: [DeleteDialogComponent]
+  entryComponents: [DeleteDialogComponent, ConfirmDialogComponent]
 })
 export class AppModule { }
