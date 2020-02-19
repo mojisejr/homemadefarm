@@ -17,9 +17,9 @@ const appRoutes: Routes = [
     { path: 'about', component: AboutsComponent},
     { path: 'order', component: ReserveOrderComponent},
     { path: 'productcharts', component: ProductchartsComponent},
-    { path: 'pollination', component: PollinationComponent},
-    { path: 'pollination/new', component: CropCreateComponent },
-    { path: 'pollination/:id', component: CropDetailsComponent}
+    { path: 'products', component: PollinationComponent},
+    { path: 'products/new', component: CropCreateComponent },
+    { path: 'products/:id', component: CropDetailsComponent}
 ];
 
 

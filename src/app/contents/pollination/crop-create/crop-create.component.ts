@@ -40,7 +40,7 @@ export class CropCreateComponent implements OnInit {
             Object.assign(data, this.cropForm.value);
             console.log(data);
             this.plService.addCrop(data);
-            this.router.navigate(['/pollination']);
+            this.router.navigate(['/products']);
         }
     }
 

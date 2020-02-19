@@ -5,11 +5,11 @@
             <h3>Crop: {{ crop.crop }}</h3>
         </div>
         <div class="header-menu">
-            <button routerLink="/pollination" mat-fab>back</button>
+            <button routerLink="/products" mat-fab><mat-icon>arrow_back</mat-icon></button>
         </div>
     </div>
-    <div ngStyle.xs="width: 100%;" fxLayout="column" fxLayoutGap="1rem" fxLayoutAlign="center" class="dashboard">
-        <div fxLayout="row wrap" fxLayoutGap="1rem" class="row-content-1">
+    <div ngStyle.xs="width: 90%;" fxLayout="column" fxLayoutGap="1rem" fxLayoutAlign="center" class="dashboard">
+        <div fxLayout.xs="column" ngStyle.xs="width: 100%;" fxLayout="row wrap" fxLayoutGap="1rem" class="row-content-1">
             <div class="crop-details">
                 <mat-card>
                     <mat-card-header>
@@ -30,7 +30,7 @@
                     </mat-card-content>
                 </mat-card>
             </div>
-            <div class="tobag">
+            <div *ngIf="crop.status != 'Initial'" class="tobag">
                 <mat-card>
                     <mat-card-header>
                         <mat-card-title>toBagAt</mat-card-title>
@@ -49,11 +49,11 @@
                 <h3>{{ crop.status }}</h3>
             </mat-card-content>
         </mat-card>
-        <mat-card class="tagTable">
+        <mat-card *ngIf="crop.status != 'Initial'" class="tagTable">
             <div class="tagTable-selector">
                 <mat-form-field>
                     <mat-label>Type select:</mat-label>
-                    <mat-select (selectionChange) = "onTypeSnapshotChange($event)">
+                    <mat-select (selectionChange) = "onTypeSnapshotChange($event, crop.status)">
                         <mat-option *ngFor="let item of crop.species" [value]="item"> {{ item }}</mat-option>
                     </mat-select>
                 </mat-form-field>
@@ -111,11 +111,10 @@
                 <div *ngIf="dataSource.length === 0">no data please create one.</div>
                 <div class="pollinationFinish" *ngIf="dataSource.length > 0 && crop.status != 'postPollination'">
                     <button (click)="onFinish()"  mat-raised-button color="warn">Finish ?</button>
-                    <!-- TODO: add confirm dialog -->
                 </div>
             </div>
         </mat-card>
-        <!-- TODO: melon info list -->
+        
     </div>
 </div>
 

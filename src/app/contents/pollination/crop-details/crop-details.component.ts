@@ -81,7 +81,11 @@ export class CropDetailsComponent implements OnInit {
     //     }
     // }
 
-    onTypeSnapshotChange({ value }) {
+    onTypeSnapshotChange({ value }, status) {
+        if(status === 'postPollination') {
+            this.displayedColumns.pop();
+            // console.log(this.displayedColumns);
+        }
         if(value != null && this.docId != null) {
             this.all$ = combineLatest(
                 this.ps.getTagColorByIdSnapshot(this.docId).snapshotChanges(),

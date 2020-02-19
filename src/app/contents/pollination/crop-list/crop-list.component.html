@@ -1,5 +1,5 @@
 <div *ngIf="isLoaded" fxLayout="column" fxLayoutAlign="center" fxLayoutGap="2rem" class="card-section">
-    <div fxLayout="row" fxLayoutAlign="space-between" class="header"><h1>Crop List</h1><button routerLink="new" fxFlexAlign="center" mat-fab color="primary">New</button></div>
+    <div fxLayout="row" fxLayoutAlign="space-between" class="header"><h1>Crop List</h1><button routerLink="new" fxFlexAlign="center" mat-fab color="primary"><mat-icon>add</mat-icon></button></div>
     <mat-card *ngFor="let data of cropList" class="card">
         <mat-card-header>
             <mat-card-title>Room: {{ data.room }}</mat-card-title>
@@ -10,7 +10,7 @@
             <div fxFlex="50%" class="card-content-list">
                 <mat-list>
                     <h3 mat-subheader>Growing:</h3>
-                    <mat-list-item *ngFor="let item of data.species">{{ item }}</mat-list-item>
+                    <mat-list-item *ngFor="let item of data.species"><mat-icon>keyboard_arrow_right</mat-icon><span>{{ item }}</span></mat-list-item>
                 </mat-list>
             </div>
             <div fxFlexAlign="center" fxLayoutAlign="center center" fxLayout="column" class="card-content-status">
@@ -20,7 +20,7 @@
         </mat-card-content>
         <mat-divider></mat-divider>
         <mat-card-actions fxLayoutAlign="end">
-            <button [routerLink]="['/pollination', data.id]" mat-raised-button color="primary">Details</button>
+            <button [routerLink]="['/products', data.id]" mat-raised-button color="primary">Details</button>
         </mat-card-actions>
     </mat-card>
 </div>
