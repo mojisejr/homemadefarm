@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core'
+import { Component, OnInit } from '@angular/core'
 import { Melon } from '../melon.model'
 import { pollination } from '../pollination.model'
 import { Crop } from '../crop.model'
@@ -82,9 +82,9 @@ export class CropDetailsComponent implements OnInit {
     // }
 
     onTypeSnapshotChange({ value }, status) {
-        if(status === 'postPollination') {
+        console.log("type snapshot run");
+        if(status === 'postPollination' && (this.displayedColumns.indexOf('actions') > 0)) {
             this.displayedColumns.pop();
-            // console.log(this.displayedColumns);
         }
         if(value != null && this.docId != null) {
             this.all$ = combineLatest(

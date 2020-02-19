@@ -1,5 +1,5 @@
 <div *ngIf="cropDetails | async; else loading; let crop" fxLayout="column" class="container">
-    <div fxLayoutAlign="space-between center" class="header">
+    <div fxFlexOffset="1rem" fxLayoutAlign="space-between" class="header">
         <div class="header-details">
             <h1>Room: {{ crop.room }}</h1>
             <h3>Crop: {{ crop.crop }}</h3>
@@ -54,7 +54,7 @@
                 <mat-form-field>
                     <mat-label>Type select:</mat-label>
                     <mat-select (selectionChange) = "onTypeSnapshotChange($event, crop.status)">
-                        <mat-option *ngFor="let item of crop.species" [value]="item"> {{ item }}</mat-option>
+                        <mat-option *ngFor="let item of crop.species; let index = index" [value]="item"> {{ item }}</mat-option>
                     </mat-select>
                 </mat-form-field>
                 <!-- <ng-container *ngIf="all$ | async; else loading; let all">
@@ -77,7 +77,7 @@
                 <mat-table *ngIf="dataSource.length > 0" [dataSource]="dataSource">
                     <ng-container matColumnDef="tagColor">
                         <mat-header-cell *matHeaderCellDef>tagColor</mat-header-cell>
-                        <mat-cell *matCellDef="let element">{{ element.tagColor }}</mat-cell>
+                        <mat-cell *matCellDef="let element" [style.color]="element.tagColor">{{ element.tagColor }}</mat-cell>
                     </ng-container>
 
                     <ng-container matColumnDef="createdAt">
@@ -114,7 +114,6 @@
                 </div>
             </div>
         </mat-card>
-        
     </div>
 </div>
 

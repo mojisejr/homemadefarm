@@ -4,5 +4,6 @@ export interface Crop {
     createdAt: Date;
     toTrayAt?: Date;
     toBagAt?: Date;
+    species?: Array<any>;
     status?: string;
 }
