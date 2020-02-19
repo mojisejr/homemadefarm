@@ -42,7 +42,7 @@ export class PollinationService {
         this.db.doc('/pollination/' + id)
         .delete()
         .then(data => {
-            // console.log("delete done")
+            console.log("delete done");
         })
         .catch(err => {
             console.log(err);
@@ -55,6 +55,9 @@ export class PollinationService {
     getTagColorById(docId) {
         return this.db.collection<pollination>('/pollination', ref => ref.where('docId', "==", docId)).valueChanges();
     }
+    getTagColorByIdSnapshot(docId) {
+        return this.db.collection<pollination>('/pollination', ref => ref.where('docId', "==", docId));
+    }
     getCropsList(): AngularFirestoreCollection<Crop> {
         return this.cropsRef;
     }
@@ -62,7 +65,7 @@ export class PollinationService {
         return this.cropsRef.doc<Crop>(docId).valueChanges();
     }
     updateCropStatus(docId: string, status) {
-        return this.cropsRef.doc<Crop>(docId).update(status);
+        return this.cropsRef.doc<Crop>(docId).update({status: status});
     }
     getMelonList(): AngularFirestoreCollection<Melon> {
         return this.melonRef;

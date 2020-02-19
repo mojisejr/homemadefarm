@@ -8,7 +8,7 @@
             <button routerLink="/pollination" mat-fab>back</button>
         </div>
     </div>
-    <div fxLayout="column" fxLayoutGap="1rem" fxLayoutAlign="center" class="dashboard">
+    <div ngStyle.xs="width: 100%;" fxLayout="column" fxLayoutGap="1rem" fxLayoutAlign="center" class="dashboard">
         <div fxLayout="row wrap" fxLayoutGap="1rem" class="row-content-1">
             <div class="crop-details">
                 <mat-card>
@@ -53,7 +53,7 @@
             <div class="tagTable-selector">
                 <mat-form-field>
                     <mat-label>Type select:</mat-label>
-                    <mat-select (selectionChange) = "onTypeSelectionChange($event)">
+                    <mat-select (selectionChange) = "onTypeSnapshotChange($event)">
                         <mat-option *ngFor="let item of crop.species" [value]="item"> {{ item }}</mat-option>
                     </mat-select>
                 </mat-form-field>
@@ -98,6 +98,11 @@
                     <ng-container matColumnDef="estHarvestDate">
                         <mat-header-cell *matHeaderCellDef>estHarvestDate</mat-header-cell>
                         <mat-cell *matCellDef="let element">{{ element.estHarvestDate }}</mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="actions">
+                        <mat-header-cell *matHeaderCellDef><mat-icon>more_vert</mat-icon></mat-header-cell>
+                        <mat-cell *matCellDef="let element"><button (click)="onTagDelete(element.typeId)" mat-icon-button color="warn"><mat-icon>backspace</mat-icon></button></mat-cell>
                     </ng-container>
 
                     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

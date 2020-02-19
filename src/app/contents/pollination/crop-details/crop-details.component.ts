@@ -34,7 +34,7 @@ export class CropDetailsComponent implements OnInit {
 
 
 
-    displayedColumns = ['tagColor', 'createdAt', 'currentDay', 'dayLeft', 'estHarvestDate'];
+    displayedColumns = ['tagColor', 'createdAt', 'currentDay', 'dayLeft', 'estHarvestDate', 'actions'];
 
     constructor(private ps: PollinationService,
         private route: ActivatedRoute,
@@ -61,23 +61,47 @@ export class CropDetailsComponent implements OnInit {
         })
     }
 
-    onTypeSelectionChange({ value }) {
+    // onTypeSelectionChange({ value }) {
+    //     if(value != null && this.docId != null) {
+    //         this.all$ = combineLatest(
+    //             this.ps.getTagColorById(this.docId),
+    //             this.ps.getMelonById(value)
+    //         ).pipe(
+    //             map(([types, melon]) => {
+    //                 return types.map(type => {
+    //                     return {
+    //                         ...type,
+    //                         currentDay: this.diffTilNow(type.createdAt), 
+    //                         estHarvestDate: this.estHarvestCalc(type.createdAt, melon.harvestdays),
+    //                         dayLeft: melon.harvestdays - this.diffTilNow(type.createdAt)
+    //                     }
+    //                 })
+    //             })
+    //         )
+    //     }
+    // }
+
+    onTypeSnapshotChange({ value }) {
         if(value != null && this.docId != null) {
             this.all$ = combineLatest(
-                this.ps.getTagColorById(this.docId),
+                this.ps.getTagColorByIdSnapshot(this.docId).snapshotChanges(),
                 this.ps.getMelonById(value)
-            ).pipe(
-                map(([types, melon]) => {
-                    return types.map(type => {
-                        return {
-                            ...type,
-                            currentDay: this.diffTilNow(type.createdAt), 
-                            estHarvestDate: this.estHarvestCalc(type.createdAt, melon.harvestdays),
-                            dayLeft: melon.harvestdays - this.diffTilNow(type.createdAt)
-                        }
-                    })
+            ).pipe(map(([types, melon]) => {
+                return types.map(d => {
+                    const types = d.payload.doc.data();
+                    const type_id = d.payload.doc.id;
+                    const currentDay = this.diffTilNow(d.payload.doc.data()['createdAt']);
+                    const estHarvestDate = this.estHarvestCalc(d.payload.doc.data()['createdAt'], melon.harvestdays);
+                    const dayLeft = melon.harvestdays - this.diffTilNow(d.payload.doc.data()['createdAt']);
+                    return {
+                        typeId: type_id,
+                        ...types,
+                        currentDay: currentDay,
+                        estHarvestDate: estHarvestDate,
+                        dayLeft: dayLeft
+                    }
                 })
-            )
+            }))
         }
     }
 
@@ -125,6 +149,27 @@ export class CropDetailsComponent implements OnInit {
                     this.ps.updateCropStatus(this.docId, 'pollination').then(result => {
                         console.log("status updated done");
                     })
+                    .catch(err => {
+                        console.error(err);
+                    })
+                }
+            })
+        }
+    }
+
+    onTagDelete(typeId) {
+        if(typeId != null) {
+            const dialogRef = this.confirmDialog.open(ConfirmDialogComponent, {
+                data: {
+                    id: typeId,
+                    dialogHeader: "Are you sure ?",
+                    dialogContent: ""
+                }
+            })
+
+            dialogRef.afterClosed().subscribe(typeId => {
+                if(typeId != null) {
+                    this.ps.deleteTag(typeId);
                 }
             })
         }
