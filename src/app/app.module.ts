@@ -29,6 +29,8 @@ import { CropCreateComponent } from './contents/pollination/crop-create/crop-cre
 import { CropListComponent } from './contents/pollination/crop-list/crop-list.component'
 import { CropDetailsComponent } from './contents/pollination/crop-details/crop-details.component'
 
+import { ProductComponent } from './contents/pollination/crop-details/products/product.component'
+
 //entry component
 import { DeleteDialogComponent } from './contents/pollination/pollination-list/delete-dialog.component'
 import { ConfirmDialogComponent } from './contents/pollination/crop-details/confirm-dialog.component' 
@@ -52,6 +54,7 @@ import { DatePipe } from '@angular/common';
     ConfirmDialogComponent,
     CropListComponent,
     CropDetailsComponent,
+    ProductComponent
   ],
   imports: [
     BrowserModule,

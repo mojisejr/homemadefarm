@@ -74,7 +74,7 @@
                     </mat-form-field>
                     <button mat-button type="submit" color="primary">Create</button>
                 </form>
-                <mat-table *ngIf="dataSource.length > 0" [dataSource]="dataSource">
+                <mat-table *ngIf="dataSource.length > 0;" [dataSource]="dataSource">
                     <ng-container matColumnDef="tagColor">
                         <mat-header-cell *matHeaderCellDef>tagColor</mat-header-cell>
                         <mat-cell *matCellDef="let element" [style.color]="element.tagColor">{{ element.tagColor }}</mat-cell>
@@ -114,6 +114,7 @@
                 </div>
             </div>
         </mat-card>
+        <app-product [crop]="crop" [cropId]="docId"></app-product>
     </div>
 </div>
 
