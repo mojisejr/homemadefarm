@@ -9,6 +9,7 @@ import { ProductchartsComponent } from './contents/productcharts/productcharts.c
 import { PollinationComponent } from './contents/pollination/pollination.component';
 import { CropDetailsComponent } from './contents/pollination/crop-details/crop-details.component';
 import { CropCreateComponent } from './contents/pollination/crop-create/crop-create.component';
+import { ProductTableComponent } from './contents/pollination/crop-details/products/product-table/product-table.component'
 
 const appRoutes: Routes = [
     { path: '', component: MainComponent },
@@ -19,7 +20,8 @@ const appRoutes: Routes = [
     { path: 'productcharts', component: ProductchartsComponent},
     { path: 'products', component: PollinationComponent},
     { path: 'products/new', component: CropCreateComponent },
-    { path: 'products/:id', component: CropDetailsComponent}
+    { path: 'products/:id', component: CropDetailsComponent},
+    { path: 'products/:id/htable', component: ProductTableComponent}
 ];
 
 

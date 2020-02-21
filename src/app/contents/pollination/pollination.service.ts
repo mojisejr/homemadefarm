@@ -2,8 +2,11 @@ import { Injectable } from '@angular/core'
 import { pollination } from './pollination.model'
 import { Crop } from './crop.model'
 import { Melon } from './melon.model'
+import { Product } from './product.model'
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore'
-import { Subject } from 'rxjs';
+import { Subject,  combineLatest } from 'rxjs';
+import { map } from 'rxjs/operators'
+import { Helper } from '../../shared/helper.service'
 
 
 @Injectable({
@@ -15,16 +18,20 @@ export class PollinationService {
     private pollinationPath ="/pollination";
     private cropsPath = "/crops";
     private melonPath = "/melon";
+    private productPath = "/products";
 
     pollinationRef: AngularFirestoreCollection<pollination> = null;
     cropsRef: AngularFirestoreCollection<Crop> = null;
     melonRef: AngularFirestoreCollection<Melon> = null;
+    productRef: AngularFirestoreCollection<Product> =  null;
 
 
-    constructor(private db: AngularFirestore) {
+    constructor(private db: AngularFirestore,
+        private helper: Helper) {
         this.pollinationRef = db.collection(this.pollinationPath);
         this.cropsRef = db.collection(this.cropsPath);
         this.melonRef = db.collection(this.melonPath);
+        this.productRef = db.collection(this.productPath);
     }
 
     addPollination(pollination) {
@@ -36,6 +43,10 @@ export class PollinationService {
             ...crop,
             status: 'Initial'
          });
+    }
+
+    addProduct(product: Product) {
+        return this.productRef.add({ ...product });
     }
 
     deleteTag(id: string) {
@@ -73,7 +84,19 @@ export class PollinationService {
     getMelonById(melon) {
         return this.melonRef.doc<Melon>(melon).valueChanges();
     }
-
+    getProductByCropId(cropId) {
+        return this.db.collection<Product>('/products', ref => ref.where('cropId', "==", cropId)).valueChanges();
+    }
+    getEstHarvestDate(type: string, docId: string, color: string) {
+        return combineLatest(
+            this.getMelonById(type),
+            this.getTagColorByIdSnapshot(docId).snapshotChanges()
+        ).pipe(map(([melon, type]) => {
+            const tagColor = type.find(c => c.payload.doc.data()['tagColor'] === color);
+            return this.helper.estHarvestCalc(tagColor.payload.doc.data()['createdAt'], melon.harvestdays);
+        }))
+        
+    }
     updateDetail(docId, value, key) {
         switch (key) {
             case "UPDATE_CROP_DETAIL":
@@ -82,33 +105,4 @@ export class PollinationService {
                 break;
         }
     }
-    // getCropDetails(cropId) {
-    //     return this.db.collection<Crop>('crops', ref => ref.where('cropId', "==", cropId)).valueChanges()
-    //     .pipe(
-    //         switchMap(crop => {
-    //             const id = crop.map(c => c.cropId);
-
-    //             return combineLatest(
-    //                 of(crop),
-    //                 combineLatest(
-    //                     id.map(i => this.db.collection<pollination>('pollination', ref => ref.where('cropId', "==", i))
-    //                     .valueChanges()
-    //                     .pipe(map(p => p))
-    //                 )
-    //             )
-    //             )
-    //         }),
-    //         map(([crop, p]) => {
-    //             return crop.map(c => {
-    //                 return {
-    //                     ...c,
-    //                     tagColors: p
-    //                 }
-    //             }
-    //             )
-    //         })
-    //     )
-    // }
-
-    
 }
