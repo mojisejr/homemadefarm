@@ -10,7 +10,7 @@ import { Subject } from 'rxjs';
     providedIn: 'root',
 })
 export class PollinationService {
-    cropChanged = new Subject<any>();
+    allChange = new Subject<any>();
 
     private pollinationPath ="/pollination";
     private cropsPath = "/crops";

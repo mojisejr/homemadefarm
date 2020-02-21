@@ -114,7 +114,7 @@
                 </div>
             </div>
         </mat-card>
-        <app-product [crop]="crop" [cropId]="docId"></app-product>
+        <app-product *ngIf="crop.status === 'postPollination'" [crop]="crop" [cropId]="docId"></app-product>
     </div>
 </div>
 
