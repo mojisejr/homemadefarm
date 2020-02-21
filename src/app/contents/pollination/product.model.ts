@@ -5,6 +5,6 @@ export interface Product {
     grade: string,
     row: string,
     specie: string,
-    estHarvestDate: Date,
+    estHarvestDate?: Date,
     createdAt: Date
 }
