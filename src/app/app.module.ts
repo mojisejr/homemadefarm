@@ -11,9 +11,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NevigationComponent } from './nevigation/nevigation.component';
 import { HttpClientModule } from '@angular/common/http'
 
+import { FormsModule } from '@angular/forms'
+
 //Firebase Import
 import { environment } from "../../src/environments/environment";
 import { AngularFireModule } from '@angular/fire';
+import { AngularFireDatabaseModule } from '@angular/fire/database'
 import { AngularFirestoreModule, FirestoreSettingsToken } from "@angular/fire/firestore";
 import { MainComponent } from './contents/main/main.component';
 import { AboutsComponent } from './contents/abouts/abouts.component';
@@ -22,8 +25,6 @@ import { FooterComponent } from './footer/footer.component';
 import { ReserveOrderComponent } from './contents/reserve-order/reserve-order.component';
 import { ProductchartsComponent } from './contents/productcharts/productcharts.component';
 import { PollinationComponent } from './contents/pollination/pollination.component';
-import { PollinationCreateComponent } from './contents/pollination/pollination-create/pollination-create.component'
-import { PollinationListComponent } from './contents/pollination/pollination-list/pollination-list.component'
 import { CropCreateComponent } from './contents/pollination/crop-create/crop-create.component'
 
 import { CropListComponent } from './contents/pollination/crop-list/crop-list.component'
@@ -33,7 +34,6 @@ import { ProductComponent } from './contents/pollination/crop-details/products/p
 import { ProductTableComponent } from './contents/pollination/crop-details/products/product-table/product-table.component'
 
 //entry component
-import { DeleteDialogComponent } from './contents/pollination/pollination-list/delete-dialog.component'
 import { ConfirmDialogComponent } from './contents/pollination/crop-details/confirm-dialog.component' 
 import { DatePipe } from '@angular/common';
 
@@ -48,10 +48,7 @@ import { DatePipe } from '@angular/common';
     ReserveOrderComponent,
     ProductchartsComponent,
     PollinationComponent,
-    PollinationCreateComponent,
-    PollinationListComponent,
     CropCreateComponent,
-    DeleteDialogComponent,
     ConfirmDialogComponent,
     CropListComponent,
     CropDetailsComponent,
@@ -64,13 +61,15 @@ import { DatePipe } from '@angular/common';
     MaterialModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
+    AngularFireDatabaseModule,
     ReactiveFormsModule,
     FlexLayoutModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [{provide: FirestoreSettingsToken, useValue: {}}, DatePipe],
   bootstrap: [AppComponent],
-  entryComponents: [DeleteDialogComponent, ConfirmDialogComponent]
+  entryComponents: [ConfirmDialogComponent]
 })
 export class AppModule { }

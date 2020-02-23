@@ -17,7 +17,9 @@ import {
     MatSelectModule,
     MatDialogModule,
     MatProgressSpinnerModule,
+    MatProgressBarModule,
     MatAutocompleteModule,
+    MatCheckboxModule,
 } from '@angular/material';
 
 const MaterialComponents = [
@@ -38,7 +40,9 @@ const MaterialComponents = [
     MatSelectModule,
     MatDialogModule,
     MatProgressSpinnerModule,
+    MatProgressBarModule,
     MatAutocompleteModule,
+    MatCheckboxModule,
 ];
 
 @NgModule ({

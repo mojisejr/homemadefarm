@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { Observable } from 'rxjs'
+import { FirebaseService } from '../../../shared/firebase.service'
 
 import { PollinationService } from '../pollination.service'
 import { Crop } from '../crop.model'
@@ -13,7 +13,8 @@ import { Crop } from '../crop.model'
 export class CropListComponent implements OnInit {
     isLoaded = false;
     cropList: Crop[];
-    constructor(private plService: PollinationService) {}
+    constructor(private plService: PollinationService,
+        private fb: FirebaseService) {}
 
     ngOnInit() {
         this.plService.getCropsList()
@@ -26,6 +27,6 @@ export class CropListComponent implements OnInit {
                 } as Crop;
             })
             this.isLoaded = true;
-        })
+        })        
     }
 }

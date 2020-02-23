@@ -2,24 +2,40 @@
     <mat-card>
         <mat-card-header fxLayout="row" fxLayoutAlign="space-between">
             <mat-card-title>Product Sorting</mat-card-title>
-            <div><button [routerLink] = "['/products', _cropId, 'htable']" mat-fab color="primary"><mat-icon>view_list</mat-icon></button></div>
+            <div>
+                <button [routerLink] = "['/products', _cropId, 'htable']" mat-fab color="accent"><mat-icon>view_list</mat-icon></button>
+            </div>
         </mat-card-header>
         <mat-card-content>
             <form [formGroup]="productForm" (ngSubmit)="onSubmit()" fxLayout="column">
-                
-                <mat-form-field>
-                    <input
-                    matInput
-                    formControlName="row"
-                    placeholder="Row"
-                    [matAutocomplete]="auto">
-                    <mat-autocomplete #auto="matAutocomplete">
-                        <mat-option *ngFor="let column of columns" [value]="column">{{ column }}</mat-option>
-                    </mat-autocomplete>
-                    <mat-hint>EX: A1 [select Column then input the row number]</mat-hint>
-                    <mat-error *ngIf="productForm.get('row').hasError('pattern')">Wrong pattern</mat-error>
-                </mat-form-field>
+                <div fxLayout.xs="column" fxLayoutAlign.xs="stretch" fxLayoutAlign="center center" fxLayoutGap="0.5rem">
+                    <mat-form-field>
+                        <input
+                        matInput
+                        formControlName="row"
+                        placeholder="Row"
+                        maxlength="1"
+                        [matAutocomplete]="auto">
+                        <mat-autocomplete #auto="matAutocomplete">
+                            <mat-option *ngFor="let column of columns" [value]="column | uppercase">{{ column }}</mat-option>
+                        </mat-autocomplete>
+                        <mat-error *ngIf="productForm.get('row').hasError('pattern')">Wrong pattern</mat-error>
+                    </mat-form-field>
 
+                    <mat-form-field>
+                        <input
+                        matInput
+                        type="number"
+                        formControlName="rowNumber"
+                        placeholder="Row Number"
+                        #rownumberInput
+                        >
+                    </mat-form-field>      
+
+                    <div class="incrementor-wrapper" fxLayoutAlign="row" fxLayoutGap="0.5rem" fxLayoutAlign.xs="end">
+                        <button mat-raised-button  color="accent" (click)="stepUp(rownumberInput, $event)">+</button><button mat-raised-button  color="accent" (click)="stepDown(rownumberInput, $event)">-</button>
+                    </div>
+                </div>
                 <mat-form-field>
                     <mat-label>Grade</mat-label>
                     <mat-select
@@ -48,9 +64,15 @@
                         <mat-option *ngFor="let tag of tags" [value]="tag.tagColor">{{ tag.tagColor }}</mat-option>
                     </mat-select>
                 </mat-form-field>
-
+                <div *ngIf="addLoaded != true">
+                    <mat-progress-bar  mode="indeterminate"></mat-progress-bar>
+                </div>
                 <button mat-raised-button color="warn">Add</button>
             </form>
         </mat-card-content>
+        <mat-card-actions fxLayoutAlign="end center">
+            <mat-checkbox [(ngModel)]="sorted">finish sorting?</mat-checkbox>
+            <button [disabled]="!sorted" (click)="onSorted()" mat-raised-button>Finish</button>
+        </mat-card-actions>
     </mat-card>
 </div>
