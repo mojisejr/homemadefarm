@@ -1,3 +1,6 @@
+.container {
+    margin: 0 auto;
+}
 .farm-qoute, .item-name {
     font-family: 'Kanit', sans-serif;
     font-size: large;
@@ -13,7 +16,12 @@
 .about-card {
     margin-top: 1rem;
     margin-bottom: 1rem;
-    max-width: 700px;
+    max-width: 80%;
+}
+.about-card-1 {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    width: 80%;
 }
 .filmav {
     background-image: url("../../../assets/filmavatar.jpg");
