@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, ViewChild } from '@angular/core'
 import { Melon } from '../melon.model'
 import { pollination } from '../pollination.model'
 import { Crop } from '../crop.model'
@@ -11,6 +11,9 @@ import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { MatDialog } from '@angular/material/dialog'
 import { ConfirmDialogComponent } from './confirm-dialog.component'
 import { Helper } from '../../../shared/helper.service'
+import { FirebaseService } from '../../../shared/firebase.service'
+
+
 
 
 @Component({
@@ -27,6 +30,7 @@ export class CropDetailsComponent implements OnInit {
     all$: Observable<any>;
     docId = null;
     cropDetails: Observable<Crop>;
+    monitorData: Observable<any>;
     dayCount: number;
 
 
@@ -37,10 +41,11 @@ export class CropDetailsComponent implements OnInit {
 
 
     displayedColumns = ['tagColor', 'createdAt', 'currentDay', 'dayLeft', 'estHarvestDate', 'actions'];
+ 
 
     constructor(private ps: PollinationService,
+        private fb: FirebaseService,
         private route: ActivatedRoute,
-        private router: Router,
         private dp: DatePipe,
         private helper: Helper,
         public confirmDialog: MatDialog) {}
@@ -51,12 +56,14 @@ export class CropDetailsComponent implements OnInit {
         })
         if(this.docId != null) {
             this.cropDetails = this.ps.getCropById(this.docId);
+            this.monitorData = this.fb.getRtbDataByRoom('room2-3/motor');
             this.cropDetails.subscribe(data => {
                 if(data != null) {
                     this.dayCount = this.helper.diffTilNow(data.createdAt);
                 }
             })
         }
+
 
         this.toTrayForm = new FormGroup({
             "toTrayAt": new FormControl(null, [Validators.required])

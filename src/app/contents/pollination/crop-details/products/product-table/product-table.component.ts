@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, ViewChild } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 import { Observable } from 'rxjs'
 import { map } from 'rxjs/operators'
 import { Product } from '../../../product.model'
 import { PollinationService } from '../../../pollination.service'
 import { MatTableDataSource } from '@angular/material/table'
+import { MatSort } from '@angular/material/sort'
+import { MatPaginator } from '@angular/material/paginator'
 
 @Component({
     selector: 'app-product-table',

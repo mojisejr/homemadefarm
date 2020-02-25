@@ -10,11 +10,6 @@ export class FirebaseService {
     constructor(private fb: AngularFireDatabase) {}
 
     getRtbDataByRoom(room: string) {
-        return this.fb.list(room).valueChanges().subscribe(result => {
-            if(result) {
-                console.log("result: ")
-                console.log(result);
-            }
-        })
+        return this.fb.object(room).valueChanges();
     }
 }
