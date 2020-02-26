@@ -1,12 +1,12 @@
-import { Component, OnInit, ViewChild } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
-import { Observable } from 'rxjs'
-import { map } from 'rxjs/operators'
-import { Product } from '../../../product.model'
 import { PollinationService } from '../../../pollination.service'
 import { MatTableDataSource } from '@angular/material/table'
-import { MatSort } from '@angular/material/sort'
-import { MatPaginator } from '@angular/material/paginator'
+import { Product } from '../../../product.model'
+import { Observable } from 'rxjs'
+import { map } from 'rxjs/operators'
+
+import { uiService } from '../../../../../shared/ui.service'
 
 @Component({
     selector: 'app-product-table',
@@ -15,14 +15,16 @@ import { MatPaginator } from '@angular/material/paginator'
 })
 
 export class ProductTableComponent implements OnInit {
-
-    private dataSource: any;
+    displayedColumns = ["row", "tagColor", "species", "grade", "estHarvestDate", 'id' ];
+    private dataSource: MatTableDataSource<Product>;
+    private rawData: Observable<Product[]>;
     private docId: string;
     private isLoaded = false;
 
-    displayedColumns = ["row", "tagColor", "species", "grade", "estHarvestDate" ];
+
 
     constructor(private ps: PollinationService,
+        private ui: uiService,
         private route: ActivatedRoute) {}
 
     ngOnInit() {
@@ -31,11 +33,31 @@ export class ProductTableComponent implements OnInit {
         })
 
         if(this.docId != null) {
-            this.ps.getProductByCropId(this.docId).subscribe(data => {
+            // this.ps.getProductByCropId(this.docId).subscribe(data => {
+            //     this.dataSource = new MatTableDataSource(data);
+            //     this.isLoaded = true;
+            // })
+            this.rawData = this.ps.getProductByCropId(this.docId)
+            .pipe(
+                map(actions => actions.map(a => {
+                    return {
+                        id: a.payload.doc.id,
+                        ...a.payload.doc.data(),
+                    }
+                }))
+            )
+            this.rawData.subscribe(data => {
                 this.dataSource = new MatTableDataSource(data);
                 this.isLoaded = true;
             })
         }
+    }
+
+    onUpdate(element) {
+        console.log(element);
+        this.ui.showProductUpdateStatusDialog(element).afterClosed().subscribe(data => {
+            console.log(data);
+        })
     }
 
     applyFilter(filterValue: String) {

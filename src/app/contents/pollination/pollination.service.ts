@@ -85,7 +85,7 @@ export class PollinationService {
         return this.melonRef.doc<Melon>(melon).valueChanges();
     }
     getProductByCropId(cropId) {
-        return this.db.collection<Product>('/products', ref => ref.where('cropId', "==", cropId)).valueChanges();
+        return this.db.collection<Product>('/products', ref => ref.where('cropId', "==", cropId)).snapshotChanges();
     }
     getEstHarvestDate(type: string, docId: string, color: string) {
         return combineLatest(

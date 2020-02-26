@@ -1,0 +1,37 @@
+<h1 mat-dialog-title>Status Update</h1>
+<div fxLayout="column" mat-dialog-content>
+   <div>
+       Row: {{ input.row }}
+   </div>
+   <mat-form-field>
+    <mat-label>Status</mat-label>
+    <mat-select [(ngModel)]="selected">
+        <mat-option value='cutted'>cutted</mat-option>
+        <mat-option value='sole'>sole</mat-option>
+        <mat-option value='eaten'>eaten</mat-option>
+        <mat-option value='lost'>lost</mat-option>
+    </mat-select>
+   </mat-form-field>
+
+    <mat-form-field>
+           <input type="number"
+           matInput
+           placeholder="weight">
+    </mat-form-field>
+
+    <mat-form-field *ngIf="selected === 'eaten'">
+        <input type="text"
+        matInput
+        placeholder="brix">
+ </mat-form-field>
+
+ <mat-form-field *ngIf="selected === 'eaten' || selected === 'lost'">
+    <input type="text"
+    matInput
+    placeholder="info">
+</mat-form-field>
+</div>
+<div mat-dialog-actions>
+    <button mat-raised-button [mat-dialog-close] = "false">Cancel</button>
+    <button mat-raised-button [mat-dialog-close] = "{id: input.id, status: selected}">Update</button>
+</div>

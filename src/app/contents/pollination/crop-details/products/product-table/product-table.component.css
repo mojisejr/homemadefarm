@@ -9,3 +9,8 @@
 .spinner {
     margin-top: 1rem;
 }
+
+.tbl-row:hover {
+    cursor: pointer;
+    background-color: #eee;
+}

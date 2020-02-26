@@ -6,9 +6,10 @@
                 <button [routerLink] = "['/products', _cropId, 'htable']" mat-fab color="accent"><mat-icon>view_list</mat-icon></button>
             </div>
         </mat-card-header>
+        <div *ngIf="_crop.status !== 'Harvesting'">
         <mat-card-content>
-            <form [formGroup]="productForm" (ngSubmit)="onSubmit()" fxLayout="column">
-                <div fxLayout.xs="column" fxLayoutAlign.xs="stretch" fxLayoutAlign="center center" fxLayoutGap="0.5rem">
+            <form  [formGroup]="productForm" (ngSubmit)="onSubmit()" fxLayout="column">
+                <div  fxLayout.xs="column" fxLayoutAlign.xs="stretch" fxLayoutAlign="center center" fxLayoutGap="0.5rem">
                     <mat-form-field>
                         <input
                         matInput
@@ -72,7 +73,8 @@
         </mat-card-content>
         <mat-card-actions fxLayoutAlign="end center">
             <mat-checkbox [(ngModel)]="sorted">finish sorting?</mat-checkbox>
-            <button [disabled]="!sorted" (click)="onSorted()" mat-raised-button>Finish</button>
+            <button [disabled]="!sorted" (click)="onSorted($event)" mat-raised-button>Finish</button>
         </mat-card-actions>
+    </div>
     </mat-card>
 </div>

@@ -4,8 +4,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { MainComponent } from './contents/main/main.component';
 import { ContactusComponent } from './contents/contactus/contactus.component';
 import { AboutsComponent } from './contents/abouts/abouts.component';
-import { ReserveOrderComponent } from './contents/reserve-order/reserve-order.component';
-import { ProductchartsComponent } from './contents/productcharts/productcharts.component';
 import { PollinationComponent } from './contents/pollination/pollination.component';
 import { CropDetailsComponent } from './contents/pollination/crop-details/crop-details.component';
 import { CropCreateComponent } from './contents/pollination/crop-create/crop-create.component';
@@ -16,8 +14,6 @@ const appRoutes: Routes = [
     { path: '', redirectTo: '/', pathMatch: 'full' },
     { path: 'location', component: ContactusComponent},
     { path: 'about', component: AboutsComponent},
-    { path: 'order', component: ReserveOrderComponent},
-    { path: 'productcharts', component: ProductchartsComponent},
     { path: 'products', component: PollinationComponent},
     { path: 'products/new', component: CropCreateComponent },
     { path: 'products/:id', component: CropDetailsComponent},
