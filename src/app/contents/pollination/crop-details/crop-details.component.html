@@ -163,7 +163,7 @@
                 </div>
             </div>
         </mat-card>
-        <app-product *ngIf="crop.status === 'postPollination' || crop.status === 'Harvesting'" [crop]="crop" [cropId]="docId"></app-product>
+        <app-product class="product-sorting-box" *ngIf="crop.status === 'postPollination' || crop.status === 'Harvesting'" [crop]="crop" [cropId]="docId"></app-product>
     </div>
 </div>
 

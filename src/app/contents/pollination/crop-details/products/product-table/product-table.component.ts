@@ -5,6 +5,7 @@ import { MatTableDataSource } from '@angular/material/table'
 import { Product } from '../../../product.model'
 import { Observable } from 'rxjs'
 import { map } from 'rxjs/operators'
+import { ProductDataSource } from './product-datasource'
 
 import { uiService } from '../../../../../shared/ui.service'
 

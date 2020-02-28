@@ -1,6 +1,6 @@
-/* .container {
-    height: 100%;
-} */
+.container {
+    margin-bottom: 1rem;
+} 
 .header {
     padding: 1rem;
 }
