@@ -13,7 +13,7 @@ import { Helper } from '../../shared/helper.service'
     providedIn: 'root',
 })
 export class PollinationService {
-    allChange = new Subject<any>();
+    productChanged = new Subject<Product[]>();
 
     private pollinationPath ="/pollination";
     private cropsPath = "/crops";
@@ -86,6 +86,21 @@ export class PollinationService {
     }
     getProductByCropId(cropId) {
         return this.db.collection<Product>('/products', ref => ref.where('cropId', "==", cropId)).snapshotChanges();
+    }
+    fetchProductByCropId(cropId){ 
+        this.db.collection<Product>('/products', ref => ref.where('cropId', "==", cropId))
+        .snapshotChanges()
+        .pipe(
+            map(product => product.map(p => {
+                return {
+                    id: p.payload.doc.id,
+                    ...p.payload.doc.data(),
+                }
+            }))
+        )
+        .subscribe((product: Product[]) => {
+            this.productChanged.next(product);
+        });
     }
     getEstHarvestDate(type: string, docId: string, color: string) {
         return combineLatest(

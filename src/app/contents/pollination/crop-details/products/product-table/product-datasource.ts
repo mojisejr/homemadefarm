@@ -28,8 +28,14 @@ export class ProductDataSource implements DataSource<Product> {
 
         this.ps.getProductByCropId(docId)
         .pipe(
-            catchError(() => of([])),
             finalize(() => this.loadingProduct.next(false)),
-        );
+            map(product => product.map(p => {
+                return {
+                    id: p.payload.doc.id,
+                    ...p.payload.doc.data(),
+                }
+            })),
+            catchError(() => of([])),
+        ).subscribe(product => this.productSubject.next(product));
     }
 }

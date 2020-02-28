@@ -1,11 +1,13 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, ViewChild, AfterViewInit, OnDestroy } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 import { PollinationService } from '../../../pollination.service'
-import { MatTableDataSource } from '@angular/material/table'
 import { Product } from '../../../product.model'
-import { Observable } from 'rxjs'
-import { map } from 'rxjs/operators'
+import { Observable, Subscription } from 'rxjs'
+import { map, tap } from 'rxjs/operators'
 import { ProductDataSource } from './product-datasource'
+import { MatPaginator } from '@angular/material/paginator'
+import { MatTableDataSource } from'@angular/material/table'
+import { SelectionModel } from '@angular/cdk/collections'
 
 import { uiService } from '../../../../../shared/ui.service'
 
@@ -15,10 +17,17 @@ import { uiService } from '../../../../../shared/ui.service'
     styleUrls: ['./product-table.component.css']
 })
 
-export class ProductTableComponent implements OnInit {
+export class ProductTableComponent implements OnInit, AfterViewInit, OnDestroy {
     displayedColumns = ["row", "tagColor", "species", "grade", "estHarvestDate", 'id' ];
     private dataSource: MatTableDataSource<Product>;
-    private rawData: Observable<Product[]>;
+    private selection = new SelectionModel<Product>(true, []);
+    private productSubscription: Subscription;
+    // private rawData: Observable<Product[]>;
+
+    // dataSource: ProductDataSource;
+
+    // @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+
     private docId: string;
     private isLoaded = false;
 
@@ -32,26 +41,36 @@ export class ProductTableComponent implements OnInit {
         this.route.params.subscribe(id => {
             this.docId = id['id'];
         })
+    }
 
+    ngAfterViewInit() {
         if(this.docId != null) {
-            // this.ps.getProductByCropId(this.docId).subscribe(data => {
-            //     this.dataSource = new MatTableDataSource(data);
-            //     this.isLoaded = true;
-            // })
-            this.rawData = this.ps.getProductByCropId(this.docId)
-            .pipe(
-                map(actions => actions.map(a => {
-                    return {
-                        id: a.payload.doc.id,
-                        ...a.payload.doc.data(),
-                    }
-                }))
-            )
-            this.rawData.subscribe(data => {
-                this.dataSource = new MatTableDataSource(data);
+            this.productSubscription = this.ps.productChanged.subscribe((product: Product[]) => {
+                this.dataSource = new MatTableDataSource(product);
                 this.isLoaded = true;
             })
+            this.ps.fetchProductByCropId(this.docId);
+            // this.ps.getProductByCropId(this.docId)
+            // .pipe(
+            //     map(actions => actions.map(a => {
+            //         return {
+            //             id: a.payload.doc.id,
+            //             ...a.payload.doc.data(),
+            //         }
+            //     }))
+            // ).subscribe(data => {
+            //     this.dataSource.data = data;
+            //     this.dataSource.paginator = this.paginator;
+            //     this.isLoaded = true;
+            // })
+            // this.dataSource = new ProductDataSource(this.ps);
+            // this.dataSource.getProductDataByCropId(this.docId);
         }
+
+    }
+
+    ngOnDestroy() {
+        this.productSubscription.unsubscribe();
     }
 
     onUpdate(element) {

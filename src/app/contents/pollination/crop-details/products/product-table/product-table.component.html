@@ -1,4 +1,4 @@
-<div *ngIf="dataSource != undefined && isLoaded === true; else loading" fxLayout="column" fxLayoutAlign="center" class="container">
+<div *ngIf="isLoaded === true; else loading;" fxLayout="column" fxLayoutAlign="center" class="container">
     <div fxFlexOffset="1rem" fxLayoutAlign="space-between" class="header">
         <div class="header-details">
             <h1>Product Table</h1>
@@ -13,7 +13,6 @@
         </mat-form-field>
     </div>
     <mat-table class="table" [dataSource]="dataSource">
-
         <ng-container matColumnDef="row">
             <mat-header-cell *matHeaderCellDef>Row</mat-header-cell>
             <mat-cell *matCellDef="let element" >{{ element.row }}</mat-cell>
