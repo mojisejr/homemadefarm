@@ -16,22 +16,25 @@
     <mat-form-field>
            <input type="number"
            matInput
+           [(ngModel)]="weight"
            placeholder="weight">
     </mat-form-field>
 
     <mat-form-field *ngIf="selected === 'eaten'">
         <input type="text"
         matInput
+        [(ngModel)]="brix"
         placeholder="brix">
  </mat-form-field>
 
  <mat-form-field *ngIf="selected === 'eaten' || selected === 'lost'">
     <input type="text"
     matInput
+    [(ngModel)]="info"
     placeholder="info">
 </mat-form-field>
 </div>
 <div mat-dialog-actions>
     <button mat-raised-button [mat-dialog-close] = "false">Cancel</button>
-    <button mat-raised-button [mat-dialog-close] = "{id: input.id, status: selected}">Update</button>
+    <button mat-raised-button [mat-dialog-close] = "{ id: input.id, status: selected, weight: weight, brix: brix, info: info  }">Update</button>
 </div>

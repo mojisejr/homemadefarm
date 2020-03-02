@@ -116,6 +116,8 @@ export class PollinationService {
         switch (key) {
             case "UPDATE_CROP_DETAIL":
                 return this.cropsRef.doc<Crop>(docId).update(value);
+            case "UPDATE_PRODUCT_SORTING":
+                return this.productRef.doc<Product>(docId).update(value);
             default:
                 break;
         }

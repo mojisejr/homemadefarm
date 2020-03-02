@@ -18,7 +18,7 @@ import { uiService } from '../../../../../shared/ui.service'
 })
 
 export class ProductTableComponent implements OnInit, AfterViewInit, OnDestroy {
-    displayedColumns = ["row", "tagColor", "species", "grade", "estHarvestDate", 'id' ];
+    displayedColumns = ["status", "row", "tagColor", "species", "grade", "weight", "estHarvestDate", 'id' ];
     private dataSource: MatTableDataSource<Product>;
     private selection = new SelectionModel<Product>(true, []);
     private productSubscription: Subscription;
@@ -74,9 +74,52 @@ export class ProductTableComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     onUpdate(element) {
-        console.log(element);
-        this.ui.showProductUpdateStatusDialog(element).afterClosed().subscribe(data => {
-            console.log(data);
+
+        this.ui.showProductUpdateStatusDialog(element).afterClosed().subscribe(result => {
+            switch(result.status) {
+                case "cutted":
+                case "sole": {
+                    if(result.status !== null, result.weight !== null) {
+                        const data = { status: result.status, weight: result.weight };
+                        this.ps.updateDetail(result.id, data, "UPDATE_PRODUCT_SORTING")
+                        .then(result => {
+                            this.ui.dataMessage(`UPDATE: ${element.row} -> CUTTED`, 2000);
+                        })
+                        .catch(error => {
+                            this.ui.dataMessage(`UPDATE_ERROR: ${element.row}`, 2000);
+                        })
+                    }
+                    break;
+                }
+                case "eaten": {
+                    if(result.status !== null, result.weight !== null) {
+                        const data = { status: result.status, weight: result.weight, brix: result.brix, info: result.info };
+                        this.ps.updateDetail(result.id, data, "UPDATE_PRODUCT_SORTING")
+                        .then(result => {
+                            this.ui.dataMessage(`UPDATE: ${element.row} -> EATEN[TESTING]`, 2000);
+                        })
+                        .catch(error => {
+                            this.ui.dataMessage(`UPDATE_ERROR: ${element.row}`, 2000);
+                        })
+                    }
+                    break;
+                }
+                case "lost": {
+                    if(result.status !== null, result.weight !== null) {
+                        const data = { status: result.status, weight: result.weight, info: result.info };
+                        this.ps.updateDetail(result.id, data, "UPDATE_PRODUCT_SORTING")
+                        .then(result => {
+                            this.ui.dataMessage(`UPDATE: ${element.row} -> LOST[TESTING]`, 2000);
+                        })
+                        .catch(error => {
+                            this.ui.dataMessage(`UPDATE_ERROR: ${element.row}`, 2000);
+                        })
+                    }
+                    break;
+                }
+                default:
+                    break;
+            }
         })
     }
 

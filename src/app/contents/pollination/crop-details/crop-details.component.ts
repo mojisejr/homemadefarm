@@ -11,6 +11,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { MatDialog } from '@angular/material/dialog'
 import { ConfirmDialogComponent } from './confirm-dialog.component'
 import { Helper } from '../../../shared/helper.service'
+import { uiService } from '../../../shared/ui.service'
 import { FirebaseService } from '../../../shared/firebase.service'
 
 
@@ -48,6 +49,7 @@ export class CropDetailsComponent implements OnInit {
         private route: ActivatedRoute,
         private dp: DatePipe,
         private helper: Helper,
+        private ui: uiService,
         public confirmDialog: MatDialog) {}
 
     ngOnInit() {
@@ -129,13 +131,10 @@ export class CropDetailsComponent implements OnInit {
             const value = new Object();
             Object.assign(value, this.toTrayForm.value, {status: "toTray"})
             this.ps.updateDetail(this.docId, value, "UPDATE_CROP_DETAIL").then(result => {
-                console.log("toTrayAdding Done");
-                //TODO: ADD CONFIRM DIALOG ? SNACKBAR
+                this.ui.dataMessage(`toTrayAT: ${this.toTrayForm.value} update successfully`, 2000);
             })
             .catch(err => {
-                console.log("onTS toTray error");
-                console.error(err);
-                //TODO: ERROR HANDLING
+                this.ui.dataMessage(`Error: ${err.dataMessage}`, 2000);
             })
         }
         if(this.toBagForm.valid) {
@@ -143,13 +142,10 @@ export class CropDetailsComponent implements OnInit {
             Object.assign(value, this.toBagForm.value, {status: "toBag"})
             console.log(value);
             this.ps.updateDetail(this.docId, value, "UPDATE_CROP_DETAIL").then(result => {
-                console.log("toBagAdding Done");
-                //TODO: ADD CONFIRM DIALOG ? SNACKBAR
+                this.ui.dataMessage(`toBagAT: ${this.toBagForm.value} update successfully`, 2000);
             })
             .catch(err => {
-                console.log("onTS toBag error");
-                console.error(err);
-                //TODO: ERROR HANDLING
+                this.ui.dataMessage(`Error: ${err.dataMessage}`, 2000);
             })
         }
     }
@@ -166,7 +162,7 @@ export class CropDetailsComponent implements OnInit {
             this.ps.addPollination(value).then(result => {
                 if(result) {
                     this.ps.updateCropStatus(this.docId, 'pollination').then(result => {
-                        console.log("status updated done");
+                        
                     })
                     .catch(err => {
                         console.error(err);

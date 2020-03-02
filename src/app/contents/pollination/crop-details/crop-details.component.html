@@ -112,7 +112,7 @@
                 </ng-container> -->
             </div>
             <div *ngIf="all$ | async; let dataSource" class="tagTable-table">
-                <form *ngIf="crop.status != 'postPollination'" [formGroup]="tagCreateForm" (ngSubmit)="onTagCreate()">
+                <form *ngIf="crop.status != 'postPollination' && crop.status != 'Harvesting'" [formGroup]="tagCreateForm" (ngSubmit)="onTagCreate()">
                     <mat-form-field >
                         <input
                         type="text"
@@ -158,7 +158,7 @@
                 </mat-table>
                 
                 <div *ngIf="dataSource.length === 0">no data please create one.</div>
-                <div class="pollinationFinish" *ngIf="dataSource.length > 0 && crop.status != 'postPollination'">
+                <div class="pollinationFinish" *ngIf="dataSource.length > 0 && crop.status != 'postPollination' && crop.status !== 'Harvesting'">
                     <button (click)="onFinish()"  mat-raised-button color="warn">Finish ?</button>
                 </div>
             </div>

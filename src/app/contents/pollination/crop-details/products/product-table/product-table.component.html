@@ -12,7 +12,14 @@
             <input matInput type="search" (keyup)="applyFilter($event.target.value)" placeholder="Filter">
         </mat-form-field>
     </div>
-    <mat-table class="table" [dataSource]="dataSource">
+    <mat-table [dataSource]="dataSource">
+
+        <ng-container matColumnDef="status">
+            <mat-header-cell *matHeaderCellDef>status</mat-header-cell>
+            <mat-cell *matCellDef="let element" >{{ element.status }}</mat-cell>
+        </ng-container>
+
+
         <ng-container matColumnDef="row">
             <mat-header-cell *matHeaderCellDef>Row</mat-header-cell>
             <mat-cell *matCellDef="let element" >{{ element.row }}</mat-cell>
@@ -31,6 +38,11 @@
         <ng-container matColumnDef="grade">
             <mat-header-cell *matHeaderCellDef >Grade</mat-header-cell>
             <mat-cell *matCellDef="let element">{{ element.grade }}</mat-cell>
+        </ng-container>
+
+        <ng-container  matColumnDef="weight">
+            <mat-header-cell *matHeaderCellDef>weight (kg)</mat-header-cell>
+            <mat-cell *matCellDef="let element" >{{ element.weight }}</mat-cell>
         </ng-container>
     
         <ng-container matColumnDef="estHarvestDate" >

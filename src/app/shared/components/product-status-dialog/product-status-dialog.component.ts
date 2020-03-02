@@ -9,6 +9,10 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog'
 export class AppProductStatusDialogComponent {
 
     private selected;
+
+    weight: number;
+    brix: string;
+    info: string;
     constructor(@Inject(MAT_DIALOG_DATA) private input: any) {
 
     }
