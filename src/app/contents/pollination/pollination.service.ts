@@ -88,7 +88,7 @@ export class PollinationService {
         return this.db.collection<Product>('/products', ref => ref.where('cropId', "==", cropId)).snapshotChanges();
     }
     fetchProductByCropId(cropId){ 
-        this.db.collection<Product>('/products', ref => ref.where('cropId', "==", cropId))
+        this.db.collection<Product>('/products', ref => ref.where('cropId', "==", cropId).orderBy("row").orderBy("species"))
         .snapshotChanges()
         .pipe(
             map(product => product.map(p => {
