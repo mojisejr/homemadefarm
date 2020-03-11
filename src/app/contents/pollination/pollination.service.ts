@@ -85,8 +85,10 @@ export class PollinationService {
         return this.melonRef.doc<Melon>(melon).valueChanges();
     }
     getProductByCropId(cropId) {
-        return this.db.collection<Product>('/products', ref => ref.where('cropId', "==", cropId)).snapshotChanges();
+        return this.db.collection<Product>('/products', ref => ref.where('cropId', "==", cropId))
+        .snapshotChanges();
     }
+
     fetchProductByCropId(cropId){ 
         this.db.collection<Product>('/products', ref => ref.where('cropId', "==", cropId).orderBy("row").orderBy("species"))
         .snapshotChanges()

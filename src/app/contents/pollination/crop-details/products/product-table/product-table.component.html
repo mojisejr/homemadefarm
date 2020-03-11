@@ -7,58 +7,73 @@
             <button routerLink="../" mat-fab><mat-icon>arrow_back</mat-icon></button>
         </div>
     </div>
-    <div class="filter-wrapper">
-        <mat-form-field fxFlex="100%">
-            <input matInput type="search" (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-        </mat-form-field>
-    </div>
-    <div ngStyle.xs="width:100%" ngClass.gt-xs="mat-elevation-z2" class="table-container">
-        <mat-table [dataSource]="dataSource">
+    <mat-tab-group>
+        <mat-tab label="Overall List">    
+            <div class="filter-wrapper">
+                <mat-form-field fxFlex="100%">
+                    <input matInput type="search" (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+                </mat-form-field>
+            </div>
+            <div ngStyle.xs="width:100%" ngClass.gt-xs="mat-elevation-z2" class="table-container">
+                <mat-table #table [dataSource]="dataSource">
 
-            <ng-container matColumnDef="status">
-                <mat-header-cell *matHeaderCellDef>status</mat-header-cell>
-                <mat-cell *matCellDef="let element" >{{ element.status }}</mat-cell>
-            </ng-container>
-    
-            <ng-container matColumnDef="row">
-                <mat-header-cell *matHeaderCellDef>Row</mat-header-cell>
-                <mat-cell *matCellDef="let element" >{{ element.row }}</mat-cell>
-            </ng-container>
-        
-            <ng-container matColumnDef="tagColor">
-                <mat-header-cell *matHeaderCellDef >TagColor</mat-header-cell>
-                <mat-cell *matCellDef="let element" [style.color]="element.tagColor">{{ element.tagColor }}</mat-cell>
-            </ng-container>
-        
-            <ng-container matColumnDef="species">
-                <mat-header-cell *matHeaderCellDef >Species</mat-header-cell>
-                <mat-cell *matCellDef="let element">{{ element.species }}</mat-cell>
-            </ng-container>
-        
-            <ng-container matColumnDef="grade">
-                <mat-header-cell *matHeaderCellDef >Grade</mat-header-cell>
-                <mat-cell *matCellDef="let element">{{ element.grade }}</mat-cell>
-            </ng-container>
-    
-            <ng-container  matColumnDef="weight">
-                <mat-header-cell *matHeaderCellDef>weight (kg)</mat-header-cell>
-                <mat-cell *matCellDef="let element" >{{ element.weight }}</mat-cell>
-            </ng-container>
-        
-            <ng-container matColumnDef="estHarvestDate" >
-                <mat-header-cell *matHeaderCellDef >estHarvestDate</mat-header-cell>
-                <mat-cell *matCellDef="let element">{{ element.estHarvestDate }}</mat-cell>
-            </ng-container>
-    
-            <ng-container matColumnDef="id">
-                <mat-header-cell *matHeaderCellDef ><mat-icon>more_vert</mat-icon></mat-header-cell>
-                <mat-cell *matCellDef="let element"><button mat-icon-button color="primary" (click)="onUpdate(element)"><mat-icon>update</mat-icon></button></mat-cell>
-            </ng-container>
-        
-            <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
-            <mat-row  *matRowDef="let row; columns: displayedColumns;"></mat-row>
-        </mat-table>
-    </div>
+                    <!-- <ng-container matColumnDef="status">
+                        <mat-header-cell *matHeaderCellDef>status</mat-header-cell>
+                        <mat-cell *matCellDef="let element" >{{ element.status }}</mat-cell>
+                    </ng-container>
+            
+                    <ng-container matColumnDef="row">
+                        <mat-header-cell *matHeaderCellDef>Row</mat-header-cell>
+                        <mat-cell *matCellDef="let element" >{{ element.row }}</mat-cell>
+                    </ng-container>
+                
+                    <ng-container matColumnDef="tagColor">
+                        <mat-header-cell *matHeaderCellDef >TagColor</mat-header-cell>
+                        <mat-cell *matCellDef="let element" [style.color]="element.tagColor">{{ element.tagColor }}</mat-cell>
+                    </ng-container>
+                
+                    <ng-container matColumnDef="species">
+                        <mat-header-cell *matHeaderCellDef >Species</mat-header-cell>
+                        <mat-cell *matCellDef="let element">{{ element.species }}</mat-cell>
+                    </ng-container>
+                
+                    <ng-container matColumnDef="grade">
+                        <mat-header-cell *matHeaderCellDef >Grade</mat-header-cell>
+                        <mat-cell *matCellDef="let element">{{ element.grade }}</mat-cell>
+                    </ng-container>
+            
+                    <ng-container  matColumnDef="weight">
+                        <mat-header-cell *matHeaderCellDef>weight (kg)</mat-header-cell>
+                        <mat-cell *matCellDef="let element" >{{ element.weight }}</mat-cell>
+                    </ng-container>
+                
+                    <ng-container matColumnDef="estHarvestDate" >
+                        <mat-header-cell *matHeaderCellDef >estHarvestDate</mat-header-cell>
+                        <mat-cell *matCellDef="let element">{{ element.estHarvestDate }}</mat-cell>
+                    </ng-container> -->
+
+                    <!--             
+                    <ng-container matColumnDef="id">
+                        <mat-header-cell *matHeaderCellDef ><mat-icon>more_vert</mat-icon></mat-header-cell>
+                        <mat-cell *matCellDef="let element"><button mat-icon-button color="primary" (click)="onUpdate(element)"><mat-icon>update</mat-icon></button></mat-cell>
+                    </ng-container> -->
+
+                    <ng-container *ngFor="let column of columns" [cdkColumnDef]="column.columnDef">
+                        <mat-header-cell *cdkHeaderCellDef>{{ column.header }}</mat-header-cell>
+                        <mat-cell *cdkCellDef="let row">{{ column.cell(row) }}</mat-cell>
+                    </ng-container>
+                
+                    <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+                    <mat-row class="table-row"  (click)="onUpdate(row)" *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                </mat-table>
+            </div>
+        </mat-tab>
+        <mat-tab label="Sorting">
+            <div>
+                <app-sorting-table [docId] = "docId"></app-sorting-table>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
 </div>
 
 <ng-template #loading>

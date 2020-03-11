@@ -30,11 +30,13 @@ import { CropDetailsComponent } from './contents/pollination/crop-details/crop-d
 
 import { ProductComponent } from './contents/pollination/crop-details/products/product.component'
 import { ProductTableComponent } from './contents/pollination/crop-details/products/product-table/product-table.component'
+import { SortingTableComponent } from './contents/pollination/crop-details/products/sorting-table/sorting-table.component'
 
 //entry component
 import { ConfirmDialogComponent } from './contents/pollination/crop-details/confirm-dialog.component'
 import { AppConfirmDialogComponent } from './shared/components/confirm-dialog/confirm-dialog.component'
-import { AppProductStatusDialogComponent } from './shared/components/product-status-dialog/product-status-dialog.component' 
+import { AppProductStatusDialogComponent } from './shared/components/product-status-dialog/product-status-dialog.component'
+import { AppDatepickerDialogComponent } from './shared/components/datepicker-dialog/datepicker-dialog.component'
 import { DatePipe } from '@angular/common';
 
 @NgModule({
@@ -50,10 +52,12 @@ import { DatePipe } from '@angular/common';
     ConfirmDialogComponent,
     AppConfirmDialogComponent,
     AppProductStatusDialogComponent,
+    AppDatepickerDialogComponent,
     CropListComponent,
     CropDetailsComponent,
     ProductComponent,
     ProductTableComponent,
+    SortingTableComponent
   ],
   imports: [
     BrowserModule,
@@ -73,7 +77,8 @@ import { DatePipe } from '@angular/common';
   entryComponents: [
     ConfirmDialogComponent, 
     AppConfirmDialogComponent, 
-    AppProductStatusDialogComponent
+    AppProductStatusDialogComponent,
+    AppDatepickerDialogComponent,
   ]
 })
 export class AppModule { }

@@ -1,0 +1,49 @@
+<div class="container">
+    <div class="menu-wrapper">
+        <button mat-raised-button [matMenuTriggerFor]="groupby" color="primary">GroupBy:</button>
+    </div>
+    <div class="card-wrapper">
+        <mat-card *ngIf="dataSource$ | async; let dataSource">
+            <mat-card-header>
+                <mat-card-title>
+                    {{ _groupby | uppercase }}
+                </mat-card-title>
+                <mat-card-subtitle>
+                    Count: [{{ dataSource?.length }}] 
+                </mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+                <mat-table [dataSource]="dataSource">
+                    <ng-container *ngFor="let column of columns" [cdkColumnDef]="column.columnDef">
+                        <mat-header-cell *cdkHeaderCellDef>{{ column.header }}</mat-header-cell>
+                        <mat-cell *cdkCellDef="let row"> {{ column.cell(row) }}</mat-cell>
+                    </ng-container>
+
+                    <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                </mat-table>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>
+
+<mat-menu #groupby="matMenu">
+    <button mat-menu-item [matMenuTriggerFor]="bystatus">Status</button>
+    <button mat-menu-item [matMenuTriggerFor]="byspecies">Species</button>
+    <button mat-menu-item (click)="getGroupByDate()">Date</button>
+</mat-menu>
+
+<mat-menu #bystatus="matMenu">
+    <button mat-menu-item (click)="getGroupBy('status', 'cutted')">Cutted</button>
+    <button mat-menu-item  (click)="getGroupBy('status', 'sole')">Sole</button>
+    <button mat-menu-item (click)="getGroupBy('status', 'eaten')">Eaten</button>
+    <button mat-menu-item (click)="getGroupBy('status', 'lost')">Lost</button>
+</mat-menu>
+
+<mat-menu #byspecies="matMenu">
+    <button mat-menu-item *ngFor="let item of speciesList" (click)="getGroupBy('species', item)"> {{ item }}</button>
+</mat-menu>
+
+<ng-template #loading>
+    <mat-spinner class="spinner" fxLayoutAlign="center center"></mat-spinner>
+</ng-template>

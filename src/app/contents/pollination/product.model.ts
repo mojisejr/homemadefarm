@@ -4,7 +4,9 @@ export interface Product {
     tagColor: string,
     grade: string,
     row: string,
-    specie: string,
+    species: string,
     estHarvestDate?: Date,
-    createdAt: Date
+    createdAt: Date,
+    weight?: number,
+    status?: string,
 }

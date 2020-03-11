@@ -2,12 +2,9 @@ import { Component, OnInit, ViewChild, AfterViewInit, OnDestroy } from '@angular
 import { ActivatedRoute, Router } from '@angular/router'
 import { PollinationService } from '../../../pollination.service'
 import { Product } from '../../../product.model'
-import { Observable, Subscription } from 'rxjs'
+import { Observable, Subscription, of } from 'rxjs'
 import { map, tap } from 'rxjs/operators'
-import { ProductDataSource } from './product-datasource'
-import { MatPaginator } from '@angular/material/paginator'
 import { MatTableDataSource } from'@angular/material/table'
-import { SelectionModel } from '@angular/cdk/collections'
 
 import { uiService } from '../../../../../shared/ui.service'
 
@@ -18,9 +15,22 @@ import { uiService } from '../../../../../shared/ui.service'
 })
 
 export class ProductTableComponent implements OnInit, AfterViewInit, OnDestroy {
-    displayedColumns = ["status", "row", "tagColor", "species", "grade", "weight", "estHarvestDate", 'id' ];
+
+
+    columns = [
+        { columnDef: "status", header: "status", cell: (element: any) => `${ element.status }`},
+        { columnDef: "row", header: "row", cell: (element: any) => `${ element.row }`},
+        { columnDef: "tagColor", header: "tag", cell: (element: any) => `${ element.tagColor }`},
+        { columnDef: "species", header: "species", cell: (element: any) => `${ element.species }`},
+        { columnDef: "grade", header: "grade", cell: (element: any) => `${ element.grade }`},
+        { columnDef: "weight", header: "weight [kg]", cell: (element: any) => `${ element.weight }`},
+        { columnDef: "estHarvestDate", header: "estH_Date", cell: (element: any) => `${ element.estHarvestDate }`},
+    ];
+
+
+    // displayedColumns = ["status", "row", "tagColor", "species", "grade", "weight", "estHarvestDate", 'id' ];
+    displayedColumns = this.columns.map(c => c.columnDef);
     private dataSource: MatTableDataSource<Product>;
-    private selection = new SelectionModel<Product>(true, []);
     private productSubscription: Subscription;
     // private rawData: Observable<Product[]>;
 
@@ -33,14 +43,19 @@ export class ProductTableComponent implements OnInit, AfterViewInit, OnDestroy {
 
 
 
-    constructor(private ps: PollinationService,
+    constructor(
+        private ps: PollinationService,
         private ui: uiService,
-        private route: ActivatedRoute) {}
+        private route: ActivatedRoute
+        ) {}
 
     ngOnInit() {
+
         this.route.params.subscribe(id => {
             this.docId = id['id'];
         })
+        
+        
     }
 
     ngAfterViewInit() {
@@ -50,6 +65,8 @@ export class ProductTableComponent implements OnInit, AfterViewInit, OnDestroy {
                 this.isLoaded = true;
             })
             this.ps.fetchProductByCropId(this.docId);
+
+
             // this.ps.getProductByCropId(this.docId)
             // .pipe(
             //     map(actions => actions.map(a => {
@@ -65,6 +82,8 @@ export class ProductTableComponent implements OnInit, AfterViewInit, OnDestroy {
             // })
             // this.dataSource = new ProductDataSource(this.ps);
             // this.dataSource.getProductDataByCropId(this.docId);
+
+
         }
 
     }

@@ -61,7 +61,7 @@ export class CropDetailsComponent implements OnInit {
             this.monitorData = this.fb.getRtbDataByRoom('room2-3/motor');
             this.cropDetails.subscribe(data => {
                 if(data != null) {
-                    this.dayCount = this.helper.diffTilNow(data.createdAt);
+                    this.dayCount = this.helper.diffTilNow(data.toBagAt);
                 }
             })
         }

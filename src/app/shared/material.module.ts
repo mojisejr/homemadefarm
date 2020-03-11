@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { CdkTableModule } from '@angular/cdk/table';
 import {
     MatButtonModule,
     MatMenuModule,
@@ -24,6 +25,7 @@ import {
 } from '@angular/material';
 
 const MaterialComponents = [
+    CdkTableModule,
     MatButtonModule,
     MatMenuModule,
     MatDividerModule,

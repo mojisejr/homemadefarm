@@ -3,6 +3,7 @@ import { MatSnackBar } from '@angular/material/snack-bar'
 import { MatDialog } from '@angular/material/dialog'
 import { AppConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component'
 import { AppProductStatusDialogComponent } from './components/product-status-dialog/product-status-dialog.component'
+import { AppDatepickerDialogComponent } from './components/datepicker-dialog/datepicker-dialog.component'
 
 
 @Injectable({
@@ -41,5 +42,10 @@ export class uiService {
 
             return dialogRef;
         } 
+    }
+
+    showDatePickerDialog() {
+        const dialogRef = this.dialog.open(AppDatepickerDialogComponent)
+        return dialogRef;
     }
 }
