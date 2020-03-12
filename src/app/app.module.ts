@@ -18,6 +18,7 @@ import { environment } from "../../src/environments/environment";
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database'
 import { AngularFirestoreModule, FirestoreSettingsToken } from "@angular/fire/firestore";
+import { AngularFireAuthModule } from '@angular/fire/auth';
 import { MainComponent } from './contents/main/main.component';
 import { AboutsComponent } from './contents/abouts/abouts.component';
 import { ContactusComponent } from './contents/contactus/contactus.component';
@@ -31,6 +32,12 @@ import { CropDetailsComponent } from './contents/pollination/crop-details/crop-d
 import { ProductComponent } from './contents/pollination/crop-details/products/product.component'
 import { ProductTableComponent } from './contents/pollination/crop-details/products/product-table/product-table.component'
 import { SortingTableComponent } from './contents/pollination/crop-details/products/sorting-table/sorting-table.component'
+
+
+//loginComponent
+
+import { AppLoginComponent } from './login/login.component'
+
 
 //entry component
 import { ConfirmDialogComponent } from './contents/pollination/crop-details/confirm-dialog.component'
@@ -57,7 +64,8 @@ import { DatePipe } from '@angular/common';
     CropDetailsComponent,
     ProductComponent,
     ProductTableComponent,
-    SortingTableComponent
+    SortingTableComponent,
+    AppLoginComponent
   ],
   imports: [
     BrowserModule,
@@ -66,11 +74,12 @@ import { DatePipe } from '@angular/common';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
     AngularFireDatabaseModule,
+    AngularFireAuthModule,
     ReactiveFormsModule,
     FlexLayoutModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [{provide: FirestoreSettingsToken, useValue: {}}, DatePipe],
   bootstrap: [AppComponent],

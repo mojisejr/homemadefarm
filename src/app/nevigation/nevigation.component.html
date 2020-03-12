@@ -1,16 +1,20 @@
 <mat-toolbar class="mat-elevation-z2">
     <a class="siteLink" routerLink=""><span class="siteName"> &#60; Homemade Farm /&#62;</span></a>
     <div fxHide.xs fxFlex="1 1" fxLayout="row" fxLayoutAlign="flex-end" class="menu-wrapper">
+        <a mat-button routerLink="/login" *ngIf="isLoggedOut$ | async">Login</a>
         <a mat-button routerLink="/about">about</a>
-        <a mat-button routerLink="/products">Products</a>
+        <a mat-button routerLink="/products" *ngIf="isLoggedIn$ | async">Products</a>
         <a mat-button routerLink="/location">location</a>
+        <a mat-button (click)="onLogout()" *ngIf="isLoggedIn$ | async">Logout</a>
     </div>
     <div fxHide.gt-xs fxFlex="1 1" fxLayoutAlign="flex-end" class="menu-wrapper">
             <button mat-button [matMenuTriggerFor]="appMenu"><mat-icon>menu</mat-icon></button>
         <mat-menu #appMenu="matMenu">
+            <a mat-menu-item routerLink="/login" *ngIf="isLoggedOut$ | async"><mat-icon>announcement</mat-icon>Login</a>
             <a mat-menu-item routerLink="/about"><mat-icon>announcement</mat-icon>About</a>
-            <a mat-menu-item routerLink="/products"><mat-icon>equalizer</mat-icon>Products</a>
+            <a mat-menu-item routerLink="/products" *ngIf="isLoggedIn$ | async"><mat-icon>equalizer</mat-icon>Products</a>
             <a mat-menu-item routerLink="/location"><mat-icon>search</mat-icon>Location</a>
+            <a mat-menu-item (click)="onLogout()" *ngIf="isLoggedIn$ | async"><mat-icon>announcement</mat-icon>Logout</a>
         </mat-menu>
     </div>
 </mat-toolbar>
