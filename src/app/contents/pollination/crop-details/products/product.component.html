@@ -6,7 +6,7 @@
                 <button [routerLink] = "['/products', _cropId, 'htable']" mat-fab color="accent"><mat-icon>view_list</mat-icon></button>
             </div>
         </mat-card-header>
-        <div *ngIf="_crop.status !== 'Harvesting'">
+        <div *ngIf="_crop.status !== 'Harvesting' && _crop.status !== 'Closed'">
         <mat-card-content>
             <form  [formGroup]="productForm" (ngSubmit)="onSubmit()" fxLayout="column">
                 <div  fxLayout.xs="column" fxLayoutAlign.xs="stretch" fxLayoutAlign="center center" fxLayoutGap="0.5rem">

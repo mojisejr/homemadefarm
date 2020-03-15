@@ -33,6 +33,7 @@ export class CropDetailsComponent implements OnInit {
     cropDetails: Observable<Crop>;
     monitorData: Observable<any>;
     dayCount: number;
+    closeCount: number;
 
 
     toTrayForm: FormGroup;
@@ -140,7 +141,7 @@ export class CropDetailsComponent implements OnInit {
         if(this.toBagForm.valid) {
             const value = new Object();
             Object.assign(value, this.toBagForm.value, {status: "toBag"})
-            console.log(value);
+            // console.log(value);
             this.ps.updateDetail(this.docId, value, "UPDATE_CROP_DETAIL").then(result => {
                 this.ui.dataMessage(`toBagAT: ${this.toBagForm.value} update successfully`, 2000);
             })
@@ -162,10 +163,10 @@ export class CropDetailsComponent implements OnInit {
             this.ps.addPollination(value).then(result => {
                 if(result) {
                     this.ps.updateCropStatus(this.docId, 'pollination').then(result => {
-                        
+                        this.ui.dataMessage(`tag: ${this.tagCreateForm.value} created successfully`, 2000);
                     })
                     .catch(err => {
-                        console.error(err);
+                        this.ui.dataMessage(`Error: ${err.dataMessage}`, 2000);
                     })
                 }
             })
@@ -202,6 +203,37 @@ export class CropDetailsComponent implements OnInit {
         dialogRef.afterClosed().subscribe(docId => {
             if(docId) {
                 this.ps.updateDetail(docId, {status: 'postPollination'}, 'UPDATE_CROP_DETAIL');
+            }
+        })
+    }
+
+    onCropClose(crop: Partial<Crop>) {
+
+        const dialogRef = this.confirmDialog.open(ConfirmDialogComponent, {
+            data: {
+                id: this.docId,
+                dialogHeader: "Crop Closing",
+                dialogContent: `Closing Room: ${crop.room} Crop: ${crop.crop} ?`
+            }
+        })
+
+        dialogRef.afterClosed().subscribe(docId => {
+            const cropCloseObject = new Object();
+            Object.assign(cropCloseObject, {
+                fromToBagCount: this.helper.diffTilNow(crop.toBagAt),
+                fromStartCount: this.helper.diffTilNow(crop.createdAt),
+                fromTrayToBag: this.helper.dateDiff(crop.toBagAt, crop.toTrayAt),
+                status: 'Closed' 
+            })
+
+            if(docId) {
+                this.ps.updateDetail(docId, cropCloseObject , "UPDATE_CROP_DETAIL")
+                .then(() => {
+                    this.ui.dataMessage(`Room: ${crop.room} crop: ${crop.crop} status: Closed - Updated!`, 2000);
+                })
+                .catch(err => {
+                    this.ui.dataMessage(`Error: ${err.dataMessage}`, 2000);
+                })
             }
         })
     }

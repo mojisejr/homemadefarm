@@ -18,7 +18,7 @@ export class NevigationComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
-    this.afAuth.authState.subscribe(user => console.log(user));
+    // this.afAuth.authState.subscribe(user => console.log(user));
     this.isLoggedIn$ = this.afAuth.authState.pipe(map(user => !!user));
     this.isLoggedOut$ = this.isLoggedIn$.pipe(map(loggedIn => !loggedIn));
   }
@@ -28,5 +28,4 @@ export class NevigationComponent implements OnInit {
 
     this.router.navigateByUrl("/");
   }
-
 }

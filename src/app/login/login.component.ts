@@ -34,7 +34,6 @@ export class AppLoginComponent implements OnInit, OnDestroy {
     }
 
     onLoginSuccessful(result) {
-        console.log("Firebase UI result: ", result);
 
         this.ngZone.run(() => this.router.navigateByUrl('/products'));
     }

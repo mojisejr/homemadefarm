@@ -7,6 +7,8 @@ import { DatePipe } from '@angular/common'
 })
 export class Helper {
 
+    private _oneDayMs = 1000*60*60*24;
+
     constructor(private dp: DatePipe) {}
 
     estHarvestCalc(createdAt: Date, harvestday: number) {
@@ -24,8 +26,6 @@ export class Helper {
     }
 
     diffTilNow (in_date: Date) {
-        const onedayMs = 1000*60*60*24;
-
         //cannot use in_date directly
         const in_dateStr = in_date.toString();
         const newDate = new Date(in_dateStr);
@@ -34,6 +34,18 @@ export class Helper {
 
         const diff = new Date().getTime() - newDate.getTime();
 
-        return Math.round(diff/onedayMs);
+        return Math.round(diff/this._oneDayMs);
+    }
+
+    dateDiff(date1: Date, date2: Date) {
+        const strDate1 = date1.toString();
+        const strDate2 = date2.toString();
+
+        const newDate1 = new Date(strDate1);
+        const newDate2 = new Date(strDate2);
+
+        const diff = newDate1.getTime() - newDate2.getTime();
+
+        return Math.round(diff/this._oneDayMs);
     }
 }
