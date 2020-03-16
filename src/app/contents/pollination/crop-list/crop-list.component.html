@@ -1,29 +1,65 @@
-<div *ngIf="isLoaded" fxLayout="column" fxLayoutAlign="center" fxLayoutGap="2rem" class="card-section">
+<div fxLayout="column" fxLayoutAlign="center" fxLayoutGap="2rem" class="card-section">
     <div fxLayout="row" fxLayoutAlign="space-between" class="header"><h1>Crop List</h1><button routerLink="new" fxFlexAlign="center" mat-fab color="primary"><mat-icon>add</mat-icon></button></div>
-    <mat-card *ngFor="let data of cropList" class="card">
-        <mat-card-header>
-            <mat-card-title>Room: {{ data.room }}</mat-card-title>
-            <mat-card-subtitle>Crop: {{ data.crop }}</mat-card-subtitle>
-        </mat-card-header>
-        <mat-divider></mat-divider>
-        <mat-card-content class="card-content" fxLayout="row">
-            <div fxFlex="50%" class="card-content-list">
-                <mat-list>
-                    <h3 mat-subheader>Growing:</h3>
-                    <mat-list-item *ngFor="let item of data.species"><mat-icon>keyboard_arrow_right</mat-icon><span>{{ item }}</span></mat-list-item>
-                </mat-list>
+    <mat-tab-group>
+        <mat-tab label="Active">
+            <div *ngIf="cropList$ | async; else loading; let cropList" class="tab-content-wrapper">
+                <mat-card *ngFor="let data of cropList" class="card">
+                    <mat-card-header>
+                        <mat-card-title>Room: {{ data.room }}</mat-card-title>
+                        <mat-card-subtitle>Crop: {{ data.crop }}</mat-card-subtitle>
+                    </mat-card-header>
+                    <mat-divider></mat-divider>
+                    <mat-card-content fxLayout.xs = "column" class="card-content" fxLayout="row">
+                        <div fxFlex="50%" class="card-content-list">
+                            <mat-list>
+                                <h3 mat-subheader>Growing:</h3>
+                                <mat-list-item *ngFor="let item of data.species"><mat-icon>keyboard_arrow_right</mat-icon><span>{{ item }}</span></mat-list-item>
+                            </mat-list>
+                        </div>
+                        <div fxFlexAlign="center" fxLayoutAlign="center center" fxLayout="column" class="card-content-status">
+                            <h3>Status:</h3>
+                            <h2>{{ data.status }}</h2>
+                        </div>
+                    </mat-card-content>
+                    <mat-divider></mat-divider>
+                    <mat-card-actions fxLayoutAlign="end">
+                        <button [routerLink]="['/products', data.id]" mat-raised-button color="primary">Details</button>
+                    </mat-card-actions>
+                </mat-card>
             </div>
-            <div fxFlexAlign="center" fxLayoutAlign="center center" fxLayout="column" class="card-content-status">
-                <h3>Status:</h3>
-                <h2>{{ data.status }}</h2>
+        </mat-tab>
+        <mat-tab label="History">
+            <div *ngIf="historyCropList$ | async; else loading; let historyCropList" class="tab-content-wrapper">
+                <mat-card *ngFor="let data of historyCropList" class="card">
+                    <mat-card-header>
+                        <mat-card-title>Room: {{ data.room }}</mat-card-title>
+                        <mat-card-subtitle>Crop: {{ data.crop }}</mat-card-subtitle>
+                    </mat-card-header>
+                    <mat-divider></mat-divider>
+                    <mat-card-content fxLayout.xs = "column" class="card-content" fxLayout="row">
+                        <div fxFlex="50%" class="card-content-list">
+                            <mat-list>
+                                <h3 mat-subheader>Growing:</h3>
+                                <mat-list-item *ngFor="let item of data.species"><mat-icon>keyboard_arrow_right</mat-icon><span>{{ item }}</span></mat-list-item>
+                            </mat-list>
+                        </div>
+                        <div fxFlexAlign="center" fxLayoutAlign="center center" fxLayout="column" class="card-content-status">
+                            <h3>Status:</h3>
+                            <h2>{{ data.status }}</h2>
+                        </div>
+                    </mat-card-content>
+                    <mat-divider></mat-divider>
+                    <mat-card-actions fxLayoutAlign="end">
+                        <button [routerLink]="['/products', data.id]" mat-raised-button color="primary">Details</button>
+                    </mat-card-actions>
+                </mat-card>
             </div>
-        </mat-card-content>
-        <mat-divider></mat-divider>
-        <mat-card-actions fxLayoutAlign="end">
-            <button [routerLink]="['/products', data.id]" mat-raised-button color="primary">Details</button>
-        </mat-card-actions>
-    </mat-card>
+        </mat-tab>
+    </mat-tab-group>
 </div>
-<div fxLayoutAlign="center center" *ngIf="!isLoaded" class="spinner">
-    <mat-spinner></mat-spinner>
-</div>
+
+<ng-template #loading>
+    <div  fxLayoutAlign="center center" class="spinner">
+        <mat-spinner></mat-spinner>
+    </div>
+</ng-template>

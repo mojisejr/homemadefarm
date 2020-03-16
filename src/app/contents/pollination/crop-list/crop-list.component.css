@@ -19,6 +19,10 @@
     border-radius: 3px;
 }
 
+.tab-content-wrapper {
+    padding: 1rem 0;
+}
+
 .spinner {
     margin-top: 3rem;
 }

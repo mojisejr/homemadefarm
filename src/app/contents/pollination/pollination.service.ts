@@ -4,7 +4,7 @@ import { Crop } from './crop.model'
 import { Melon } from './melon.model'
 import { Product } from './product.model'
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore'
-import { Subject,  combineLatest } from 'rxjs';
+import { Subject, combineLatest, Observable } from 'rxjs';
 import { map } from 'rxjs/operators'
 import { Helper } from '../../shared/helper.service'
 
@@ -69,8 +69,37 @@ export class PollinationService {
     getTagColorByIdSnapshot(docId) {
         return this.db.collection<pollination>('/pollination', ref => ref.where('docId', "==", docId));
     }
-    getCropsList(): AngularFirestoreCollection<Crop> {
-        return this.cropsRef;
+    getCropsList(): Observable<Crop[]> {
+        return this.cropsRef.snapshotChanges()
+        .pipe(
+            map(snaps => {
+                return snaps.map(snap => {
+                    return {
+                        id: snap.payload.doc.id,
+                        ...snap.payload.doc.data() as Crop
+                    }
+                })
+            })
+        )
+    }
+    getActiveCropList(): Observable<Crop[]> {
+        return this.getCropsList().pipe(
+            map(snaps => {
+                return snaps.filter(snap => {
+                    return snap.status !== "Closed";
+                })
+            })
+        )
+    }
+
+    getHistoryCropList(): Observable<Crop[]> {
+        return this.getCropsList().pipe(
+            map(snaps => {
+                return snaps.filter(snap => {
+                    return snap.status === "Closed";
+                })
+            })
+        )
     }
     getCropById(docId: string) {
         return this.cropsRef.doc<Crop>(docId).valueChanges();

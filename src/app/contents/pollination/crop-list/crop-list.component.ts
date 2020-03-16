@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
-import { FirebaseService } from '../../../shared/firebase.service'
-
+import { Observable, of} from 'rxjs'
+import { map, filter, combineLatest } from 'rxjs/operators'
 import { PollinationService } from '../pollination.service'
 import { Crop } from '../crop.model'
 
@@ -11,22 +11,12 @@ import { Crop } from '../crop.model'
 })
 
 export class CropListComponent implements OnInit {
-    isLoaded = false;
-    cropList: Crop[];
-    constructor(private plService: PollinationService,
-        private fb: FirebaseService) {}
+    cropList$: Observable<Crop[]>;
+    historyCropList$: Observable<Crop[]>;
+    constructor(private plService: PollinationService) {}
 
     ngOnInit() {
-        this.plService.getCropsList()
-        .snapshotChanges()
-        .subscribe(list => {
-            this.cropList = list.map(e => {
-                return {
-                    id: e.payload.doc.id,
-                    ...e.payload.doc.data()
-                } as Crop;
-            })
-            this.isLoaded = true;
-        })        
+        this.cropList$ = this.plService.getActiveCropList();
+        this.historyCropList$ = this.plService.getHistoryCropList();
     }
 }
