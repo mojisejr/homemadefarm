@@ -10,11 +10,11 @@
     <div fxHide.gt-xs fxFlex="1 1" fxLayoutAlign="flex-end" class="menu-wrapper">
             <button mat-button [matMenuTriggerFor]="appMenu"><mat-icon>menu</mat-icon></button>
         <mat-menu #appMenu="matMenu">
-            <a mat-menu-item routerLink="/login" *ngIf="isLoggedOut$ | async"><mat-icon>announcement</mat-icon>Login</a>
+            <a mat-menu-item routerLink="/login" *ngIf="isLoggedOut$ | async"><mat-icon>vpn_key</mat-icon>Login</a>
             <a mat-menu-item routerLink="/about"><mat-icon>announcement</mat-icon>About</a>
             <a mat-menu-item routerLink="/products" *ngIf="isLoggedIn$ | async"><mat-icon>equalizer</mat-icon>Products</a>
             <a mat-menu-item routerLink="/location"><mat-icon>search</mat-icon>Location</a>
-            <a mat-menu-item (click)="onLogout()" *ngIf="isLoggedIn$ | async"><mat-icon>announcement</mat-icon>Logout</a>
+            <a mat-menu-item (click)="onLogout()" *ngIf="isLoggedIn$ | async"><mat-icon>cancel</mat-icon>Logout</a>
         </mat-menu>
     </div>
 </mat-toolbar>
