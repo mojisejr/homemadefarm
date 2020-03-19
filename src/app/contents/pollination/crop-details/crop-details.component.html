@@ -8,186 +8,199 @@
             <button routerLink="/products" mat-fab><mat-icon>arrow_back</mat-icon></button>
         </div>
     </div>
-    <div ngStyle.xs="width: 90%;" fxLayout="column" fxLayoutGap="1rem" fxLayoutAlign="center" class="dashboard">
-        <div fxLayout.xs="column" ngStyle.xs="width: 100%;" fxLayout="row wrap" fxLayoutGap="1rem" class="row-content-1">
-            <div class="crop-details">
-                <mat-card>
-                    <mat-card-header>
-                        <mat-card-subtitle>Created At</mat-card-subtitle>
-                    </mat-card-header>
-                    <mat-card-content>
-                        <h3>{{ crop.createdAt }}</h3>
-                    </mat-card-content>
-                </mat-card>
-            </div>
-            <div class="totray">
-                <mat-card>
-                    <mat-card-header>
-                        <mat-card-subtitle>toTrayAt</mat-card-subtitle>
-                    </mat-card-header>
-                    <mat-card-content *ngIf="crop.toTrayAt != null; else trayUpdate;">
-                       <h3>{{ crop.toTrayAt }}</h3>
-                    </mat-card-content>
-                </mat-card>
-            </div>
-            <div *ngIf="crop.status != 'Initial'" class="tobag">
-                <mat-card>
-                    <mat-card-header>
-                        <mat-card-subtitle>toBagAt</mat-card-subtitle>
-                    </mat-card-header>
-                    <mat-card-content *ngIf="crop.toBagAt != null; else bagUpdate;">
-                        <h3>{{ crop.toBagAt }}</h3>
-                    </mat-card-content>
-                </mat-card>
-            </div>
-            <div *ngIf="crop.status === 'Closed'" class="crop-dayCount">
-                <mat-card>
-                    <mat-card-header>
-                        <mat-card-subtitle>fromStart</mat-card-subtitle>
-                    </mat-card-header>
-                    <mat-card-content>
-                        <h3>{{ crop.fromStartCount }} days</h3>
-                    </mat-card-content>
-                </mat-card>
-            </div>
-            <div *ngIf="crop.status === 'Closed'" class="crop-dayCount">
-                <mat-card>
-                    <mat-card-header>
-                        <mat-card-subtitle>fromTrayToBag</mat-card-subtitle>
-                    </mat-card-header>
-                    <mat-card-content>
-                        <h3>{{ crop.fromTrayToBag }} days</h3>
-                    </mat-card-content>
-                </mat-card>
-            </div>
-            <div class="crop-dayCount">
-                <mat-card>
-                    <mat-card-header>
-                        <mat-card-subtitle>fromToBag</mat-card-subtitle>
-                    </mat-card-header>
-                    <mat-card-content>
-                        <h3 *ngIf="crop.status != 'Closed'">{{ dayCount }} days</h3>
-                        <h3 *ngIf="crop.status === 'Closed'">{{ crop.fromToBagCount }} days [CLOSED]</h3>
-                    </mat-card-content>
-                </mat-card>
-            </div>
-        </div>
-        <mat-card>
-            <mat-card-header>
-                <mat-card-subtitle>Status</mat-card-subtitle>
-            </mat-card-header>
-            <mat-card-content fxLayoutAlign="center center">
-                <h3>{{ crop.status }}</h3>
-            </mat-card-content>
-        </mat-card>
-        <div class="monitor-wrapper" *ngIf="monitorData | async; let data">
-            <mat-card>
-                <mat-card-header>
-                    <mat-card-subtitle>
-                        Monitor
-                    </mat-card-subtitle>
-                </mat-card-header>
-                <mat-card-content>
-                    <mat-list fxLayout="row" fxLayout.xs = "column" fxLayoutAlign="space-between center" fxLayoutAlign.xs="center center">
-                        <mat-list-item>
-                            <mat-icon>keyboard_arrow_right</mat-icon>
-                            <span>Motor Status: {{ data.status }}  </span>
-                        </mat-list-item>
-                        
-                        <mat-list-item>
-                            <mat-icon>keyboard_arrow_right</mat-icon>
-                            <span>Mortor Temp: {{ data.Temp }} *C</span>
-                        </mat-list-item>
-
-                        <mat-list-item>
-                            <mat-icon>keyboard_arrow_right</mat-icon>
-                            <span>Motor Voltage: {{ data.voltage }} V</span>
-                        </mat-list-item>
-
-                        <mat-list-item>
-                            <mat-icon>keyboard_arrow_right</mat-icon>
-                            <span>Motor Current: {{ data.current }} A</span>
-                        </mat-list-item>
-
-                        <mat-list-item>
-                            <mat-icon>keyboard_arrow_right</mat-icon>
-                            <span>Last Sync: {{ data.Time }} </span>
-                        </mat-list-item>
-
-                    </mat-list>
-                </mat-card-content>
-            </mat-card>
-        </div>
-        <mat-card *ngIf="crop.status != 'Initial'  && crop.status != 'Closed'" class="tagTable">
-            <div class="tagTable-selector">
-                <mat-form-field>
-                    <mat-label>Type select:</mat-label>
-                    <mat-select (selectionChange) = "onTypeSnapshotChange($event, crop.status)">
-                        <mat-option *ngFor="let item of crop.species; let index = index" [value]="item"> {{ item }}</mat-option>
-                    </mat-select>
-                </mat-form-field>
-                <!-- <ng-container *ngIf="all$ | async; else loading; let all">
-                    <ul>
-                        <li *ngFor = "let type of all">{{ type.tagColor }} est: {{ type.estHarvestDate }}</li>
-                    </ul>
-                </ng-container> -->
-            </div>
-            <div *ngIf="all$ | async; let dataSource" class="tagTable-table">
-                <form *ngIf="crop.status != 'postPollination' && crop.status != 'Harvesting' && crop.status != 'Closed'" [formGroup]="tagCreateForm" (ngSubmit)="onTagCreate()">
-                    <mat-form-field >
-                        <input
-                        type="text"
-                        formControlName="tagColor"
-                        placeholder="TagColor"
-                        matInput>
-                    </mat-form-field>
-                    <button mat-button type="submit" color="primary">Create</button>
-                </form>
-                <mat-table *ngIf="dataSource.length > 0;" [dataSource]="dataSource">
-                    <ng-container matColumnDef="tagColor">
-                        <mat-header-cell *matHeaderCellDef>tagColor</mat-header-cell>
-                        <mat-cell *matCellDef="let element" [style.color]="element.tagColor">{{ element.tagColor }}</mat-cell>
-                    </ng-container>
-
-                    <ng-container matColumnDef="createdAt">
-                        <mat-header-cell *matHeaderCellDef>createdAt</mat-header-cell>
-                        <mat-cell *matCellDef="let element">{{ element.createdAt }}</mat-cell>
-                    </ng-container>
-
-                    <ng-container matColumnDef="currentDay">
-                        <mat-header-cell *matHeaderCellDef>currentDay</mat-header-cell>
-                        <mat-cell *matCellDef="let element">{{ element.currentDay }}</mat-cell>
-                    </ng-container>
-
-                    <ng-container matColumnDef="dayLeft">
-                        <mat-header-cell *matHeaderCellDef>dayLeft</mat-header-cell>
-                        <mat-cell *matCellDef="let element">{{ element.dayLeft }}</mat-cell>
-                    </ng-container>
-
-                    <ng-container matColumnDef="estHarvestDate">
-                        <mat-header-cell *matHeaderCellDef>estHarvestDate</mat-header-cell>
-                        <mat-cell *matCellDef="let element">{{ element.estHarvestDate }}</mat-cell>
-                    </ng-container>
-
-                    <ng-container matColumnDef="actions">
-                        <mat-header-cell *matHeaderCellDef><mat-icon>more_vert</mat-icon></mat-header-cell>
-                        <mat-cell *matCellDef="let element"><button (click)="onTagDelete(element.typeId)" mat-icon-button color="warn"><mat-icon>backspace</mat-icon></button></mat-cell>
-                    </ng-container>
-
-                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-                    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-                </mat-table>
+    <div>
+        <mat-tab-group>
+            <mat-tab label="Main">
+                <div class="content-wrapper">
+                    <div ngStyle.xs="width: 90%;" fxLayout="column" fxLayoutGap="1rem" fxLayoutAlign="center" class="dashboard">
+                        <div fxLayout.xs="column" ngStyle.xs="width: 100%;" fxLayout="row wrap" fxLayoutGap="1rem" class="row-content-1">
+                            <div class="crop-details">
+                                <mat-card>
+                                    <mat-card-header>
+                                        <mat-card-subtitle>Created At</mat-card-subtitle>
+                                    </mat-card-header>
+                                    <mat-card-content>
+                                        <h3>{{ crop.createdAt }}</h3>
+                                    </mat-card-content>
+                                </mat-card>
+                            </div>
+                            <div class="totray">
+                                <mat-card>
+                                    <mat-card-header>
+                                        <mat-card-subtitle>toTrayAt</mat-card-subtitle>
+                                    </mat-card-header>
+                                    <mat-card-content *ngIf="crop.toTrayAt != null; else trayUpdate;">
+                                       <h3>{{ crop.toTrayAt }}</h3>
+                                    </mat-card-content>
+                                </mat-card>
+                            </div>
+                            <div *ngIf="crop.status != 'Initial'" class="tobag">
+                                <mat-card>
+                                    <mat-card-header>
+                                        <mat-card-subtitle>toBagAt</mat-card-subtitle>
+                                    </mat-card-header>
+                                    <mat-card-content *ngIf="crop.toBagAt != null; else bagUpdate;">
+                                        <h3>{{ crop.toBagAt }}</h3>
+                                    </mat-card-content>
+                                </mat-card>
+                            </div>
+                            <div *ngIf="crop.status === 'Closed'" class="crop-dayCount">
+                                <mat-card>
+                                    <mat-card-header>
+                                        <mat-card-subtitle>fromStart</mat-card-subtitle>
+                                    </mat-card-header>
+                                    <mat-card-content>
+                                        <h3>{{ crop.fromStartCount }} days</h3>
+                                    </mat-card-content>
+                                </mat-card>
+                            </div>
+                            <div *ngIf="crop.status === 'Closed'" class="crop-dayCount">
+                                <mat-card>
+                                    <mat-card-header>
+                                        <mat-card-subtitle>fromTrayToBag</mat-card-subtitle>
+                                    </mat-card-header>
+                                    <mat-card-content>
+                                        <h3>{{ crop.fromTrayToBag }} days</h3>
+                                    </mat-card-content>
+                                </mat-card>
+                            </div>
+                            <div class="crop-dayCount">
+                                <mat-card>
+                                    <mat-card-header>
+                                        <mat-card-subtitle>fromToBag</mat-card-subtitle>
+                                    </mat-card-header>
+                                    <mat-card-content>
+                                        <h3 *ngIf="crop.status != 'Closed'">{{ dayCount }} days</h3>
+                                        <h3 *ngIf="crop.status === 'Closed'">{{ crop.fromToBagCount }} days [CLOSED]</h3>
+                                    </mat-card-content>
+                                </mat-card>
+                            </div>
+                        </div>
+                        <mat-card>
+                            <mat-card-header>
+                                <mat-card-subtitle>Status</mat-card-subtitle>
+                            </mat-card-header>
+                            <mat-card-content fxLayoutAlign="center center">
+                                <h3>{{ crop.status }}</h3>
+                            </mat-card-content>
+                        </mat-card>
+                        <!-- <div class="monitor-wrapper" *ngIf="monitorData | async; let data">
+                            <mat-card>
+                                <mat-card-header>
+                                    <mat-card-subtitle>
+                                        Monitor
+                                    </mat-card-subtitle>
+                                </mat-card-header>
+                                <mat-card-content>
+                                    <mat-list fxLayout="row" fxLayout.xs = "column" fxLayoutAlign="space-between center" fxLayoutAlign.xs="center center">
+                                        <mat-list-item>
+                                            <mat-icon>keyboard_arrow_right</mat-icon>
+                                            <span>Motor Status: {{ data.status }}  </span>
+                                        </mat-list-item>
+                                        
+                                        <mat-list-item>
+                                            <mat-icon>keyboard_arrow_right</mat-icon>
+                                            <span>Mortor Temp: {{ data.Temp }} *C</span>
+                                        </mat-list-item>
                 
-                <div *ngIf="dataSource.length === 0">no data please create one.</div>
-                <div class="pollinationFinish" *ngIf="dataSource.length > 0 && crop.status != 'postPollination' && crop.status !== 'Harvesting'">
-                    <button (click)="onFinish()"  mat-raised-button color="warn">Finish ?</button>
+                                        <mat-list-item>
+                                            <mat-icon>keyboard_arrow_right</mat-icon>
+                                            <span>Motor Voltage: {{ data.voltage }} V</span>
+                                        </mat-list-item>
+                
+                                        <mat-list-item>
+                                            <mat-icon>keyboard_arrow_right</mat-icon>
+                                            <span>Motor Current: {{ data.current }} A</span>
+                                        </mat-list-item>
+                
+                                        <mat-list-item>
+                                            <mat-icon>keyboard_arrow_right</mat-icon>
+                                            <span>Last Sync: {{ data.Time }} </span>
+                                        </mat-list-item>
+                
+                                    </mat-list>
+                                </mat-card-content>
+                            </mat-card>
+                        </div> -->
+                        <mat-card *ngIf="crop.status != 'Initial'  && crop.status != 'Closed'" class="tagTable">
+                            <div class="tagTable-selector">
+                                <mat-form-field>
+                                    <mat-label>Type select:</mat-label>
+                                    <mat-select (selectionChange) = "onTypeSnapshotChange($event, crop.status)">
+                                        <mat-option *ngFor="let item of crop.species; let index = index" [value]="item"> {{ item }}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                                <!-- <ng-container *ngIf="all$ | async; else loading; let all">
+                                    <ul>
+                                        <li *ngFor = "let type of all">{{ type.tagColor }} est: {{ type.estHarvestDate }}</li>
+                                    </ul>
+                                </ng-container> -->
+                            </div>
+                            <div *ngIf="all$ | async; let dataSource" class="tagTable-table">
+                                <form *ngIf="crop.status != 'postPollination' && crop.status != 'Harvesting' && crop.status != 'Closed'" [formGroup]="tagCreateForm" (ngSubmit)="onTagCreate()">
+                                    <mat-form-field >
+                                        <input
+                                        type="text"
+                                        formControlName="tagColor"
+                                        placeholder="TagColor"
+                                        matInput>
+                                    </mat-form-field>
+                                    <button mat-button type="submit" color="primary">Create</button>
+                                </form>
+                                <mat-table *ngIf="dataSource.length > 0;" [dataSource]="dataSource">
+                                    <ng-container matColumnDef="tagColor">
+                                        <mat-header-cell *matHeaderCellDef>tagColor</mat-header-cell>
+                                        <mat-cell *matCellDef="let element" [style.color]="element.tagColor">{{ element.tagColor }}</mat-cell>
+                                    </ng-container>
+                
+                                    <ng-container matColumnDef="createdAt">
+                                        <mat-header-cell *matHeaderCellDef>createdAt</mat-header-cell>
+                                        <mat-cell *matCellDef="let element">{{ element.createdAt }}</mat-cell>
+                                    </ng-container>
+                
+                                    <ng-container matColumnDef="currentDay">
+                                        <mat-header-cell *matHeaderCellDef>currentDay</mat-header-cell>
+                                        <mat-cell *matCellDef="let element">{{ element.currentDay }}</mat-cell>
+                                    </ng-container>
+                
+                                    <ng-container matColumnDef="dayLeft">
+                                        <mat-header-cell *matHeaderCellDef>dayLeft</mat-header-cell>
+                                        <mat-cell *matCellDef="let element">{{ element.dayLeft }}</mat-cell>
+                                    </ng-container>
+                
+                                    <ng-container matColumnDef="estHarvestDate">
+                                        <mat-header-cell *matHeaderCellDef>estHarvestDate</mat-header-cell>
+                                        <mat-cell *matCellDef="let element">{{ element.estHarvestDate }}</mat-cell>
+                                    </ng-container>
+                
+                                    <ng-container matColumnDef="actions">
+                                        <mat-header-cell *matHeaderCellDef><mat-icon>more_vert</mat-icon></mat-header-cell>
+                                        <mat-cell *matCellDef="let element"><button (click)="onTagDelete(element.typeId)" mat-icon-button color="warn"><mat-icon>backspace</mat-icon></button></mat-cell>
+                                    </ng-container>
+                
+                                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                                    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                                </mat-table>
+                                
+                                <div *ngIf="dataSource.length === 0">no data please create one.</div>
+                                <div class="pollinationFinish" *ngIf="dataSource.length > 0 && crop.status != 'postPollination' && crop.status !== 'Harvesting'">
+                                    <button (click)="onFinish()"  mat-raised-button color="warn">Finish ?</button>
+                                </div>
+                            </div>
+                        </mat-card>
+                        <app-product class="product-sorting-box" *ngIf="crop.status === 'postPollination' || crop.status === 'Harvesting' || crop.status === 'Closed'" [crop]="crop" [cropId]="docId"></app-product>
+                        <div *ngIf="crop.status === 'Harvesting'" fxLayoutAlign="end" class="closing-container">
+                            <button mat-raised-button color="warn" (click)="onCropClose(crop)">Close Corp ?</button>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </mat-card>
-        <app-product class="product-sorting-box" *ngIf="crop.status === 'postPollination' || crop.status === 'Harvesting' || crop.status === 'Closed'" [crop]="crop" [cropId]="docId"></app-product>
-        <div *ngIf="crop.status === 'Harvesting'" fxLayoutAlign="end" class="closing-container">
-            <button mat-raised-button color="warn" (click)="onCropClose(crop)">Close Corp ?</button>
-        </div>
+            </mat-tab>
+            <mat-tab label="Activities">
+                <div class="content-wrapper">
+                    <app-activities [crop]="crop" [docId]=[docId]></app-activities>
+                </div>
+            </mat-tab>
+        </mat-tab-group>
     </div>
 </div>
 

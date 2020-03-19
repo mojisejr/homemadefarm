@@ -9,6 +9,7 @@ import { CropDetailsComponent } from './contents/pollination/crop-details/crop-d
 import { CropCreateComponent } from './contents/pollination/crop-create/crop-create.component';
 import { ProductTableComponent } from './contents/pollination/crop-details/products/product-table/product-table.component';
 import { AppLoginComponent } from './login/login.component';
+import { AppActivitiesComponent } from './contents/activities/activities.component';
 
 const appRoutes: Routes = [
     { path: '', component: MainComponent },
@@ -19,7 +20,7 @@ const appRoutes: Routes = [
     { path: 'products', component: PollinationComponent},
     { path: 'products/new', component: CropCreateComponent },
     { path: 'products/:id', component: CropDetailsComponent},
-    { path: 'products/:id/htable', component: ProductTableComponent}
+    { path: 'products/:id/htable', component: ProductTableComponent},
 ];
 
 

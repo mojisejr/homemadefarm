@@ -31,7 +31,7 @@ export class CropDetailsComponent implements OnInit {
     all$: Observable<any>;
     docId = null;
     cropDetails: Observable<Crop>;
-    monitorData: Observable<any>;
+    // monitorData: Observable<any>;
     dayCount: number;
     closeCount: number;
 
@@ -59,7 +59,7 @@ export class CropDetailsComponent implements OnInit {
         })
         if(this.docId != null) {
             this.cropDetails = this.ps.getCropById(this.docId);
-            this.monitorData = this.fb.getRtbDataByRoom('room2-3/motor');
+            // this.monitorData = this.fb.getRtbDataByRoom('room2-3/motor');
             this.cropDetails.subscribe(data => {
                 if(data != null) {
                     this.dayCount = this.helper.diffTilNow(data.toBagAt);
