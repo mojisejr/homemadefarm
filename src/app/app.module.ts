@@ -19,6 +19,14 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database'
 import { AngularFirestoreModule, FirestoreSettingsToken } from "@angular/fire/firestore";
 import { AngularFireAuthModule } from '@angular/fire/auth';
+
+
+//ngx-charts module
+
+import { NgxChartsModule } from '@swimlane/ngx-charts'
+import { AppVerticalChartComponent } from './shared/components/charts/vertical-bar-chart/vb-chart.component'
+import { AppNumberCardComponent } from './shared/components/charts/ืnumber-card/number-card.component'
+
 import { MainComponent } from './contents/main/main.component';
 import { AboutsComponent } from './contents/abouts/abouts.component';
 import { ContactusComponent } from './contents/contactus/contactus.component';
@@ -73,7 +81,9 @@ import { DatePipe } from '@angular/common';
     SortingTableComponent,
     AppLoginComponent,
     AppActivitiesComponent,
-    AppActivitiesTableComponent
+    AppActivitiesTableComponent,
+    AppVerticalChartComponent,
+    AppNumberCardComponent
   ],
   imports: [
     BrowserModule,
@@ -88,6 +98,7 @@ import { DatePipe } from '@angular/common';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    NgxChartsModule
   ],
   providers: [{provide: FirestoreSettingsToken, useValue: {}}, DatePipe],
   bootstrap: [AppComponent],

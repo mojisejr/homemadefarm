@@ -63,7 +63,9 @@ export class AppActivitiesComponent implements OnInit {
 
 
     addFertilizer() {
-        if(this.activityForm.get('fertilizer').value != null) {
+        if((this.activityForm.get('fertilizer.formula').value !== null)
+        && (this.activityForm.get('fertilizer.amount').value !== null)
+        && (this.activityForm.get('fertilizer.unit').value !== null)) {
             this._fertData.push(this.activityForm.get(['fertilizer']).value);
             this.activityForm.get('fertilizer').reset();
             this.ui.dataMessage(`${this.activityForm.get(['fertilizer']).value.formula} was added`, 2000);

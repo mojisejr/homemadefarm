@@ -104,9 +104,6 @@ export class PollinationService {
     getCropById(docId: string) {
         return this.cropsRef.doc<Crop>(docId).valueChanges();
     }
-    updateCropStatus(docId: string, status) {
-        return this.cropsRef.doc<Crop>(docId).update({status: status});
-    }
     getMelonList(): AngularFirestoreCollection<Melon> {
         return this.melonRef;
     }
@@ -133,6 +130,7 @@ export class PollinationService {
             this.productChanged.next(product);
         });
     }
+    
     getEstHarvestDate(type: string, docId: string, color: string) {
         return combineLatest(
             this.getMelonById(type),
@@ -143,6 +141,8 @@ export class PollinationService {
         }))
         
     }
+
+
     updateDetail(docId, value, key) {
         switch (key) {
             case "UPDATE_CROP_DETAIL":
@@ -152,5 +152,9 @@ export class PollinationService {
             default:
                 break;
         }
+    }
+
+    updateCropStatus(docId: string, status) {
+        return this.cropsRef.doc<Crop>(docId).update({status: status});
     }
 }
