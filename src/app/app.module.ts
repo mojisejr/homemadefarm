@@ -21,11 +21,6 @@ import { AngularFirestoreModule, FirestoreSettingsToken } from "@angular/fire/fi
 import { AngularFireAuthModule } from '@angular/fire/auth';
 
 
-//ngx-charts module
-
-import { NgxChartsModule } from '@swimlane/ngx-charts'
-import { AppVerticalChartComponent } from './shared/components/charts/vertical-bar-chart/vb-chart.component'
-import { AppNumberCardComponent } from './shared/components/charts/ืnumber-card/number-card.component'
 
 import { MainComponent } from './contents/main/main.component';
 import { AboutsComponent } from './contents/abouts/abouts.component';
@@ -42,10 +37,14 @@ import { ProductTableComponent } from './contents/pollination/crop-details/produ
 import { SortingTableComponent } from './contents/pollination/crop-details/products/sorting-table/sorting-table.component'
 
 //Activities Component
-
 import { AppActivitiesComponent } from './contents/activities/activities.component'
 import { AppActivitiesTableComponent } from './contents/activities/activity-table/activities-table.component'
 
+//Stock Component 
+import { AppStockComponent } from './contents/Stock/stock.component'
+
+//Monitor Component
+import { AppMonitorComponent } from './contents/monitor/monitor.component'
 
 //loginComponent
 import { AppLoginComponent } from './login/login.component'
@@ -82,8 +81,8 @@ import { DatePipe } from '@angular/common';
     AppLoginComponent,
     AppActivitiesComponent,
     AppActivitiesTableComponent,
-    AppVerticalChartComponent,
-    AppNumberCardComponent
+    AppStockComponent,
+    AppMonitorComponent
   ],
   imports: [
     BrowserModule,
@@ -98,7 +97,6 @@ import { DatePipe } from '@angular/common';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    NgxChartsModule
   ],
   providers: [{provide: FirestoreSettingsToken, useValue: {}}, DatePipe],
   bootstrap: [AppComponent],

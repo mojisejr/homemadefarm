@@ -28,6 +28,7 @@ export class CropCreateComponent implements OnInit {
             "cropId": new FormControl(null, [Validators.required]),
             "room": new FormControl(null, [Validators.required]),
             "crop": new FormControl(null, [Validators.required]),
+            "material": new FormControl(null, [Validators.required, Validators.pattern("([A-Za-z0-9]:[A-Za-z0-9]:[A-Za-z0-9])")]),
             "species": new FormControl(null, [Validators.required]),
             "createdAt": new FormControl(null, [Validators.required]),
         })

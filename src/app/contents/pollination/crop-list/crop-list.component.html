@@ -1,5 +1,10 @@
 <div fxLayout="column" fxLayoutAlign="center" fxLayoutGap="2rem" class="card-section">
-    <div fxLayout="row" fxLayoutAlign="space-between" class="header"><h1>Crop List</h1><button routerLink="new" fxFlexAlign="center" mat-fab color="primary"><mat-icon>add</mat-icon></button></div>
+    <div fxLayout="row" fxLayoutAlign="space-between" class="header">
+        <h1>Crop List</h1>
+        <button routerLink="new" fxFlexAlign="center" mat-fab color="primary">
+            <mat-icon>add</mat-icon>
+        </button>
+    </div>
     <mat-tab-group>
         <mat-tab label="Active">
             <div *ngIf="cropList$ | async; else loading; let cropList" class="tab-content-wrapper">
@@ -14,6 +19,10 @@
                             <mat-list>
                                 <h3 mat-subheader>Growing:</h3>
                                 <mat-list-item *ngFor="let item of data.species"><mat-icon>keyboard_arrow_right</mat-icon><span>{{ item }}</span></mat-list-item>
+                            </mat-list>
+                            <mat-list>
+                                <h3 mat-subheader>Growing Material Ratio</h3>
+                                <mat-list-item><mat-icon>keyboard_arrow_right</mat-icon>{{ data.material }}</mat-list-item>
                             </mat-list>
                         </div>
                         <div fxFlexAlign="center" fxLayoutAlign="center center" fxLayout="column" class="card-content-status">
@@ -41,6 +50,10 @@
                             <mat-list>
                                 <h3 mat-subheader>Growing:</h3>
                                 <mat-list-item *ngFor="let item of data.species"><mat-icon>keyboard_arrow_right</mat-icon><span>{{ item }}</span></mat-list-item>
+                            </mat-list>
+                            <mat-list>
+                                <h3 mat-subheader>Growing Material Ratio</h3>
+                                <mat-list-item><mat-icon>keyboard_arrow_right</mat-icon>{{ data.material }}</mat-list-item>
                             </mat-list>
                         </div>
                         <div fxFlexAlign="center" fxLayoutAlign="center center" fxLayout="column" class="card-content-status">
