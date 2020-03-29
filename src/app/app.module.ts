@@ -39,9 +39,8 @@ import { SortingTableComponent } from './contents/pollination/crop-details/produ
 //Activities Component
 import { AppActivitiesComponent } from './contents/activities/activities.component'
 import { AppActivitiesTableComponent } from './contents/activities/activity-table/activities-table.component'
-
-//Stock Component 
-import { AppStockComponent } from './contents/Stock/stock.component'
+import { AppSingleActivitiesComponent } from './contents/activities/single/single.component'
+import { AppMultiActivitiesComponent } from './contents/activities/multi/multi.component'
 
 //Monitor Component
 import { AppMonitorComponent } from './contents/monitor/monitor.component'
@@ -81,7 +80,8 @@ import { DatePipe } from '@angular/common';
     AppLoginComponent,
     AppActivitiesComponent,
     AppActivitiesTableComponent,
-    AppStockComponent,
+    AppSingleActivitiesComponent,
+    AppMultiActivitiesComponent,
     AppMonitorComponent
   ],
   imports: [

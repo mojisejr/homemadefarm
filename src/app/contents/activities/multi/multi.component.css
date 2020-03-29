@@ -1,0 +1,12 @@
+.container {
+    padding: 1rem;
+}
+.activity-card { 
+    width: 80%;
+    margin: 1rem auto;
+}
+
+.table-section {
+    width: 80%;
+    margin: 0 auto;
+}

@@ -24,6 +24,7 @@ export class ActivityService {
             this.ui.dataMessage(err, 2000);
         })
     }
+    
     updateActivity() {
 
     }
@@ -47,4 +48,9 @@ export class ActivityService {
             })
         )
     }
+
+    addBatchActivities() {
+    }
+
+     
 }

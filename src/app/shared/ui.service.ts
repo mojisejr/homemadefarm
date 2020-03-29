@@ -14,7 +14,7 @@ export class uiService {
     constructor(private snackbar: MatSnackBar,
         private dialog: MatDialog) {}
     dataMessage(message, duration) {
-        this.snackbar.open(`Data: ${message} added successfully`, null, {
+        this.snackbar.open(`Data: ${message}`, null, {
             duration: duration,
         })
     }

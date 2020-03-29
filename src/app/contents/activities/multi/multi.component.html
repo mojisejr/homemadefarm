@@ -1,0 +1,90 @@
+<div class="container">
+    <mat-card class="activity-card">
+        <mat-card-header>
+            <mat-card-title>Activity</mat-card-title>
+            <mat-card-subtitle>For all rooms/crops</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content fxLayout.gt-xs="row" fxLayoutAlign.gt-xs="space-evenly center" fxLayout="column" fxLayoutGap="1rem">
+            
+            <form [formGroup] = "activityForm" (ngSubmit) = "onSubmit()" fxLayout="column" fxLayoutGap="1rem">
+                <mat-form-field>
+                    <mat-label>Crops</mat-label>
+                    <mat-select
+                    formControlName = "docId"
+                    multiple>
+                        <mat-option 
+                        *ngFor="let crop of _crop" 
+                        [value]="{ id: crop.id, cropId: crop.cropId,  toBagAt: crop.toBagAt }"
+                        >Room: {{ crop.room }} / {{ crop.crop }}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+
+                <mat-form-field>
+                    <mat-label>Category</mat-label>
+                    <mat-select 
+                        formControlName="category">
+                            <mat-option value="fertilizer">Fertilizer</mat-option>
+                            <mat-option value="embeded">Embeded</mat-option>
+                            <mat-option value="spray">Spray</mat-option>
+                        </mat-select>
+                </mat-form-field>
+
+
+                <div class="fertilizer-wrapper" fxLayout="row" fxLayoutGap="0.3rem" fxLayout.xs="column">
+                    <!-- <div formArrayName="fertilizer" *ngFor="let fert of activityForm.get('fertilizer').controls; let i = index"> -->
+                        <div fxLayoutGap="10px" formGroupName="fertilizer"  fxLayout.xs="column">
+                            <mat-form-field>
+                                <input matInput type="text" formControlName="formula" placeholder="formula">
+                            </mat-form-field>
+                            <mat-form-field>
+                                <input matInput type="number" formControlName="amount" placeholder="amount">
+                            </mat-form-field>
+                            <mat-form-field>
+                                <mat-label>unit</mat-label>
+                                <mat-select formControlName="unit">
+                                    <mat-option value="ml">ml(cc)</mat-option>
+                                    <mat-option value="g">g</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    <!-- </div> -->
+                    <div>
+                        <button  type="button" mat-flat-button color="warn" (click)="addFertilizer()">add</button>
+                    </div>
+                </div>
+                <mat-form-field appearance="fill">
+                    <mat-label>description</mat-label>
+                    <textarea matInput formControlName="description"></textarea>
+                </mat-form-field>
+                <button type="submit" mat-raised-button color="primary">Add</button>
+            </form>
+            <div fxFlexAlign="start" [ngStyle.xs]="{ 'width': '100%'}">
+                <mat-card class="fertilizer-card mat-elevation-z5" *ngIf="_fertData.length > 0; else loading;">
+                    <mat-list>
+                        <mat-label>Fertilizer</mat-label>
+                        <mat-list-item *ngFor="let item of _fertData; let i = index;"><mat-icon color="primary">transit_enterexit</mat-icon> {{ item.formula }} - [{{ item.amount }}{{ item.unit }}] <button mat-icon-button (click)="onFertListDelete(i)"><mat-icon color="warn">cancel</mat-icon></button></mat-list-item>
+                    </mat-list>
+                </mat-card>
+            </div>
+        </mat-card-content>
+    </mat-card>
+    <div fxLayout="column" class="table-section">
+        <mat-form-field [ngStyle.xs]="{ 'width': '100%'}" fxFlexAlign="start">
+            <mat-label>Room Select</mat-label>
+            <mat-select
+            [(ngModel)] = "_docId">
+                <mat-option *ngFor="let crop of _crop" [value]="crop.id">Room: {{ crop.room }} / {{ crop.crop }}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <app-activities-table *ngIf="_docId" [docId] = "_docId"></app-activities-table>
+    </div>
+</div>
+
+<ng-template #loading>
+    <mat-card class="fertilizer-card" fxFlexAlign="start">
+        <mat-card-content>
+            <h3>Fertilizer list goes here</h3>
+        </mat-card-content>
+    </mat-card>
+</ng-template>

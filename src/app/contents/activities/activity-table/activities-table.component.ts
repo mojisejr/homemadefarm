@@ -18,6 +18,7 @@ export class AppActivitiesTableComponent implements OnInit {
     @Input()
     set docId(docId: string) {
         this._docId = docId;
+        this.dataSource$ = this.as.getActivityListByDocId(this._docId);
     }
 
     get docId(): string {
