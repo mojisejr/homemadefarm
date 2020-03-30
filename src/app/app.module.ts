@@ -42,6 +42,13 @@ import { AppActivitiesTableComponent } from './contents/activities/activity-tabl
 import { AppSingleActivitiesComponent } from './contents/activities/single/single.component'
 import { AppMultiActivitiesComponent } from './contents/activities/multi/multi.component'
 
+//Stock Component
+import { AppStockComponent } from './contents/stock/stock.component'
+import { AppStockCreateComponent } from './contents/stock/stock-create/stock-create.component'
+import { AppStockUpdateComponent } from './contents/stock/stock-update/stock-update.component'
+import { AppStockListComponent } from './contents/stock/stock-list/stock-list.component'
+import { AppStockCardComponent } from './contents/stock/stock-card/stock-card.component'
+
 //Monitor Component
 import { AppMonitorComponent } from './contents/monitor/monitor.component'
 
@@ -82,7 +89,12 @@ import { DatePipe } from '@angular/common';
     AppActivitiesTableComponent,
     AppSingleActivitiesComponent,
     AppMultiActivitiesComponent,
-    AppMonitorComponent
+    AppMonitorComponent,
+    AppStockComponent,
+    AppStockCreateComponent,
+    AppStockUpdateComponent,
+    AppStockListComponent,
+    AppStockCardComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,15 @@
+<mat-card class="mat-elevation-z5" fxLayout.xs="column">
+    <mat-card-header>
+        <mat-card-title>{{ _seed.name }}</mat-card-title>
+        <mat-card-subtitle>Days of Harvesting: {{ _seed.harvestdays }}</mat-card-subtitle>
+    </mat-card-header>
+    <img fxFlexAlign="center" mat-card-image [src]="_seed.imgUrl">
+    <mat-card-content fxLayoutAlign.xs="center stretch">
+        <p>
+            Total: {{ _seed.total }} seeds. |  <span>{{ _seed.status }}</span>
+        </p>
+    </mat-card-content>
+    <!-- <mat-card-actions>
+        <button mat-raised-button>Update</button>
+    </mat-card-actions> -->
+</mat-card>

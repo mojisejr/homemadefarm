@@ -1,0 +1,10 @@
+mat-card {
+    max-width: 50rem;
+    max-height: 100rem;
+}
+img {
+    max-width: 15rem;
+    max-height: 15rem;
+    background-size: cover;
+    overflow: hidden;
+}

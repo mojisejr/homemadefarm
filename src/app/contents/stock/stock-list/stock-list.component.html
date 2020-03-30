@@ -1,0 +1,17 @@
+<div class="stock-list-container" fxLayout="column" fxLayoutGap="1rem" fxLayoutAlign="center center">
+    <div 
+    class="card-container" 
+    fxLayout="column" 
+    [ngStyle.xs]="{ 'width': '100%'}" 
+    fxLayout.gt-xs="row wrap" 
+    fxLayoutGap="1rem" 
+    fxLayoutAlign="center"
+    *ngIf="_seedStock$ | async; else loading; let seeds"
+    >
+        <app-stock-card *ngFor="let seed of seeds" [seed] = "seed"></app-stock-card>
+    </div>
+</div>
+
+<ng-template #loading>
+    <mat-spinner></mat-spinner>
+</ng-template>

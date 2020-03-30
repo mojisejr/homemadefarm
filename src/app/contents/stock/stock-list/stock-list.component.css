@@ -1,0 +1,16 @@
+.stock-list-container {
+    padding: 2rem;
+    height: 100%;
+}
+
+.card-container {
+    max-width: 50rem;
+}
+
+app-stock-card {
+    margin-bottom: 1rem;
+}
+
+app-stock-card:last-child {
+    margin-right: 16px;
+}
