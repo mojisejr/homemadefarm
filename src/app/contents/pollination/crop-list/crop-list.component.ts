@@ -13,6 +13,7 @@ import { Crop } from '../crop.model'
 export class CropListComponent implements OnInit {
     cropList$: Observable<Crop[]>;
     historyCropList$: Observable<Crop[]>;
+    selected = 0;
     constructor(private plService: PollinationService) {}
 
     ngOnInit() {

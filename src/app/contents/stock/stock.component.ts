@@ -11,4 +11,8 @@ export class AppStockComponent implements OnInit {
     constructor() {}
 
     ngOnInit() {}
+
+    onNewSeed() {
+        
+    }
 }

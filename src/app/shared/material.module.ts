@@ -22,6 +22,7 @@ import {
     MatProgressBarModule,
     MatAutocompleteModule,
     MatCheckboxModule,
+    MatExpansionModule
 } from '@angular/material';
 
 const MaterialComponents = [
@@ -47,6 +48,7 @@ const MaterialComponents = [
     MatProgressBarModule,
     MatAutocompleteModule,
     MatCheckboxModule,
+    MatExpansionModule
 ];
 
 @NgModule ({

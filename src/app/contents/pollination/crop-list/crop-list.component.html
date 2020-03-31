@@ -1,11 +1,14 @@
 <div fxLayout="column" fxLayoutAlign="center" fxLayoutGap="2rem" class="card-section">
     <div fxLayout="row" fxLayoutAlign="space-between" class="header">
         <h1>Crop List</h1>
-        <button routerLink="new" fxFlexAlign="center" mat-fab color="primary">
+        <!-- <button routerLink="new" fxFlexAlign="center" mat-fab color="primary">
+            <mat-icon>add</mat-icon>
+        </button> -->
+        <button [matMenuTriggerFor]="menu" fxFlexAlign="center" mat-fab color="primary">
             <mat-icon>add</mat-icon>
         </button>
     </div>
-    <mat-tab-group>
+    <mat-tab-group [selectedIndex] = "selected">
         <mat-tab label="Active">
             <div *ngIf="cropList$ | async; else loading; let cropList" class="tab-content-wrapper">
                 <mat-card *ngFor="let data of cropList" class="card">
@@ -87,3 +90,14 @@
         <mat-spinner></mat-spinner>
     </div>
 </ng-template>
+
+<mat-menu #menu="matMenu">
+    <button mat-menu-item routerLink="new">Crop</button>
+    <button mat-menu-item (click)="selected = 2">Activity[all]</button>
+    <button mat-menu-item (click)="selected = 3">Stock</button>
+</mat-menu>
+
+<!-- <mat-menu #stock="matMenu">
+    <button mat-menu-item>Seeds</button>
+    <button mat-menu-item>Chemical</button>
+</mat-menu> -->
