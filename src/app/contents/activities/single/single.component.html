@@ -1,10 +1,12 @@
 <div fxLayout="column" fxLayoutGap="1rem" class="container">
     <div class="menu-warpper" *ngIf="_crop.status != 'Closed'">
-        <mat-card>
-            <mat-card-header>
-                <mat-card-title>Add new activity</mat-card-title>
-            </mat-card-header>
-            <mat-card-content fxLayout.xs="column" fxLayoutGap.xs="1rem" fxLayout="row" fxLayoutAlign.gt-xs="space-evenly center">
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Activity
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="content-wrapper" fxLayout="column" fxLayoutGap="1rem">
                 <form fxLayout="column" fxLayoutGap="1rem" [formGroup]="activityForm" (ngSubmit)="onSubmit()">
                     <mat-form-field>
                         <mat-label>Category</mat-label>
@@ -56,8 +58,64 @@
                         </mat-list>
                     </mat-card>
                 </div>
+            </div>
+        </mat-expansion-panel>
+        <!-- <mat-card>
+            <mat-card-header>
+                <mat-card-title>Add new activity</mat-card-title>
+            </mat-card-header>
+            <mat-card-content fxLayout.xs="column" fxLayoutGap.xs="1rem" fxLayout="row" fxLayoutAlign.gt-xs="space-evenly center">
+                <form fxLayout="column" fxLayoutGap="1rem" [formGroup]="activityForm" (ngSubmit)="onSubmit()">
+                    <mat-form-field>
+                        <mat-label>Category</mat-label>
+                        <mat-select 
+                        formControlName="category"
+                        required>
+                            <mat-option value="fertilizer">Fertilizer</mat-option>
+                            <mat-option value="embeded">Embeded</mat-option>
+                            <mat-option value="spray">Spray</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <div class="fertilizer-wrapper">
+                            <div fxLayoutGap="10px" formGroupName="fertilizer" fxLayout.xs="column">
+                                <mat-form-field>
+                                    <input matInput type="text" formControlName="formula" placeholder="formula">
+                                </mat-form-field>
+                                <mat-form-field>
+                                    <input matInput type="number" formControlName="amount" placeholder="amount">
+                                </mat-form-field>
+                                <mat-form-field>
+                                    <mat-label>unit</mat-label>
+                                    <mat-select 
+                                    formControlName="unit"
+                                    >
+                                        <mat-option value="ml">ml(cc)</mat-option>
+                                        <mat-option value="g">g</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        <div>
+                            <button type="button" mat-flat-button color="warn" (click)="addFertilizer()">add</button>
+                        </div>
+                    </div>
+                    <mat-form-field appearance="fill">
+                        <mat-label>description</mat-label>
+                        <textarea matInput formControlName="description"></textarea>
+                    </mat-form-field>
+                      <div>
+                        <button type="submit" mat-raised-button color="warn">Add Activity</button>
+                      </div>
+                </form>
+                <div>
+                    <mat-card class="mat-elevation-z5" *ngIf="_fertData.length > 0">
+                        <mat-list>
+                            <mat-label>Fertilizer</mat-label>
+                            <mat-list-item *ngFor="let item of _fertData; let i = index;"><mat-icon color="primary">transit_enterexit</mat-icon> {{ item.formula }} - [{{ item.amount }}{{ item.unit }}] <button mat-icon-button (click)="onFertListDelete(i)"><mat-icon color="warn">cancel</mat-icon></button></mat-list-item>
+                        </mat-list>
+                    </mat-card>
+                </div>
             </mat-card-content>
-        </mat-card>
+        </mat-card> -->
     </div>
     <div class="table-wrapper">
         <app-activities-table [docId]="_docId"></app-activities-table>

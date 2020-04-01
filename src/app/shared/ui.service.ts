@@ -5,6 +5,7 @@ import { AppConfirmDialogComponent } from './components/confirm-dialog/confirm-d
 import { AppProductStatusDialogComponent } from './components/product-status-dialog/product-status-dialog.component'
 import { AppDatepickerDialogComponent } from './components/datepicker-dialog/datepicker-dialog.component'
 import { AppActivityDialogComponent } from './components/activity-dialog/activity-dialog.component'
+import { AppStockCreateComponent } from './components/stock-create/stock-create.component'
 
 
 @Injectable({
@@ -79,6 +80,11 @@ export class uiService {
             }
         })
 
+        return dialogRef;
+    }
+
+    showStockCreateDialog() {
+        const dialogRef = this.dialog.open(AppStockCreateComponent);
         return dialogRef;
     }
 }

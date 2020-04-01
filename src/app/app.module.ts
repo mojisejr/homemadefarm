@@ -44,7 +44,7 @@ import { AppMultiActivitiesComponent } from './contents/activities/multi/multi.c
 
 //Stock Component
 import { AppStockComponent } from './contents/stock/stock.component'
-import { AppStockCreateComponent } from './contents/stock/stock-create/stock-create.component'
+import { AppStockCreateComponent } from './shared/components/stock-create/stock-create.component'
 import { AppStockUpdateComponent } from './contents/stock/stock-update/stock-update.component'
 import { AppStockListComponent } from './contents/stock/stock-list/stock-list.component'
 import { AppStockCardComponent } from './contents/stock/stock-card/stock-card.component'
@@ -117,7 +117,8 @@ import { DatePipe } from '@angular/common';
     AppConfirmDialogComponent, 
     AppProductStatusDialogComponent,
     AppDatepickerDialogComponent,
-    AppActivityDialogComponent
+    AppActivityDialogComponent,
+    AppStockCreateComponent
   ]
 })
 export class AppModule { }

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit } from '@angular/core';
+import { uiService } from '../../shared/ui.service';
 
 
 @Component({
@@ -8,11 +9,11 @@ import { Component, OnInit } from '@angular/core'
 })
 
 export class AppStockComponent implements OnInit {
-    constructor() {}
+    constructor(private ui: uiService) {}
 
     ngOnInit() {}
 
-    onNewSeed() {
-        
+    onStockCreate() {
+        const dialogRef = this.ui.showStockCreateDialog();
     }
 }
