@@ -48,4 +48,11 @@ export class Helper {
 
         return Math.round(diff/this._oneDayMs);
     }
+
+    googleDriveUrlToDisplayImageUrl(url: string): string{
+        const id = url.split("=")[1];
+        const newUrl = "http://drive.google.com/uc?export=view&id=" + id;
+        return newUrl;
+    }
+
 }

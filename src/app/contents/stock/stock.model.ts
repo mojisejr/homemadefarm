@@ -10,5 +10,5 @@ export interface Seed {
     lastInDate?: Date;
     lastOutDate?: Date;
     createdAt?: Date;
-    pictureUrl?: string;
+    imgUrl?: string;
 }

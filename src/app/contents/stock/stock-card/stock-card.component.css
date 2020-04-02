@@ -8,3 +8,7 @@ img {
     background-size: cover;
     overflow: hidden;
 }
+
+mat-card:hover {
+    cursor: pointer;
+}

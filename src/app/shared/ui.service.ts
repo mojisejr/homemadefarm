@@ -84,7 +84,8 @@ export class uiService {
     }
 
     showStockCreateDialog() {
-        const dialogRef = this.dialog.open(AppStockCreateComponent);
+        const dialogRef = this.dialog.open(AppStockCreateComponent, {
+        });
         return dialogRef;
     }
 }
