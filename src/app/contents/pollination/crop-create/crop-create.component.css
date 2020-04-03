@@ -7,3 +7,8 @@
     width: 20rem;
     padding: 3rem;
 }
+
+.species-list {
+    border: 1px rebeccapurple solid;
+    border-radius: 5px;
+}

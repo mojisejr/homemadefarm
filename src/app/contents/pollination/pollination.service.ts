@@ -7,6 +7,8 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/fire
 import { Subject, combineLatest, Observable } from 'rxjs';
 import { map } from 'rxjs/operators'
 import { Helper } from '../../shared/helper.service'
+import { StockService } from '../stock/stock.service'
+import { Seed } from '../stock/stock.model'
 
 
 @Injectable({
@@ -27,7 +29,8 @@ export class PollinationService {
 
 
     constructor(private db: AngularFirestore,
-        private helper: Helper) {
+        private helper: Helper,
+        private stock: StockService) {
         this.pollinationRef = db.collection(this.pollinationPath);
         this.cropsRef = db.collection(this.cropsPath);
         this.melonRef = db.collection(this.melonPath);
@@ -39,10 +42,25 @@ export class PollinationService {
     }
 
     addCrop(crop: Crop) {
-        this.cropsRef.add({ 
+        return this.cropsRef.add({ 
             ...crop,
-            status: 'Initial'
-         });
+         })
+         .then(() => {
+             return true;
+         })
+         .catch(e => {
+             return false;
+         })
+    }
+
+    addNewCrop(cropData: Crop, seedData: Partial<Seed>[]) {
+        if(cropData != null && seedData.length > 0) {
+            if(this.addCrop(cropData) && this.stock.updateStockTotal(seedData)) {
+                return true;
+            } else {
+                return false;
+            }
+        }
     }
 
     addProduct(product: Product) {

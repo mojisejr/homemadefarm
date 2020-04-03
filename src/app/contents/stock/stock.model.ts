@@ -11,4 +11,6 @@ export interface Seed {
     lastOutDate?: Date;
     createdAt?: Date;
     imgUrl?: string;
+    left?: string;
+    species?: string;
 }

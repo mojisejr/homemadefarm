@@ -31,6 +31,20 @@ export class StockService {
         )
     }
 
-    updateStockTotal(seed: Partial<Seed>) {
+    updateStockTotal(seed: Partial<Seed>[]): boolean {
+        console.log(seed);
+        try {
+            seed.forEach(seed => {
+                this.af.collection('melon').doc(seed.species).update(
+                    {
+                        total: seed.left
+                    }
+                )
+            })
+            return true;
+        } catch(e) {
+            console.log(e);
+            return false;
+        }
     }
 }

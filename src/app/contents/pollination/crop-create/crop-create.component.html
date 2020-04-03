@@ -3,7 +3,7 @@
     <div class="formWrapper" fxLayout="column" fxLayoutAlign="center center">
         <mat-card class="card">
             <mat-card-content>
-                <form [formGroup]="cropForm" (ngSubmit)="onSubmit()" fxLayout="column">
+                <form [formGroup]="cropForm" (ngSubmit)="onSubmit()" fxLayout="column" fxLayoutGap="0.2rem">
                     <mat-form-field>
                         <input 
                         matInput
@@ -43,22 +43,34 @@
                         </mat-select>
                     </mat-form-field> -->
                     <div class="species-wrapper">
-                        <div formGroupName="specieForm" fxLayout="column">
-                        <mat-form-field>
-                            <mat-label>Species</mat-label>
-                            <mat-select
-                            formControlName="species"
-                            >
-                            <mat-option *ngFor="let type of typeList | async" [value]="type.name">{{ type.name }}</mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                        <mat-form-field>
-                            <input type="number"
-                            matInput
-                            placeholder="amount"
-                            >
-                        </mat-form-field>
-                        <button mat-flat-button type="button" color="warn"><mat-icon>add</mat-icon></button>
+                        <div formGroupName="speciesForm" fxLayout="column" fxLayoutGap="1rem">
+                            <mat-form-field>
+                                <mat-label>Species</mat-label>
+                                <mat-select
+                                formControlName="species"
+                                >
+                                <mat-option *ngFor="let type of typeList | async" [value]="type">{{ type.name }} [{{type.total}}]</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <input type="number"
+                                matInput
+                                placeholder="amount"
+                                formControlName = "total"
+                                >
+                            </mat-form-field>
+                            <button mat-flat-button type="button" color="warn" (click)="onAddType()"><mat-icon>add</mat-icon></button>
+
+                            <div class="species-list" *ngIf="selectedType.length > 0;">
+                                <mat-list>
+                                    <div mat-subheader>Species List</div>
+                                    <mat-list-item *ngFor="let item of selectedType; let i = index;">
+                                        <button mat-icon-button color="warn" (click)="onRemove(i)"><mat-icon>cancel</mat-icon></button>
+                                        <div mat-line> {{ item.species }}</div>
+                                        <div mat-line> amount [{{ item.total }}] seeds</div>
+                                    </mat-list-item>
+                                </mat-list>
+                            </div>
                         </div>
                     </div>
 
@@ -69,6 +81,7 @@
                         formControlName="createdAt" 
                         placeholder="Created at">
                     </mat-form-field>
+
                     <div fxLayout="row" fxLayoutAlign="space-evenly">
                         <button type="submit" mat-raised-button color="primary">Create</button>
                         <button (click)="onReset()" mat-raised-button color="warn">Reset</button>
