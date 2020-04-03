@@ -16,6 +16,7 @@ export class CropCreateComponent implements OnInit {
 
     cropForm: FormGroup;
     typeList: Observable<Melon[]>;
+    selectedType = [];
 
     constructor(private plService: PollinationService,
         private router: Router) {}
@@ -32,6 +33,10 @@ export class CropCreateComponent implements OnInit {
             "species": new FormControl(null, [Validators.required]),
             "createdAt": new FormControl(null, [Validators.required]),
         })
+    }
+
+    onAddType() {
+        
     }
 
     onSubmit() {

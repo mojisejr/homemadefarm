@@ -18,7 +18,7 @@
                             <mat-option value="spray">Spray</mat-option>
                         </mat-select>
                     </mat-form-field>
-                    <div class="fertilizer-wrapper">
+                    <div class="fertilizer-wrapper" fxLayout="column">
                         <!-- <div formArrayName="fertilizer" *ngFor="let fert of activityForm.get('fertilizer').controls; let i = index"> -->
                             <div fxLayoutGap="10px" formGroupName="fertilizer" fxLayout.xs="column">
                                 <mat-form-field>
@@ -36,6 +36,9 @@
                                         <mat-option value="g">g</mat-option>
                                     </mat-select>
                                 </mat-form-field>
+                            </div>
+                            <div class="spicies-list">
+                                
                             </div>
                         <!-- </div> -->
                         <div>

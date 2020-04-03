@@ -30,4 +30,7 @@ export class StockService {
             })
         )
     }
+
+    updateStockTotal(seed: Partial<Seed>) {
+    }
 }
