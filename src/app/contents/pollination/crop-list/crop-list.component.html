@@ -21,12 +21,12 @@
                         <div fxFlex="50%" class="card-content-list">
                             <mat-list>
                                 <h3 mat-subheader>Growing:</h3>
-                                <mat-list-item *ngFor="let item of data.species"><mat-icon>keyboard_arrow_right</mat-icon><span>{{ item }}</span></mat-list-item>
+                                <mat-list-item *ngFor="let item of data.species"><mat-icon>keyboard_arrow_right</mat-icon><span>{{ item.species }} | {{ item.total }}</span></mat-list-item>
                             </mat-list>
                             <mat-list>
                                 <h3 mat-subheader>Growing Material Ratio</h3>
                                 <mat-list-item><mat-icon>keyboard_arrow_right</mat-icon>{{ data.material }}</mat-list-item>
-                            </mat-list>
+                            </mat-list> 
                         </div>
                         <div fxFlexAlign="center" fxLayoutAlign="center center" fxLayout="column" class="card-content-status">
                             <h3>Status:</h3>

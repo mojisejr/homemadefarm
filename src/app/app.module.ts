@@ -62,6 +62,7 @@ import { AppConfirmDialogComponent } from './shared/components/confirm-dialog/co
 import { AppProductStatusDialogComponent } from './shared/components/product-status-dialog/product-status-dialog.component'
 import { AppDatepickerDialogComponent } from './shared/components/datepicker-dialog/datepicker-dialog.component'
 import { AppActivityDialogComponent } from './shared/components/activity-dialog/activity-dialog.component'
+import { AppStockCardDialogComponent } from './contents/stock/stock-card/stock-card-dialog/stock-card-dialog.component'
 import { DatePipe } from '@angular/common';
 
 @NgModule({
@@ -94,7 +95,8 @@ import { DatePipe } from '@angular/common';
     AppStockCreateComponent,
     AppStockUpdateComponent,
     AppStockListComponent,
-    AppStockCardComponent
+    AppStockCardComponent,
+    AppStockCardDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -118,7 +120,8 @@ import { DatePipe } from '@angular/common';
     AppProductStatusDialogComponent,
     AppDatepickerDialogComponent,
     AppActivityDialogComponent,
-    AppStockCreateComponent
+    AppStockCreateComponent,
+    AppStockCardDialogComponent
   ]
 })
 export class AppModule { }

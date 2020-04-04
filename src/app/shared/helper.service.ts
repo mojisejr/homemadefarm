@@ -27,6 +27,9 @@ export class Helper {
 
     diffTilNow (in_date: Date) {
         //cannot use in_date directly
+        if(in_date === undefined) {
+            return null;
+        }
         const in_dateStr = in_date.toString();
         const newDate = new Date(in_dateStr);
 

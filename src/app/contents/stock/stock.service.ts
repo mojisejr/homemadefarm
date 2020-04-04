@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { map } from 'rxjs/operators';
 import { Seed } from './stock.model';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 
 @Injectable({
@@ -14,6 +14,23 @@ export class StockService {
 
     addNewSeed(seed: Seed) {
         return this.af.collection('melon').doc(seed.name).set(seed);
+    }
+
+    updateTotalSeed(name, total) {
+        return of(this.af.collection('melon').doc(name).update({
+            total: total,
+            status: "ready"
+        })
+        .then(() => {
+            return true;
+        })
+        .catch(e => {
+            return false;
+        }))
+    }
+
+    takeSeed(name, amount) {
+        
     }
 
     getSeedsStockList(): Observable<Seed[]> {
@@ -32,19 +49,39 @@ export class StockService {
     }
 
     updateStockTotal(seed: Partial<Seed>[]): boolean {
-        console.log(seed);
         try {
             seed.forEach(seed => {
-                this.af.collection('melon').doc(seed.species).update(
-                    {
-                        total: seed.left
-                    }
-                )
+                if(seed.left === 0) {
+                    this.af.collection('melon').doc(seed.species).update(
+                        {
+                            total: seed.left
+                        }
+                    )
+                } else if(seed.left > 0) {
+                    this.af.collection('melon').doc(seed.species).update(
+                        {
+                            total: seed.left,
+                            status: 'out of stock'
+                        }
+                    )
+                }
             })
             return true;
         } catch(e) {
             console.log(e);
             return false;
         }
+    }
+
+    updateSeedInfo(seed: Partial<Seed>) {
+        return of(
+            this.af.collection('melon').doc(seed.name).update(seed)
+            .then(() => {
+                return false;
+            })
+            .catch(e => {
+                return false;
+            })
+        )
     }
 }

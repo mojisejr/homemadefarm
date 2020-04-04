@@ -1,7 +1,7 @@
 export interface Seed {
     id?: string;
     name: string;
-    harvestday: number;
+    harvestdays: number;
     brix?: string;
     meatColor?: string;
     texture?: string;
@@ -11,6 +11,7 @@ export interface Seed {
     lastOutDate?: Date;
     createdAt?: Date;
     imgUrl?: string;
-    left?: string;
+    left?: number;
     species?: string;
+    estWeight?: string;
 }

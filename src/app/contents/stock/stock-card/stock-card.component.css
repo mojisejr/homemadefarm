@@ -3,12 +3,8 @@ mat-card {
     max-height: 100rem;
 }
 img {
-    max-width: 15rem;
-    max-height: 15rem;
+    min-width: 15rem;
+    max-height: 10rem;
     background-size: cover;
     overflow: hidden;
-}
-
-mat-card:hover {
-    cursor: pointer;
 }

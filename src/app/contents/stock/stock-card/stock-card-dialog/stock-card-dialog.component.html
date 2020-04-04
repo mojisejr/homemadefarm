@@ -1,0 +1,96 @@
+<div *ngIf="input.isFor === 'add' || input.isFor === 'take'" fxLayoutAlign="center center" fxLayout="column">
+    <h1 mat-dialog-title>{{ input.isFor | uppercase }} Seed</h1>
+    <div mat-dialog-content>
+        <mat-divider></mat-divider>
+        <mat-form-field>
+            <input
+            matInput
+            type="number"
+            placeholder="amount"
+            [(ngModel)]="amount"
+            >
+        </mat-form-field>
+    </div>
+    <div mat-dialog-actions>
+        <button mat-raised-button color="primary" [mat-dialog-close] = "false">Close</button>
+        <button mat-raised-button color="primary" [mat-dialog-close] = "amount">{{ input.isFor | lowercase }}</button>
+    </div>
+</div>
+
+
+<div *ngIf="input.isFor === 'edit'" fxLayoutAlign="center center" fxLayout="column">
+    <h1 mat-dialog-title>Update {{ _seed.name }} Info</h1>
+    <div mat-dialog-content>
+        <mat-divider></mat-divider>
+        <form [formGroup]="editForm" fxLayout="column">
+            <mat-form-field>
+                <input
+                matInput
+                type="text"
+                formControlName='name'
+                placeholder="Name"
+                >
+            </mat-form-field>
+            <mat-form-field>
+                <input
+                matInput
+                type="number"
+                formControlName='harvestdays'
+                placeholder="Days of harvest"
+                >
+            </mat-form-field>
+            <mat-form-field>
+                <input
+                matInput
+                type="text"
+                formControlName='estWeight'
+                placeholder="Est. Weight [kg]"
+                >
+            </mat-form-field>
+            <mat-form-field>
+                <input
+                matInput
+                type="text"
+                formControlName='isNet'
+                placeholder="Netting Info"
+                >
+            </mat-form-field>
+            <mat-form-field>
+                <input
+                matInput
+                type="text"
+                formControlName='meatColor'
+                placeholder="Meat Color"
+                >
+            </mat-form-field>
+            <mat-form-field>
+                <input
+                matInput
+                type="text"
+                formControlName='texture'
+                placeholder="Texture"
+                >
+            </mat-form-field>
+            <mat-form-field>
+                <input
+                matInput
+                type="text"
+                formControlName='brix'
+                placeholder="Brix"
+                >
+            </mat-form-field>
+            <mat-form-field>
+                <input
+                matInput
+                type="url"
+                formControlName='imgUrl'
+                placeholder="Image URL"
+                >
+            </mat-form-field>
+        </form>
+    </div>
+    <div mat-dialog-actions>
+        <button mat-raised-button color="primary" [mat-dialog-close] = "false">Close</button>
+        <button mat-raised-button color="primary" [mat-dialog-close] = "editForm">Update</button>
+    </div>
+</div>

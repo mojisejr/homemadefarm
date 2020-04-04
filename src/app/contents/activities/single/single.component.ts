@@ -57,7 +57,7 @@ export class AppSingleActivitiesComponent implements OnInit {
             //     this.addFertilizerFromGroup()
             // ]),
             description: [null],
-            counter: [this.hp.dateDiff(new Date(), this._crop.toBagAt)]
+            // counter: [this.hp.dateDiff(new Date(), this._crop.toBagAt)] || null
         })
     }
 
@@ -108,7 +108,7 @@ export class AppSingleActivitiesComponent implements OnInit {
                 category: formValue.category,
                 fertilizer: this._fertData,
                 description: formValue.description,
-                counter: formValue.counter
+                counter: [this.hp.dateDiff(new Date(), this._crop.toBagAt)]
             });
             this.as.addActivity(data);
             this.ui.dataMessage(`activity data added successfully`, 2000);

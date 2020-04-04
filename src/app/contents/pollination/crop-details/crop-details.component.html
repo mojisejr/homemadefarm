@@ -124,10 +124,16 @@
                         </div> -->
                         <mat-card *ngIf="crop.status != 'Initial'  && crop.status != 'Closed'" class="tagTable">
                             <div class="tagTable-selector">
-                                <mat-form-field>
+                                <!-- <mat-form-field>
                                     <mat-label>Type select:</mat-label>
                                     <mat-select (selectionChange) = "onTypeSnapshotChange($event, crop.status)">
                                         <mat-option *ngFor="let item of crop.species; let index = index" [value]="item"> {{ item }}</mat-option>
+                                    </mat-select>
+                                </mat-form-field> -->
+                                <mat-form-field>
+                                    <mat-label>Type select:</mat-label>
+                                    <mat-select (selectionChange) = "onTypeSnapshotChange($event, crop.status)">
+                                        <mat-option *ngFor="let item of crop.species; let index = index" [value]="item.species"> {{ item.species }}</mat-option>
                                     </mat-select>
                                 </mat-form-field>
                                 <!-- <ng-container *ngIf="all$ | async; else loading; let all">
