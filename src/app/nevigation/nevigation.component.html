@@ -3,7 +3,7 @@
     <div fxHide.xs fxFlex="1 1" fxLayout="row" fxLayoutAlign="flex-end" class="menu-wrapper">
         <a mat-button routerLink="/login" *ngIf="isLoggedOut$ | async">Login</a>
         <a mat-button routerLink="/about">about</a>
-        <a mat-button routerLink="/products" *ngIf="isLoggedIn$ | async">Products</a>
+        <a mat-button routerLink="/admin" *ngIf="isLoggedIn$ | async">Admin</a>
         <a mat-button routerLink="/location">location</a>
         <a mat-button (click)="onLogout()" *ngIf="isLoggedIn$ | async">Logout</a>
     </div>
@@ -12,7 +12,7 @@
         <mat-menu #appMenu="matMenu">
             <a mat-menu-item routerLink="/login" *ngIf="isLoggedOut$ | async"><mat-icon>vpn_key</mat-icon>Login</a>
             <a mat-menu-item routerLink="/about"><mat-icon>announcement</mat-icon>About</a>
-            <a mat-menu-item routerLink="/products" *ngIf="isLoggedIn$ | async"><mat-icon>equalizer</mat-icon>Products</a>
+            <a mat-menu-item routerLink="/admin" *ngIf="isLoggedIn$ | async"><mat-icon>equalizer</mat-icon>Admin</a>
             <a mat-menu-item routerLink="/location"><mat-icon>search</mat-icon>Location</a>
             <a mat-menu-item (click)="onLogout()" *ngIf="isLoggedIn$ | async"><mat-icon color="warn">cancel</mat-icon>Logout</a>
         </mat-menu>

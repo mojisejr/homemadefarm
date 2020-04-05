@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CdkTableModule } from '@angular/cdk/table';
+import { ScrollingModule } from '@angular/cdk/scrolling'
 import {
     MatButtonModule,
     MatMenuModule,
@@ -22,11 +23,12 @@ import {
     MatProgressBarModule,
     MatAutocompleteModule,
     MatCheckboxModule,
-    MatExpansionModule
+    MatExpansionModule,
 } from '@angular/material';
 
 const MaterialComponents = [
     CdkTableModule,
+    ScrollingModule,
     MatButtonModule,
     MatMenuModule,
     MatDividerModule,

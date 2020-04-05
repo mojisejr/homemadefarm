@@ -16,10 +16,10 @@ const appRoutes: Routes = [
     { path: 'location', component: ContactusComponent},
     { path: 'login', component: AppLoginComponent },
     { path: 'about', component: AboutsComponent},
-    { path: 'products', component: PollinationComponent},
-    { path: 'products/new', component: CropCreateComponent },
-    { path: 'products/:id', component: CropDetailsComponent},
-    { path: 'products/:id/htable', component: ProductTableComponent},
+    { path: 'admin', component: PollinationComponent},
+    { path: 'admin/new', component: CropCreateComponent },
+    { path: 'admin/:id', component: CropDetailsComponent},
+    { path: 'admin/:id/htable', component: ProductTableComponent},
 ];
 
 

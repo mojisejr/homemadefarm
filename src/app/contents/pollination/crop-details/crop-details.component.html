@@ -5,7 +5,7 @@
             <h3>Crop: {{ crop.crop }}</h3>
         </div>
         <div class="header-menu" fxLayoutGap="0.5rem">
-            <button routerLink="/products" mat-fab><mat-icon>arrow_back</mat-icon></button>
+            <button routerLink="/admin" mat-fab><mat-icon>arrow_back</mat-icon></button>
         </div>
     </div>
     <div>
@@ -84,63 +84,15 @@
                                 <h3>{{ crop.status }}</h3>
                             </mat-card-content>
                         </mat-card>
-                        <!-- <div class="monitor-wrapper" *ngIf="monitorData | async; let data">
-                            <mat-card>
-                                <mat-card-header>
-                                    <mat-card-subtitle>
-                                        Monitor
-                                    </mat-card-subtitle>
-                                </mat-card-header>
-                                <mat-card-content>
-                                    <mat-list fxLayout="row" fxLayout.xs = "column" fxLayoutAlign="space-between center" fxLayoutAlign.xs="center center">
-                                        <mat-list-item>
-                                            <mat-icon>keyboard_arrow_right</mat-icon>
-                                            <span>Motor Status: {{ data.status }}  </span>
-                                        </mat-list-item>
-                                        
-                                        <mat-list-item>
-                                            <mat-icon>keyboard_arrow_right</mat-icon>
-                                            <span>Mortor Temp: {{ data.Temp }} *C</span>
-                                        </mat-list-item>
-                
-                                        <mat-list-item>
-                                            <mat-icon>keyboard_arrow_right</mat-icon>
-                                            <span>Motor Voltage: {{ data.voltage }} V</span>
-                                        </mat-list-item>
-                
-                                        <mat-list-item>
-                                            <mat-icon>keyboard_arrow_right</mat-icon>
-                                            <span>Motor Current: {{ data.current }} A</span>
-                                        </mat-list-item>
-                
-                                        <mat-list-item>
-                                            <mat-icon>keyboard_arrow_right</mat-icon>
-                                            <span>Last Sync: {{ data.Time }} </span>
-                                        </mat-list-item>
-                
-                                    </mat-list>
-                                </mat-card-content>
-                            </mat-card>
-                        </div> -->
                         <mat-card *ngIf="crop.status != 'Initial'  && crop.status != 'Closed'" class="tagTable">
                             <div class="tagTable-selector">
-                                <!-- <mat-form-field>
-                                    <mat-label>Type select:</mat-label>
-                                    <mat-select (selectionChange) = "onTypeSnapshotChange($event, crop.status)">
-                                        <mat-option *ngFor="let item of crop.species; let index = index" [value]="item"> {{ item }}</mat-option>
-                                    </mat-select>
-                                </mat-form-field> -->
+
                                 <mat-form-field>
                                     <mat-label>Type select:</mat-label>
                                     <mat-select (selectionChange) = "onTypeSnapshotChange($event, crop.status)">
                                         <mat-option *ngFor="let item of crop.species; let index = index" [value]="item.species"> {{ item.species }}</mat-option>
                                     </mat-select>
                                 </mat-form-field>
-                                <!-- <ng-container *ngIf="all$ | async; else loading; let all">
-                                    <ul>
-                                        <li *ngFor = "let type of all">{{ type.tagColor }} est: {{ type.estHarvestDate }}</li>
-                                    </ul>
-                                </ng-container> -->
                             </div>
                             <div *ngIf="all$ | async; let dataSource" class="tagTable-table">
                                 <form *ngIf="crop.status != 'postPollination' && crop.status != 'Harvesting' && crop.status != 'Closed'" [formGroup]="tagCreateForm" (ngSubmit)="onTagCreate()">

@@ -13,6 +13,7 @@ import { ConfirmDialogComponent } from './confirm-dialog.component'
 import { Helper } from '../../../shared/helper.service'
 import { uiService } from '../../../shared/ui.service'
 import { FirebaseService } from '../../../shared/firebase.service'
+import { AngularFireAuth } from '@angular/fire/auth'
 
 
 
@@ -51,9 +52,18 @@ export class CropDetailsComponent implements OnInit {
         private dp: DatePipe,
         private helper: Helper,
         private ui: uiService,
-        public confirmDialog: MatDialog) {}
+        public confirmDialog: MatDialog,
+        private afAuth: AngularFireAuth,
+        private router: Router) {}
 
     ngOnInit() {
+    
+        this.afAuth.authState.subscribe(state => {
+            if(state == null) {
+                this.router.navigateByUrl('/');
+            }
+        })
+
         this.route.params.subscribe(id => {
             this.docId = id['id'];
         })
