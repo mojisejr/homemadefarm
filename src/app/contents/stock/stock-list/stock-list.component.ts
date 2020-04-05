@@ -6,7 +6,7 @@ import { Seed } from '../stock.model';
 @Component({
     selector: 'app-stock-list',
     templateUrl: './stock-list.component.html',
-    styleUrls: ['./stock-list.component.css']
+    styleUrls: ['./stock-list.component.scss']
 })
 
 export class AppStockListComponent implements OnInit {

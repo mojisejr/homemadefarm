@@ -10,7 +10,7 @@ import { FormGroup } from '@angular/forms'
 @Component({
     selector: 'app-stock-card',
     templateUrl: './stock-card.component.html',
-    styleUrls: ['./stock-card.component.css']
+    styleUrls: ['./stock-card.component.scss']
 })
 
 export class AppStockCardComponent implements OnInit {

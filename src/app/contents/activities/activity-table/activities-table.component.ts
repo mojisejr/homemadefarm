@@ -7,7 +7,7 @@ import { uiService } from 'src/app/shared/ui.service';
 @Component({
     selector: 'app-activities-table',
     templateUrl: './activities-table.component.html',
-    styleUrls: ['./activities-table.component.css']
+    styleUrls: ['./activities-table.component.scss']
 })
 
 export class AppActivitiesTableComponent implements OnInit {

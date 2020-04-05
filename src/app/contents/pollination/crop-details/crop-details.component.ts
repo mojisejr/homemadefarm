@@ -20,7 +20,7 @@ import { FirebaseService } from '../../../shared/firebase.service'
 @Component({
     selector: 'app-crop-details',
     templateUrl: './crop-details.component.html',
-    styleUrls: ['./crop-details.component.css']
+    styleUrls: ['./crop-details.component.scss']
 })
 
 export class CropDetailsComponent implements OnInit {

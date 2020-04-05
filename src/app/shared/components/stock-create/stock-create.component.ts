@@ -8,7 +8,7 @@ import { Seed } from '../../../contents/stock/stock.model'
 @Component({
     selector: 'app-stock-create',
     templateUrl: './stock-create.component.html',
-    styleUrls: ['./stock-create.component.css']
+    styleUrls: ['./stock-create.component.scss']
 })
 
 //https://drive.google.com/open?id=17J0usGfJyrchB22KUc1ZmoE0wDOjLU9E

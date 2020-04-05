@@ -12,7 +12,7 @@ import { Seed } from '../../stock/stock.model';
 @Component({
     selector: 'app-crop-create',
     templateUrl: './crop-create.component.html',
-    styleUrls: ['./crop-create.component.css']
+    styleUrls: ['./crop-create.component.scss']
 })
 
 export class CropCreateComponent implements OnInit {

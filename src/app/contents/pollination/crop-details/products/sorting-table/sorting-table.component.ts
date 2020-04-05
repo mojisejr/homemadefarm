@@ -11,7 +11,7 @@ import { uniq } from 'lodash'
 @Component({
     selector: 'app-sorting-table',
     templateUrl: './sorting-table.component.html',
-    styleUrls: ['./sorting-table.component.css']
+    styleUrls: ['./sorting-table.component.scss']
 })
 
 export class SortingTableComponent implements OnInit, AfterViewInit {

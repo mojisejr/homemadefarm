@@ -5,7 +5,7 @@ import { uiService } from '../../shared/ui.service';
 @Component({
     selector: 'app-stock',
     templateUrl: './stock.component.html',
-    styleUrls: ['./stock.component.css']
+    styleUrls: ['./stock.component.scss']
 })
 
 export class AppStockComponent implements OnInit {

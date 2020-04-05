@@ -10,7 +10,7 @@ import { Activity } from '../activity.model'
 @Component({
     selector: 'app-multi-activity',
     templateUrl: './multi.component.html',
-    styleUrls: ['./multi.component.css']
+    styleUrls: ['./multi.component.scss']
 })
 
 export class AppMultiActivitiesComponent implements OnInit {

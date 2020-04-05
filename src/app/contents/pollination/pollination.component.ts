@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 @Component({
     selector: "app-pollination",
     templateUrl: "./pollination.component.html",
-    styleUrls: ["./pollination.component.css"],
+    styleUrls: ["./pollination.component.scss"],
 })
 
 export class PollinationComponent implements OnInit {

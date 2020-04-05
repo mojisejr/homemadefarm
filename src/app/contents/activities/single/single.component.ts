@@ -11,7 +11,7 @@ import { ActivityService } from '.././activity.service'
 @Component({
     selector: "app-single-activities",
     templateUrl: './single.component.html',
-    styleUrls: ['./single.component.css']
+    styleUrls: ['./single.component.scss']
 })
 
 

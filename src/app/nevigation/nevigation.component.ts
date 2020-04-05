@@ -7,7 +7,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-nevigation',
   templateUrl: './nevigation.component.html',
-  styleUrls: ['./nevigation.component.css']
+  styleUrls: ['./nevigation.component.scss']
 })
 export class NevigationComponent implements OnInit {
 
