@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { trigger, state, style, transition, animate} from '@angular/animations'
+import { PollinationService } from '../pollination/pollination.service'
+import { Crop } from '../pollination/crop.model';
+import { Observable } from 'rxjs';
+
 
 @Component({
   selector: 'app-main',
@@ -8,9 +11,11 @@ import { trigger, state, style, transition, animate} from '@angular/animations'
 })
 export class MainComponent implements OnInit {
 
+  private cropList$: Observable<Crop[]>;
 
-  constructor() { }
+  constructor(private ps: PollinationService) { }
 
   ngOnInit() {
+    this.cropList$ = this.ps.getActiveCropList();
   }
 }

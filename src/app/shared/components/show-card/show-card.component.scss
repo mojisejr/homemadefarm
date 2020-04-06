@@ -1,0 +1,49 @@
+.card {
+    &-container {
+        width: 20rem;
+    }
+
+    &-container:hover .card-face-1 {
+        background-color: orangered;
+        color: white;
+        transform: translateY(0);
+    }
+
+    &-container:hover .card-face-2 {
+        transform: translateY(0);
+    }
+    
+    &-face {
+        transition: 0.5s;
+        &-1 {
+            height: 15rem;
+            color: rgba(black, 0.2);
+            font-size: 2rem;
+            background-color: #333;
+            transform: translateY(7.5rem);
+            z-index: 1;
+            h1 {
+                margin: 0;
+                padding: 0;
+            }
+            .growingDate {
+                font-weight: 700;
+            }
+        }
+        
+        &-2 {
+            background-color: #444;
+            color: white;
+            height: 15rem;
+            transform: translateY(-7.50rem);
+            .content {
+                padding: 0.8rem;
+            }
+            h4 {
+                margin: 0;
+                padding: 0;
+                text-decoration: underline;
+            }
+        }
+    }
+}

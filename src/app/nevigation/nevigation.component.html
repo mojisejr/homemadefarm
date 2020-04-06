@@ -1,13 +1,13 @@
-<mat-toolbar class="mat-elevation-z2">
+<mat-toolbar >
     <a class="siteLink" routerLink=""><span class="siteName"> &#60; Homemade Farm /&#62;</span></a>
-    <div fxHide.xs fxFlex="1 1" fxLayout="row" fxLayoutAlign="flex-end" class="menu-wrapper">
+    <div fxHide.lt-md fxFlex="1 1" fxLayout="row" fxLayoutAlign="flex-end" class="menu-wrapper">
         <a mat-button routerLink="/login" *ngIf="isLoggedOut$ | async">Login</a>
         <a mat-button routerLink="/about">about</a>
         <a mat-button routerLink="/admin" *ngIf="isLoggedIn$ | async">Admin</a>
         <a mat-button routerLink="/location">location</a>
         <a mat-button (click)="onLogout()" *ngIf="isLoggedIn$ | async">Logout</a>
     </div>
-    <div fxHide.gt-xs fxFlex="1 1" fxLayoutAlign="flex-end" class="menu-wrapper">
+    <div fxHide.gt-md fxFlex="1 1" fxLayoutAlign="flex-end" class="menu-wrapper">
             <button mat-button [matMenuTriggerFor]="appMenu"><mat-icon>menu</mat-icon></button>
         <mat-menu #appMenu="matMenu">
             <a mat-menu-item routerLink="/login" *ngIf="isLoggedOut$ | async"><mat-icon>vpn_key</mat-icon>Login</a>

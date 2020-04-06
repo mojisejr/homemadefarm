@@ -1,0 +1,20 @@
+<div [ngStyle.lt-md]="{'width': '100%'}" class="card-container">
+    <div class="card-face card-face-1">
+        <div class="content">
+            <h1 *ngFor="let name of _crop.species">{{ name.species }}</h1>
+            <div><span class="growingDate">{{ dayCount }}</span> days</div>
+            <div>{{ _crop.status }}</div>
+        </div>
+    </div>
+    <div class="card-face card-face-2">
+        <div class="content" *ngIf="melon$ | async; let melon">
+            <h4>เมล่อนสายพันธุ์ {{ melon.name }}</h4>
+            <p>
+                เมล่อนเปลือกสี{{ melon.isNet }} เนื้อสี{{ melon.meatColor }}
+                สัมผัสเนื้อ{{ melon.texture }} ระดับความหวาน {{ melon.brix }} brix
+                มีระยะการเก็บเกี่ยวที่ {{ melon.harvestdays }} วันหลังผสมดอก
+            </p>
+            <div> <span *ngIf="loaded" class="harvestDate">เก็บเกี่ยวประมาณวันที่: {{ harvestDate[0].harvestDate }}</span></div>
+        </div>
+    </div>
+</div>

@@ -21,8 +21,11 @@ import { AngularFirestoreModule, FirestoreSettingsToken } from "@angular/fire/fi
 import { AngularFireAuthModule } from '@angular/fire/auth';
 
 
-
+//MainComponent
 import { MainComponent } from './contents/main/main.component';
+import { AppShowCardComponent } from './shared/components/show-card/show-card.component'
+
+
 import { AboutsComponent } from './contents/abouts/abouts.component';
 import { ContactusComponent } from './contents/contactus/contactus.component';
 import { FooterComponent } from './footer/footer.component';
@@ -70,6 +73,7 @@ import { DatePipe } from '@angular/common';
     AppComponent,
     NevigationComponent,
     MainComponent,
+    AppShowCardComponent,
     AboutsComponent,
     ContactusComponent,
     FooterComponent,
@@ -96,7 +100,7 @@ import { DatePipe } from '@angular/common';
     AppStockUpdateComponent,
     AppStockListComponent,
     AppStockCardComponent,
-    AppStockCardDialogComponent
+    AppStockCardDialogComponent,
   ],
   imports: [
     BrowserModule,

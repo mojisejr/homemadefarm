@@ -87,6 +87,9 @@ export class PollinationService {
     getTagColorByIdSnapshot(docId) {
         return this.db.collection<pollination>('/pollination', ref => ref.where('docId', "==", docId));
     }
+    getTagColorByIdSnapshotOne(docId) {
+        return this.db.collection<pollination>('/pollination', ref => ref.where('docId', "==", docId).limit(1));
+    }
     getCropsList(): Observable<Crop[]> {
         return this.cropsRef.snapshotChanges()
         .pipe(
