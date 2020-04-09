@@ -3,6 +3,11 @@
     width: 100%;
 }
 
+.logo-img {
+    background-size: cover;
+    overflow: hidden;
+}
+
 .intro-card {
     &-section {
         color: rgba(0,0,0, 0.7);
