@@ -1,20 +1,39 @@
-<div [ngStyle.lt-md]="{'width': '100%'}" class="card-container">
-    <div class="card-face card-face-1">
-        <div class="content">
-            <h1 *ngFor="let name of _crop.species">{{ name.species }}</h1>
-            <div><span class="growingDate">{{ dayCount }}</span> days</div>
-            <div>{{ _crop.status }}</div>
-        </div>
+<div class="card" *ngIf="melon$ | async; let melon; else loading;">
+    <div class="card-1">
+        <h3>{{ melon.name }}</h3>
+        <img *ngIf="melon.imgUrl !== null" class="card-1__img" [src]="melon.imgUrl">
+        <img *ngIf="melon.imgUrl == null" class="card-1__img" [src]="NoImage">
     </div>
-    <div class="card-face card-face-2">
-        <div class="content" *ngIf="melon$ | async; let melon">
-            <h4>เมล่อนสายพันธุ์ {{ melon.name }}</h4>
-            <p>
-                เมล่อนเปลือกสี{{ melon.isNet }} เนื้อสี{{ melon.meatColor }}
-                สัมผัสเนื้อ{{ melon.texture }} ระดับความหวาน {{ melon.brix }} brix
-                มีระยะการเก็บเกี่ยวที่ {{ melon.harvestdays }} วันหลังผสมดอก
-            </p>
-            <div> <span *ngIf="loaded" class="harvestDate">เก็บเกี่ยวประมาณวันที่: {{ harvestDate[0].harvestDate }}</span></div>
-        </div>
+    <div class="card-2" (click)="onShow()">
+        <!-- <h4>สายพันธุ์ {{ melon.name }}</h4> -->
+        <p>
+            เมล่อนเปลือก{{ melon.isNet}}
+            เนื้อสี <span>"{{ melon.meatColor}}"</span>
+            สัมผัสเนื้อ<span>"{{ melon.texture }}"</span>
+            ความหวาน {{ melon.brix }} องศาบริกซ์
+        </p>
+        <p>
+            <strong>วันที่เก็บเกี่ยว: </strong><span class="dueDate" *ngIf="loaded; else waiting;">{{ harvestDate[0].harvestDate }}</span>
+        </p>
+
+    <div
+    [ngClass]="{'card-2__more-clicked': showMore === true}"
+    [ngClass.xl]="{'card-2__more-clicked': true}" 
+    class="card-2__more">
+        <p>
+            {{ dayCount }} / {{ melon.harvestdays + 30 }} days
+        </p>
+        <p>
+            of Growing
+        </p>
+    </div>
     </div>
 </div>
+
+<ng-template #loading>
+    <h2 class="loading">Loading .. </h2>
+</ng-template>
+
+<ng-template #waiting>
+    <span class="dueDate">รอผสมดอก</span>
+</ng-template>

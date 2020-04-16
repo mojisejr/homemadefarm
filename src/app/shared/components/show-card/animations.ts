@@ -1,0 +1,1 @@
+import { trigger, style } from '@angular/animations';

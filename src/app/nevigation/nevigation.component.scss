@@ -1,23 +1,42 @@
 .mat-button, .siteName  {
     // color: #ffa726;
-    color: rgba(orangered, 0.8);
+    color: rgba(#333, 0.8);
     font-family: 'Alegreya Sans SC', sans-serif;
 }
 .siteLink, .siteName {
     text-decoration-line: none;
-    font-size: 2.5rem;
+    font-size: 1.5rem;
+    // @media only screen and (max-width: 600px) {
+    //     display: none;
+    // }
 }
 .siteName:hover {
     opacity: 0.7;
 }
 .mat-button {
-    font-size: 1.5rem;
+    font-size: 1rem;
 }
 
 .mat-toolbar {
     top: 0;
-    position: sticky;
-    background-color: rgba(#eee, 0.3);
+    position: fixed;
+    background-color: white;
     // background-color: #ffa726;
     z-index: 10;
+    box-shadow: 1px 1px 20px rgba(#333, 0.5);
+    height: 10vh;
+    @media only screen and (max-width: 600px) {
+        height: 15vh;
+    }
+
+    @media only screen and (max-width: 736px) {
+        height: 20vh;
+    }
+}
+
+.logo-img {
+    background-image: cover;
+    object-fit: cover;
+    width: 5rem;
+    height: auto;
 }

@@ -1,76 +1,54 @@
-<div class="container" fxLayout="column">
-
-    <section class="logo-section" fxLayout="row" fxLayoutAlign="center center">
-        <img class="logo-img" src="../../../assets/logo.png">
-    </section>
-
-    <section class="intro-card-section" 
-    fxLayout="column" 
-    fxLayoutGap="0rem"
-    fxLayoutAlign="center center"
-    fxHide.xs
-    [ngStyle.xs]="{
-        'width': '100%'
-    }"
-    >
-
-        <div class="intro-card-content-1" 
-        fxFlexAlign="start"
-        fxFlexAlign.xs="center"
-        fxLayout="column"
-        fxLayoutAlign="start center"
-        [ngStyle.xs] = "{
-            'width': '90%'
-        }"
-        >
-            <h1>Homemade Farm</h1>
-            <p>
-                .​ .​ .​ ค ว า ม สุ ข อ ยู่ ที่ ก า ร ล ง มื อ ป ลู ก
-            </p>
-            <p>
-                .​ .​ .​ แ ล ะ เ ร า ใ ส่ ใ จ ล ง ไ ป ใ น นั้ น ..​ ทุกครั้ง ..
-            </p>
-            <p>
-                .​ .​ .​
-            </p>
-        </div>
-
-        <div class="intro-card-content-2"
-        fxLayout="column"
-        fxFlexAlign="end"
-        fxFlexAlign.xs="center"
-        fxLayoutAlign="start center" 
-        [ngStyle.xs] = "{
-            'width': '90%'
-        }">
-            <h1>Ban Kombang Chanthaburi</h1>
-            <p>
-                ห มู่ บ้ า น เ ล็​ ก ๆ ที่ เ ต็​ ม ไ ป ด้ ว ย สี เ ขี ย ว .​ .​​ .
-            </p>
-            <div> กั บ </div>
-            <p>
-                . .​ ​. # เ ม ล่ อ น . .​ .​ คุ ณ​ ภ า พ . .​​ .
-            </p>
-        </div>
-    </section>
-
-    <section class="product-show-section" fxLayout="column">
-        <div class="product-show-header">
-            <h1 [ngStyle.xs]="{'font-size': '2rem'}">We are growing</h1>
-        </div>
-        <div *ngIf="cropList$ | async; let crop" 
-        class="product-show-content" 
-        fxLayout="row wrap"
-        fxLayoutAlign="space-between center"
-        fxLayout.lt-md="column" 
-        fxLayoutGap="3rem"
-        fxLayoutGap.lt-md="0rem">
-            <app-show-card *ngFor="let c of crop" [crop] = "c"></app-show-card>
-        </div>
-    </section>
-    
-    <!-- <section class="farm-section" fxLayout="row">
-        <img src="../../../assets/Melon.jpg">
-        <div>Content</div>
-    </section> -->
+<div class="intro">
+    <ul class="intro-list">
+        <li class="intro-list-item intro-list-item__1">Welome to</li>
+        <li class="intro-list-item intro-list-item__2" >HomemadeFarm</li>
+        <li class="intro-list-item intro-list-item__3">Ban Khombang</li>
+        <li class="intro-list-item intro-list-item__4">Chanthaburi</li>
+    </ul>
 </div>
+
+<section class="first">
+    <img class="first-img" src="../../../assets/logo.png">
+</section>
+
+<section class="second">
+    <h1 class="second-header">We are growing</h1>
+    <div class="card-section"  *ngIf="cropList$ | async; let crop">
+        <app-show-card *ngFor="let c of crop" [crop] = "c"></app-show-card>
+    </div>
+</section>
+
+<section class="third">
+    <h1 class="third-header">Our Farm</h1>
+    <div class="third-content">
+        <div class="third-content-1">
+            <img class="third-content-1__img" src="../../../assets/DJI_0809_resized1.jpg">
+            <div class="third-content-1__address">
+                <p>
+                    13 Moo 3 Ban <span>Khombang</span>
+                </p>
+                <p>
+                    <span>Khombang</span> sub-District
+                </p>
+                <p>
+                    Mueang District
+                </p>
+                <p>
+                    <span>Chanthaburi</span>
+                </p>
+                <p>
+                    22000
+                </p>
+                <p>
+                    +66 92 993 1147
+                </p>
+                <p>
+                    <a href="https://www.facebook.com/HOMEMADE.FARM.THAI" target="_blank">Facebook</a>
+                </p>
+                <p>
+                    <a routerLink="/location">On Map</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</section>

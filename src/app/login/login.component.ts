@@ -35,7 +35,7 @@ export class AppLoginComponent implements OnInit, OnDestroy {
 
     onLoginSuccessful(result) {
 
-        this.ngZone.run(() => this.router.navigateByUrl('/products'));
+        this.ngZone.run(() => this.router.navigateByUrl('/admin'));
     }
 
     ngOnDestroy() {

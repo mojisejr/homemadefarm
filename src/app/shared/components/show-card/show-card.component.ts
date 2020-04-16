@@ -10,10 +10,12 @@ import { pollination } from 'src/app/contents/pollination/pollination.model';
 @Component({
     selector: 'app-show-card',
     templateUrl: './show-card.component.html',
-    styleUrls: ['./show-card.component.scss']
+    styleUrls: ['./show-card.component.scss'],
 })
 
 export class AppShowCardComponent implements OnInit {
+
+    private showMore = false;
 
     private _crop: Crop;
     private dayCount: number;
@@ -21,6 +23,7 @@ export class AppShowCardComponent implements OnInit {
     private harvestDate: any;
     private harvestday;
     private loaded = false;
+    private NoImage;
     constructor(private hp: Helper,
         private ps: PollinationService) {}
 
@@ -29,6 +32,9 @@ export class AppShowCardComponent implements OnInit {
          this._crop = crop;
      }
     ngOnInit() {
+
+        this.NoImage = this.hp.googleDriveUrlToDisplayImageUrl("https://drive.google.com/open?id=17J0usGfJyrchB22KUc1ZmoE0wDOjLU9E");
+
         if(this._crop.toBagAt != null) {
             this.dayCount = this.hp.diffTilNow(this._crop.toBagAt);
         } else {
@@ -60,6 +66,10 @@ export class AppShowCardComponent implements OnInit {
             }
             this.loaded = true;
         })
+    }
+
+    onShow() {
+        this.showMore = !this.showMore;
     }
 }
 

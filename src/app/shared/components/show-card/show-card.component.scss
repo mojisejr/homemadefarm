@@ -1,49 +1,98 @@
+@import "../../../../styles.scss";
+
 .card {
-    &-container {
-        width: 20rem;
-    }
-
-    &-container:hover .card-face-1 {
-        background-color: orangered;
-        color: white;
-        transform: translateY(0);
-    }
-
-    &-container:hover .card-face-2 {
-        transform: translateY(0);
-    }
-    
-    &-face {
-        transition: 0.5s;
-        &-1 {
-            height: 15rem;
-            color: rgba(black, 0.2);
+    width: 90%;
+    margin: 0 auto;
+    position: relative;
+    border: 0.4rem solid $color-1-dark;
+    margin-bottom: 1rem;
+    color: $text-on-1;
+    box-shadow: 5px 5px 10px rgba(#333, 0.2);
+    &-1 {
+        background-color: $color-1-light;
+        h3 {
+            margin: 0;
             font-size: 2rem;
-            background-color: #333;
-            transform: translateY(7.5rem);
-            z-index: 1;
-            h1 {
-                margin: 0;
-                padding: 0;
+            display: flex;
+            justify-content: flex-end;
+            background-color: $color-1-dark;
+            border-bottom: 3px solid $color-2;
+        }
+        &__img {
+            width: 100%;
+            background-size: cover;
+            object-fit: cover;
+        }
+    }
+
+    &-2 {
+        position: relative;
+        padding: 1rem;
+        background-color: $color-1-light;
+        h4 {
+            margin: 0;
+        }
+
+        p span {
+            font-size: 2rem;
+            font-weight: 700;
+            @media only screen and (min-width: 1920px) and (max-width: 5000px) {
+                font-size: 1.8rem;
             }
-            .growingDate {
+        }
+
+        &__more {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            position: absolute;
+            color: $color-2-dark;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: $color-2-light;
+            p {
+                margin: 0;
+                font-size: 3rem;
                 font-weight: 700;
+            }
+            z-index: -1;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+        }
+        
+        &__more-clicked {
+            visibility: visible;
+            opacity: 1;
+            z-index: 0;
+            color: $text-on-2;
+            @media only screen and (min-width: 1920px) and (max-width: 5000px) {
+                display: none;
+            }
+        }
+
+        &:hover &__more-clicked {
+            @media only screen and (min-width: 1920px) and (max-width: 5000px) {
+                display: flex;
+                visibility: visible;
+                opacity: 1;
+                z-index: 0;
+                color: $text-on-2;
             }
         }
         
-        &-2 {
-            background-color: #444;
-            color: white;
-            height: 15rem;
-            transform: translateY(-7.50rem);
-            .content {
-                padding: 0.8rem;
-            }
-            h4 {
-                margin: 0;
-                padding: 0;
-                text-decoration: underline;
-            }
-        }
     }
+}
+
+.dueDate {
+    color: orangered;
+}
+
+.loading {
+    display: flex;
+    justify-content: center;
 }

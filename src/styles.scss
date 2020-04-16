@@ -1,6 +1,24 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import "~firebaseui/dist/firebaseui.scss";
+
+//color pattern;
+
+$color-1: #fafafa;
+$color-1-light: #ffffff;
+$color-1-dark: #c7c7c7;
+
+$color-2: #2e7d32;
+$color-2-light: #60ad5e;
+$color-2-dark: #005005;
+
+$text-on-1: #424242;
+$text-on-2: #ffffff;
+
+
+
+
+
 $fa-font-path: "~font-awesome/fonts";
 
 html, body { height: 100%; }
