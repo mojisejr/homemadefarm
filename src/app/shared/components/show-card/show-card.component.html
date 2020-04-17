@@ -5,7 +5,7 @@
         <img *ngIf="melon.imgUrl == null" class="card-1__img" [src]="NoImage">
     </div>
     <div class="card-2" (click)="onShow()">
-        <!-- <h4>สายพันธุ์ {{ melon.name }}</h4> -->
+        <h4>โรงเรือนที่: {{ _crop.room }} - {{_crop.crop}}</h4>
         <p>
             เมล่อนเปลือก{{ melon.isNet}}
             เนื้อสี <span>"{{ melon.meatColor}}"</span>

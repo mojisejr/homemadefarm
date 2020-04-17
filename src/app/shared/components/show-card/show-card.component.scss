@@ -29,7 +29,13 @@
         position: relative;
         padding: 1rem;
         background-color: $color-1-light;
+        display: flex;
+        flex-direction: column;
         h4 {
+            align-self: flex-start;
+            padding: 0.5rem;
+            background-color: $color-2-light;
+            color: $text-on-2;
             margin: 0;
         }
 
