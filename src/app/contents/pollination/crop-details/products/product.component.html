@@ -3,7 +3,7 @@
         <mat-card-header fxLayout="row" fxLayoutAlign="space-between">
             <mat-card-title>Product Sorting</mat-card-title>
             <div>
-                <button [routerLink] = "['/products', _cropId, 'htable']" mat-fab color="accent"><mat-icon>view_list</mat-icon></button>
+                <button [routerLink] = "['/admin', _cropId, 'htable']" mat-fab color="accent"><mat-icon>view_list</mat-icon></button>
             </div>
         </mat-card-header>
         <div *ngIf="_crop.status !== 'Harvesting' && _crop.status !== 'Closed'">
@@ -31,7 +31,7 @@
                         placeholder="Row Number"
                         #rownumberInput
                         >
-                    </mat-form-field>      
+                    </mat-form-field>
 
                     <div class="incrementor-wrapper" fxLayoutAlign="row" fxLayoutGap="0.5rem" fxLayoutAlign.xs="end">
                         <button mat-raised-button  color="accent" (click)="stepUp(rownumberInput, $event)">+</button><button mat-raised-button  color="accent" (click)="stepDown(rownumberInput, $event)">-</button>
@@ -52,8 +52,8 @@
                     <mat-label>Type</mat-label>
                     <mat-select
                     formControlName="species">
-                        <mat-option *ngFor="let type of _crop.species" [value]="type">
-                            {{ type }}
+                        <mat-option *ngFor="let type of _crop.species" [value]="type.species">
+                            {{ type.species }}
                         </mat-option>
                     </mat-select>
                 </mat-form-field>

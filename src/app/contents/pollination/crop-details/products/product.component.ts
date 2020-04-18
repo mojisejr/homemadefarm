@@ -16,10 +16,10 @@ import { uiService } from '../../../../shared/ui.service'
 })
 
 export class ProductComponent implements OnInit {
-    private _crop: Crop;
-    private _cropId: string;
-    private pollination$: Observable<pollination[]>;
-    private melon: Melon;
+    _crop: Crop;
+    _cropId: string;
+    pollination$: Observable<pollination[]>;
+    melon: Melon;
     addLoaded = true;
     sorted = false;
 
@@ -94,7 +94,7 @@ export class ProductComponent implements OnInit {
                 }
             }
         })
-        
+
     }
 
     stepUp(input: number, event) {

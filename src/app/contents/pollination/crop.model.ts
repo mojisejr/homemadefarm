@@ -9,4 +9,7 @@ export interface Crop {
     toBagAt?: Date;
     species?: Array<any>;
     status?: string;
+    fromTrayToBag?: number;
+    fromToBagCount?: number;
+    fromStartCount?: number;
 }

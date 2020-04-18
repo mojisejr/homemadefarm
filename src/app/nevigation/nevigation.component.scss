@@ -1,3 +1,5 @@
+@import "../../styles.scss";
+
 .mat-button, .siteName  {
     // color: #ffa726;
     color: rgba(#333, 0.8);
@@ -6,6 +8,7 @@
 .siteLink, .siteName {
     text-decoration-line: none;
     font-size: 1.5rem;
+    color: $text-on-2;
     // @media only screen and (max-width: 600px) {
     //     display: none;
     // }
@@ -20,18 +23,18 @@
 .mat-toolbar {
     top: 0;
     position: fixed;
-    background-color: white;
+    background-color: $color-2-light;
     // background-color: #ffa726;
     z-index: 10;
     box-shadow: 1px 1px 20px rgba(#333, 0.5);
-    height: 10vh;
-    @media only screen and (max-width: 600px) {
-        height: 15vh;
-    }
+    // height: 10vh;
+    // @media only screen and (max-width: 600px) {
+    //     height: 15vh;
+    // }
 
-    @media only screen and (max-width: 736px) {
-        height: 20vh;
-    }
+    // @media only screen and (max-width: 736px) {
+    //     height: 20vh;
+    // }
 }
 
 .logo-img {
