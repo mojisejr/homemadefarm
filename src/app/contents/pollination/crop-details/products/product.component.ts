@@ -83,6 +83,8 @@ export class ProductComponent implements OnInit {
                     species: formValue.species,
                     grade: formValue.grade,
                     estHarvestDate: estHarvestDate,
+                    weight: "na",
+                    status: 'confirmed',
                 })
                 if(productData != null) {
                     this.ps.addProduct(productData).then(result => {

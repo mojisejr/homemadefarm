@@ -116,6 +116,13 @@ export class SortingTableComponent implements OnInit, AfterViewInit {
             { columnDef: "info", header: "info", cell: (element: any) => `${ element.info }`}
         ]
 
+        const rspc = [
+          { columnDef: "row", header: "row", cell: (element: any) => `${element.row}` },
+          { columnDef: "species", header: "species", cell: (element: any) => `${element.species}` },
+          { columnDef: "customer", header: "customer", cell: (element: any) => `${element.customer}` },
+          { columnDef: "price", header: "price", cell: (element: any) => `${element.price}` },
+        ]
+
         const specie = [
             { columnDef: "row", header: "row", cell: (element: any) => `${ element.row }` },
             { columnDef: "weight", header: "weight", cell: (element: any) => `${ element.weight}`},
@@ -130,7 +137,12 @@ export class SortingTableComponent implements OnInit, AfterViewInit {
         ]
         switch(by) {
             case "status": {
-                if(status == 'cutted' || status == 'sole') {
+                if(status == 'sole') {
+                    this.displayedColumns = rspc.map(c => c.columnDef);
+                    this.columns = rspc;
+                    break;
+                }
+                if(status == 'cutted') {
                     this.displayedColumns = rws.map(c => c.columnDef);
                     this.columns = rws;
                     break;

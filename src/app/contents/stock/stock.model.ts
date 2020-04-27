@@ -14,4 +14,5 @@ export interface Seed {
     left?: number;
     species?: string;
     estWeight?: string;
+    status?: string;
 }

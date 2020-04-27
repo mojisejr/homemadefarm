@@ -15,7 +15,7 @@ import { FormGroup } from '@angular/forms'
 
 export class AppStockCardComponent implements OnInit {
 
-    private _seed: Seed;
+    _seed: Seed;
 
     @Input()
     set seed(seed: Seed) {
@@ -85,7 +85,7 @@ export class AppStockCardComponent implements OnInit {
                     isFor: "take"
                 }
             })
-    
+
             dialogRef.afterClosed().subscribe(amount => {
                 if(this._seed.total !== 0 && amount != false && this._seed.total > amount) {
                     const left = this._seed.total - amount;
@@ -98,7 +98,7 @@ export class AppStockCardComponent implements OnInit {
                     })
                 } else if(this._seed.total !== 0 && amount != false && this._seed.total < amount){
                     this.ui.dataMessage(`${this._seed.name} has not enough to take`, 2000);
-                } 
+                }
             })
         } else {
             this.ui.dataMessage(`${this._seed.name} has not enough to take`, 2000);
@@ -112,5 +112,5 @@ export class AppStockCardComponent implements OnInit {
     //         }
     //     })
     // }
-    
+
 }

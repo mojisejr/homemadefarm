@@ -54,8 +54,8 @@ export class ProductTableComponent implements OnInit, AfterViewInit, OnDestroy {
         this.route.params.subscribe(id => {
             this.docId = id['id'];
         })
-        
-        
+
+
     }
 
     ngAfterViewInit() {
@@ -95,14 +95,33 @@ export class ProductTableComponent implements OnInit, AfterViewInit, OnDestroy {
     onUpdate(element) {
 
         this.ui.showProductUpdateStatusDialog(element).afterClosed().subscribe(result => {
-            switch(result.status) {
-                case "cutted":
+          if(result.formValue === undefined) {
+            return;
+          }
+            const status = result.formValue.status;
+            const id = result.id;
+            const value = result.formValue;
+            switch(status) {
+                case "cutted": {
+                  if(status !== null
+                    || value.weight !== null) {
+                    this.ps.updateDetail(id, value, "UPDATE_PRODUCT_SORTING")
+                    .then(() => {
+                      this.ui.dataMessage(`UPDATE: ${element.row} -> CUTTED`, 2000);
+                    })
+                    .catch(error => {
+                      this.ui.dataMessage(`UPDATE_ERROR: ${element.row}`, 2000);
+                    })
+                  }
+                }
                 case "sole": {
-                    if(result.status !== null, result.weight !== null) {
-                        const data = { status: result.status, weight: result.weight };
-                        this.ps.updateDetail(result.id, data, "UPDATE_PRODUCT_SORTING")
-                        .then(result => {
-                            this.ui.dataMessage(`UPDATE: ${element.row} -> CUTTED`, 2000);
+                    if(status !== null ||
+                      value.weight !== null ||
+                      value.price !== null ||
+                      value.customer !== null) {
+                        this.ps.updateDetail(id, value, "UPDATE_PRODUCT_SORTING")
+                        .then(() => {
+                            this.ui.dataMessage(`UPDATE: ${element.row} -> SOLE`, 2000);
                         })
                         .catch(error => {
                             this.ui.dataMessage(`UPDATE_ERROR: ${element.row}`, 2000);
@@ -111,10 +130,11 @@ export class ProductTableComponent implements OnInit, AfterViewInit, OnDestroy {
                     break;
                 }
                 case "eaten": {
-                    if(result.status !== null, result.weight !== null) {
-                        const data = { status: result.status, weight: result.weight, brix: result.brix, info: result.info };
-                        this.ps.updateDetail(result.id, data, "UPDATE_PRODUCT_SORTING")
-                        .then(result => {
+                    if(status !== null ||
+                      value.weight !== null ||
+                      value.brix !== null) {
+                        this.ps.updateDetail(id, value, "UPDATE_PRODUCT_SORTING")
+                        .then(() => {
                             this.ui.dataMessage(`UPDATE: ${element.row} -> EATEN[TESTING]`, 2000);
                         })
                         .catch(error => {
@@ -124,10 +144,11 @@ export class ProductTableComponent implements OnInit, AfterViewInit, OnDestroy {
                     break;
                 }
                 case "lost": {
-                    if(result.status !== null, result.weight !== null) {
-                        const data = { status: result.status, weight: result.weight, info: result.info };
-                        this.ps.updateDetail(result.id, data, "UPDATE_PRODUCT_SORTING")
-                        .then(result => {
+                    if(status !== null ||
+                      value.weight !== null ||
+                      value.info !== null) {
+                        this.ps.updateDetail(id, value, "UPDATE_PRODUCT_SORTING")
+                        .then(() => {
                             this.ui.dataMessage(`UPDATE: ${element.row} -> LOST[TESTING]`, 2000);
                         })
                         .catch(error => {
@@ -146,6 +167,14 @@ export class ProductTableComponent implements OnInit, AfterViewInit, OnDestroy {
         if(this.dataSource != undefined) {
             this.dataSource.filter = filterValue.trim().toLowerCase();
         }
-        
     }
+
+    // calcTotalWeight() {
+    //   var totalWeight = 0;
+    //   totalWeight = this.dataSource.data.map(t => t.weight).reduce((sum, value) => sum + value, 0);
+    //   console.log("weight summation");
+    //   console.log(totalWeight);
+    //   var avgWeight = totalWeight / this.dataSource.data.length;
+    //   console.log(`average weight: ${avgWeight}`);
+    // }
 }

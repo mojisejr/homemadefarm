@@ -31,19 +31,19 @@ export class uiService {
             });
 
             return dialogRef;
-        } 
+        }
     }
     showProductUpdateStatusDialog(element) {
+      console.log(element);
         if(element != null) {
             const dialogRef = this.dialog.open(AppProductStatusDialogComponent, {
                 data: {
-                    id: element.id,
-                    row: element.row
+                    ...element,
                 }
             });
 
             return dialogRef;
-        } 
+        }
     }
 
     showDatePickerDialog() {

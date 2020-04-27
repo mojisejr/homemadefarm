@@ -29,9 +29,9 @@ export class StockService {
         }))
     }
 
-    takeSeed(name, amount) {
-        
-    }
+    // takeSeed(name, amount) {
+
+    // }
 
     getSeedsStockList(): Observable<Seed[]> {
         return this.af.collection<Seed>('melon')

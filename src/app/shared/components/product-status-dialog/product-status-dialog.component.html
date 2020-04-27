@@ -1,7 +1,7 @@
 <h1 mat-dialog-title>Status Update</h1>
 <div fxLayout="column" mat-dialog-content>
    <div>
-       Row: {{ input.row }}
+       Row: {{ element.row }}
    </div>
    <mat-form-field>
     <mat-label>Status</mat-label>
@@ -12,11 +12,122 @@
         <mat-option value='lost'>lost</mat-option>
     </mat-select>
    </mat-form-field>
+   <div *ngIf="selected == 'cutted'" >
+    <form [formGroup]="cuttedForm"  fxLayout="column">
+      <mat-form-field>
+        <input
+        type='number'
+        matInput
+        placeholder="weight"
+        formControlName="weight">
+      </mat-form-field>
+    </form>
+    <div mat-dialog-actions>
+      <button mat-raised-button [mat-dialog-close] = "false">Cancel</button>
+      <button mat-raised-button [mat-dialog-close] = "{ id: element.id, formValue: cuttedForm.value }">Update</button>
+    </div>
+   </div>
 
+   <div *ngIf="selected == 'sole'">
+    <form  [formGroup]="soleForm" fxLayout="column">
+      <mat-form-field>
+        <input
+        type='number'
+        matInput
+        placeholder="weight"
+        formControlName="weight">
+      </mat-form-field>
+
+      <mat-form-field>
+       <input
+       type='price'
+       matInput
+       placeholder="price"
+       formControlName="price">
+     </mat-form-field>
+
+     <mat-form-field>
+       <input
+       type='text'
+       matInput
+       placeholder="customer"
+       formControlName="customer">
+     </mat-form-field>
+
+     <mat-form-field>
+       <input
+       type='text'
+       matInput
+       placeholder="info"
+       formControlName="info">
+     </mat-form-field>
+    </form>
+    <div mat-dialog-actions>
+      <button mat-raised-button [mat-dialog-close] = "false">Cancel</button>
+      <button mat-raised-button [mat-dialog-close] = "{ id: element.id, formValue: soleForm.value }">Update</button>
+    </div>
+   </div>
+
+   <div *ngIf="selected == 'eaten'" >
+    <form [formGroup]="eatenForm" fxLayout="column">
+      <mat-form-field>
+        <input
+        type='number'
+        matInput
+        placeholder="weight"
+        formControlName="weight">
+      </mat-form-field>
+
+      <mat-form-field>
+       <input
+       type='text'
+       matInput
+       placeholder="brix"
+       formControlName="brix">
+     </mat-form-field>
+
+     <mat-form-field>
+       <input
+       type='text'
+       matInput
+       placeholder="info"
+       formControlName="info">
+     </mat-form-field>
+    </form>
+    <div mat-dialog-actions>
+      <button mat-raised-button [mat-dialog-close] = "false">Cancel</button>
+      <button mat-raised-button [mat-dialog-close] = "{ id: element.id, formValue: eatenForm.value }">Update</button>
+    </div>
+   </div>
+   <div *ngIf="selected == 'lost'">
+    <form  [formGroup]="lostForm" fxLayout="column">
+      <mat-form-field>
+        <input
+        type='number'
+        matInput
+        placeholder="weight"
+        formControlName="weight">
+      </mat-form-field>
+
+     <mat-form-field>
+       <input
+       type='text'
+       matInput
+       placeholder="info"
+       formControlName="info">
+     </mat-form-field>
+    </form>
+    <div mat-dialog-actions>
+      <button mat-raised-button [mat-dialog-close] = "false">Cancel</button>
+      <button mat-raised-button [mat-dialog-close] = "{ id: element.id, formValue: lostForm.value }">Update</button>
+    </div>
+   </div>
+<!--
     <mat-form-field>
            <input type="number"
            matInput
            [(ngModel)]="weight"
+           id="weight"
            placeholder="weight">
     </mat-form-field>
 
@@ -33,8 +144,4 @@
     [(ngModel)]="info"
     placeholder="info">
 </mat-form-field>
-</div>
-<div mat-dialog-actions>
-    <button mat-raised-button [mat-dialog-close] = "false">Cancel</button>
-    <button mat-raised-button [mat-dialog-close] = "{ id: input.id, status: selected, weight: weight, brix: brix, info: info  }">Update</button>
-</div>
+</div> -->

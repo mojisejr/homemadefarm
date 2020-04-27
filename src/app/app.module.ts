@@ -39,6 +39,8 @@ import { ProductComponent } from './contents/pollination/crop-details/products/p
 import { ProductTableComponent } from './contents/pollination/crop-details/products/product-table/product-table.component'
 import { SortingTableComponent } from './contents/pollination/crop-details/products/sorting-table/sorting-table.component'
 
+import { AppReportComponent } from './contents/pollination/crop-details/report/report.component';
+
 //Activities Component
 import { AppActivitiesComponent } from './contents/activities/activities.component'
 import { AppActivitiesTableComponent } from './contents/activities/activity-table/activities-table.component'
@@ -101,6 +103,7 @@ import { DatePipe } from '@angular/common';
     AppStockListComponent,
     AppStockCardComponent,
     AppStockCardDialogComponent,
+    AppReportComponent,
   ],
   imports: [
     BrowserModule,
@@ -119,8 +122,8 @@ import { DatePipe } from '@angular/common';
   providers: [{provide: FirestoreSettingsToken, useValue: {}}, DatePipe],
   bootstrap: [AppComponent],
   entryComponents: [
-    ConfirmDialogComponent, 
-    AppConfirmDialogComponent, 
+    ConfirmDialogComponent,
+    AppConfirmDialogComponent,
     AppProductStatusDialogComponent,
     AppDatepickerDialogComponent,
     AppActivityDialogComponent,
