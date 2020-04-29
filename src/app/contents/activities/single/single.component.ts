@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core'
+import { Component, OnInit, Input, OnDestroy } from '@angular/core'
 import { Crop } from '../../pollination/crop.model'
 import { Activity, Fertilizer } from '../activity.model'
 import { DatePipe } from '@angular/common'
@@ -6,6 +6,7 @@ import { Helper } from '../../../shared/helper.service'
 import { uiService } from '../../../shared/ui.service'
 import { FormGroup, FormControl, Validators, FormArray, FormBuilder } from '@angular/forms';
 import { ActivityService } from '.././activity.service'
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -15,12 +16,18 @@ import { ActivityService } from '.././activity.service'
 })
 
 
-export class AppSingleActivitiesComponent implements OnInit {
+export class AppSingleActivitiesComponent implements OnInit, OnDestroy {
+    fertSub: Subscription;
+    fertCount: Number;
+    embedSub: Subscription;
+    embedCount: Number;
+    spraySub: Subscription;
+    sprayCount: Number;
 
-    private _crop: Crop;
-    private _docId: string;
-    private activityForm: FormGroup;
-    private _fertData = [];
+    _crop: Crop;
+    _docId: string;
+    activityForm: FormGroup;
+    _fertData = [];
 
     @Input()
     set crop(crop: Crop) {
@@ -58,7 +65,8 @@ export class AppSingleActivitiesComponent implements OnInit {
             // ]),
             description: [null],
             // counter: [this.hp.dateDiff(new Date(), this._crop.toBagAt)] || null
-        })
+        });
+        this.displayDataOnCard();
     }
 
 
@@ -86,17 +94,6 @@ export class AppSingleActivitiesComponent implements OnInit {
         }
     }
 
-    // addFertilizerClick() {
-    //     (<FormArray>this.activityForm.get('fertilizer')).push(this.addFertilizerFromGroup());
-    // }
-    // addFertilizerFromGroup(): FormGroup {
-    //     return this.fb.group({
-    //         formula: [null, Validators.required],
-    //         amount: [null, Validators.required],
-    //         unit: [null, Validators.required]
-    //     })
-    // }
-
     onSubmit() {
         const data = new Object() as Activity;
         const formValue = this.activityForm.value;
@@ -119,5 +116,23 @@ export class AppSingleActivitiesComponent implements OnInit {
         } else {
             this.ui.dataMessage("Please fill all form fields", 2000);
         }
+    }
+
+    displayDataOnCard() {
+      this.fertSub = this.as.subFertSum.subscribe(data => {
+        this.fertCount = data;
+      });
+      this.embedSub = this.as.subEmbedSum.subscribe(data => {
+        this.embedCount = data;
+      });
+      this.spraySub = this.as.subSpraySum.subscribe(data => {
+        this.sprayCount = data;
+      })
+    }
+
+    ngOnDestroy() {
+      this.fertSub.unsubscribe();
+      this.embedSub.unsubscribe();
+      this.spraySub.unsubscribe();
     }
 }

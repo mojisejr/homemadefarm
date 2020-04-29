@@ -1,0 +1,39 @@
+@import '../../../../styles.scss';
+
+.card {
+  &-container {
+    width: 90%;
+    height: 7rem;
+    padding: 1rem;
+    background-color: $color-2-light;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    color: $text-on-2;
+    box-shadow: 5px 5px 5px rgba($color: #000000, $alpha: 0.2);
+  }
+
+  &-header {
+    display: flex;
+    justify-content: flex-end;
+    font-size: 0.5rem;
+    h1 {
+      margin: 0;
+    }
+  }
+
+  &-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    h4 {
+      margin: 0;
+      font-size: 1.6rem;
+    }
+  }
+}
+
+.small {
+  font-size: 0.8rem;
+}

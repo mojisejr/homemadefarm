@@ -9,6 +9,9 @@ import { Activity } from './activity.model';
     providedIn: 'root',
 })
 export class ActivityService {
+   subFertSum = new Subject<Number>();
+   subEmbedSum = new Subject<Number>();
+   subSpraySum = new Subject<Number>();
 
     constructor(
         private db: AngularFirestore,
@@ -23,14 +26,6 @@ export class ActivityService {
         .catch(err => {
             this.ui.dataMessage(err, 2000);
         })
-    }
-    
-    updateActivity() {
-
-    }
-
-    deleteActivity(docId: string) {
-
     }
 
     getActivityListByDocId(docId: string): Observable<Activity[]> {
@@ -48,9 +43,4 @@ export class ActivityService {
             })
         )
     }
-
-    addBatchActivities() {
-    }
-
-     
 }

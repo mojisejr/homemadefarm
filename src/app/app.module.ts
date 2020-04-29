@@ -38,6 +38,7 @@ import { CropDetailsComponent } from './contents/pollination/crop-details/crop-d
 import { ProductComponent } from './contents/pollination/crop-details/products/product.component'
 import { ProductTableComponent } from './contents/pollination/crop-details/products/product-table/product-table.component'
 import { SortingTableComponent } from './contents/pollination/crop-details/products/sorting-table/sorting-table.component'
+import { AppStatusCardComponent } from './shared/components/status-card/status-card.component';
 
 import { AppReportComponent } from './contents/pollination/crop-details/report/report.component';
 
@@ -104,6 +105,7 @@ import { DatePipe } from '@angular/common';
     AppStockCardComponent,
     AppStockCardDialogComponent,
     AppReportComponent,
+    AppStatusCardComponent,
   ],
   imports: [
     BrowserModule,

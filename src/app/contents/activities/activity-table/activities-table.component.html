@@ -1,8 +1,8 @@
 <div class="table-container">
     <mat-card>
-        <mat-card-content *ngIf="dataSource$ | async; else loading; let dataSource">
+        <mat-card-content *ngIf="dataSource$ | async; let dataSource">
             <mat-table [dataSource]="dataSource">
-                
+
                 <ng-container matColumnDef="date">
                     <mat-header-cell *matHeaderCellDef>date</mat-header-cell>
                     <mat-cell *matCellDef="let element" >{{ element.date }}</mat-cell>

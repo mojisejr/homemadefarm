@@ -1,0 +1,15 @@
+.report {
+  &-container {
+    background-color: wheat;
+    width: 100%;
+    height: 100%;
+  }
+
+  &-body {
+    position: absolute;
+    top: 50px;
+    left: 50px;
+    height: 100%;
+    background-color: slategray;
+  }
+}

@@ -15,75 +15,63 @@
                     <div ngStyle.xs="width: 90%;" fxLayout="column" fxLayoutGap="1rem" fxLayoutAlign="center" class="dashboard">
                         <div fxLayout.xs="column" ngStyle.xs="width: 100%;" fxLayout="row wrap" fxLayoutGap="1rem" class="row-content-1">
                             <div class="crop-details">
-                                <mat-card>
-                                    <mat-card-header>
-                                        <mat-card-subtitle>Created At</mat-card-subtitle>
-                                    </mat-card-header>
-                                    <mat-card-content>
-                                        <h3>{{ crop.createdAt }}</h3>
-                                    </mat-card-content>
-                                </mat-card>
+                                <app-status-card
+                                [data]="crop.createdAt"
+                                title="วันที่เริ่มปลูก"
+                                card_hint="เร่ิมต้นตั้งแต่เพาะเมล็ด">
+                              </app-status-card>
                             </div>
                             <div class="totray">
-                                <mat-card>
-                                    <mat-card-header>
-                                        <mat-card-subtitle>toTrayAt</mat-card-subtitle>
-                                    </mat-card-header>
-                                    <mat-card-content *ngIf="crop.toTrayAt != null; else trayUpdate;">
-                                       <h3>{{ crop.toTrayAt }}</h3>
-                                    </mat-card-content>
-                                </mat-card>
+                                <app-status-card
+                                *ngIf="crop.toTrayAt != null; else trayUpdate;"
+                                [data]="crop.toTrayAt"
+                                title="วันที่ลงถาดเพาะชำ"
+                                card_hint="วันที่ลงถาดเพาะชำ">
+                              </app-status-card>
                             </div>
                             <div *ngIf="crop.status != 'Initial'" class="tobag">
-                                <mat-card>
-                                    <mat-card-header>
-                                        <mat-card-subtitle>toBagAt</mat-card-subtitle>
-                                    </mat-card-header>
-                                    <mat-card-content *ngIf="crop.toBagAt != null; else bagUpdate;">
-                                        <h3>{{ crop.toBagAt }}</h3>
-                                    </mat-card-content>
-                                </mat-card>
+                                <app-status-card
+                                *ngIf="crop.toBagAt != null; else bagUpdate;"
+                                [data]="crop.toBagAt"
+                                title="วันที่ปลูกลงแปลง"
+                                card_hint="วันที่ปลูกลงแปลงเพาะปลูก">
+                              </app-status-card>
                             </div>
                             <div *ngIf="crop.status === 'Closed'" class="crop-dayCount">
-                                <mat-card>
-                                    <mat-card-header>
-                                        <mat-card-subtitle>fromStart</mat-card-subtitle>
-                                    </mat-card-header>
-                                    <mat-card-content>
-                                        <h3>{{ crop.fromStartCount }} days</h3>
-                                    </mat-card-content>
-                                </mat-card>
+                                <app-status-card
+                                [data]="crop.fromStartCount"
+                                title="ระยะเวลาปลูก (วัน)"
+                                card_hint="จำนวนวันทั้งหมดที่ใช้ในการปลูกคอร์ปนี้">
+                              </app-status-card>
                             </div>
                             <div *ngIf="crop.status === 'Closed'" class="crop-dayCount">
-                                <mat-card>
-                                    <mat-card-header>
-                                        <mat-card-subtitle>fromTrayToBag</mat-card-subtitle>
-                                    </mat-card-header>
-                                    <mat-card-content>
-                                        <h3>{{ crop.fromTrayToBag }} days</h3>
-                                    </mat-card-content>
-                                </mat-card>
+                                <app-status-card
+                                [data]="crop.fromTrayToBag"
+                                title="ระยะการเพาะกล้า (วัน)"
+                                card_hint="เริ่มต้นจากลงถาดจนถึงลงแปลงปลูก">
+                              </app-status-card>
                             </div>
                             <div class="crop-dayCount">
-                                <mat-card>
-                                    <mat-card-header>
-                                        <mat-card-subtitle>fromToBag</mat-card-subtitle>
-                                    </mat-card-header>
-                                    <mat-card-content>
-                                        <h3 *ngIf="crop.status != 'Closed'">{{ dayCount }} days</h3>
-                                        <h3 *ngIf="crop.status === 'Closed'">{{ crop.fromToBagCount }} days [CLOSED]</h3>
-                                    </mat-card-content>
-                                </mat-card>
+                              <app-status-card
+                                *ngIf="crop.status != 'Closed'"
+                                [data]="dayCount"
+                                title="ระยะเวลาปลูกหลังจากลงแปลง (วัน)"
+                                card_hint="นับตั้งแต่ลงแปลงปลูก">
+                              </app-status-card>
+
+                              <app-status-card
+                                *ngIf="crop.status === 'Closed'"
+                                [data]="crop.fromToBagCount"
+                                title="ระยะเวลาปลูกหลังจากลงแปลง (วัน)"
+                                card_hint="นับตั้งแต่ลงแปลงปลูก">
+                              </app-status-card>
                             </div>
                         </div>
-                        <mat-card>
-                            <mat-card-header>
-                                <mat-card-subtitle>Status</mat-card-subtitle>
-                            </mat-card-header>
-                            <mat-card-content fxLayoutAlign="center center">
-                                <h3>{{ crop.status }}</h3>
-                            </mat-card-content>
-                        </mat-card>
+                        <app-status-card
+                                [data]="crop.status"
+                                title="สถานะ"
+                                card_hint="ตอนนี้ถึงขั้นตอนไหนแล้ว">
+                              </app-status-card>
                         <mat-card *ngIf="crop.status != 'Initial'  && crop.status != 'Closed'" class="tagTable">
                             <div class="tagTable-selector">
 
@@ -159,7 +147,7 @@
                 </div>
             </mat-tab>
             <mat-tab *ngIf="crop.status === 'Closed'" label="Report">
-              <app-report [crop]="crop" [docId]=[docId]></app-report>
+              <app-report [crop]="crop" [docId]="docId"></app-report>
             </mat-tab>
         </mat-tab-group>
     </div>
