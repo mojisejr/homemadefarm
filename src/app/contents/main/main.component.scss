@@ -9,7 +9,7 @@
 
     display: grid;
     grid-template-columns: repeat(12, minmax(min-content, 1fr));
-    grid-template-rows: calc(100vh - 10vh) repeat(3, min-content);
+    grid-template-rows: calc(100vh - 10vh) repeat(4, min-content);
     justify-items: center;
     align-items: center;
 }
@@ -138,7 +138,88 @@
     100% {
         opacity: 0;
     }
-    
+
+}
+
+.advertise {
+  &-box-1 {
+    grid-column: 2 / span 10;
+    @media only screen and (min-width: 1920px) and (max-width: 5000px) {
+      grid-row: 3 / 4;
+    }
+    width: 100%;
+    height: 30rem;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 5px 5px 10px rgba(#333, 0.2);
+    @media only screen and (min-width: 414px) {
+      height: 32rem;
+    }
+
+    @media only screen and (min-width: 414px) {
+      height: 33rem;
+    }
+  }
+  &-header {
+    width: 50%;
+    background-image: url("../../../assets/mangosteen1.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    @media only screen and (min-width: 375px) {
+      // background-size: cover;
+      object-fit: fill;
+    }
+    @media only screen and (min-width: 1920px) and (max-width: 5000px) {
+      background-size: cover;
+      object-fit: cover;
+    }
+  }
+  &-content {
+    width: 50%;
+    background-color: #856c8b;
+    background-size: cover;
+    color: white;
+    &-header {
+      font-size: 2.4rem;
+      @media only screen and (min-width: 414px) {
+        font-size: 2.8rem;
+      }
+
+      @media only screen and (min-width: 1200px) {
+        font-size: 3.8rem;
+      }
+    }
+    &-detail * {
+      @media only screen and (min-width: 800px) {
+        font-size: 1.5rem;
+      }
+
+      @media only screen and (min-width: 1200px) {
+        font-size: 2rem;
+      }
+    }
+  }
+
+  &-btn, :visited, :link {
+    width: 70%;
+    margin: 0 auto;
+    display: inline-block;
+    text-decoration: none;
+    background-color: #a4c5c6;
+    padding: 1rem;
+    border-radius: 2px;
+    color: #333;
+    font-weight: bold;
+    text-align: center;
+  }
+}
+
+.k {
+  &-5box, &-10box {
+    font-size: 1.2rem;
+    font-weight: bold;
+    background-color: #333;
+  }
 }
 
 // .subscribe {
@@ -180,7 +261,7 @@
     grid-column: 2 / span 10;
 
     @media only screen and (min-width: 1920px) and (max-width: 5000px) {
-        grid-row: 3 / 4;
+        grid-row: 4 / 5;
         display: flex;
         margin: 10rem 0;
     }
