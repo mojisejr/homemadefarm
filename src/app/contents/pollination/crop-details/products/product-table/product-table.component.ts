@@ -30,7 +30,7 @@ export class ProductTableComponent implements OnInit, AfterViewInit, OnDestroy {
 
     // displayedColumns = ["status", "row", "tagColor", "species", "grade", "weight", "estHarvestDate", 'id' ];
     displayedColumns = this.columns.map(c => c.columnDef);
-    private dataSource: MatTableDataSource<Product>;
+    dataSource: MatTableDataSource<Product>;
     private productSubscription: Subscription;
     // private rawData: Observable<Product[]>;
 

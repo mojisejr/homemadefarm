@@ -7,6 +7,6 @@ export interface Product {
     species: string,
     estHarvestDate?: Date,
     createdAt: Date,
-    weight?: number,
+    weight?: any,
     status?: string,
 }

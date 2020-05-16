@@ -146,9 +146,6 @@
                     <app-single-activities [crop]="crop" [docId]=[docId]></app-single-activities>
                 </div>
             </mat-tab>
-            <mat-tab *ngIf="crop.status === 'Closed'" label="Report">
-              <app-report [crop]="crop" [docId]="docId"></app-report>
-            </mat-tab>
         </mat-tab-group>
     </div>
 </div>

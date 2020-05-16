@@ -40,7 +40,7 @@ import { ProductTableComponent } from './contents/pollination/crop-details/produ
 import { SortingTableComponent } from './contents/pollination/crop-details/products/sorting-table/sorting-table.component'
 import { AppStatusCardComponent } from './shared/components/status-card/status-card.component';
 
-import { AppReportComponent } from './contents/pollination/crop-details/report/report.component';
+import { AppReportComponent } from './contents/pollination/crop-details/products/product-table/report/report.component';
 
 //Activities Component
 import { AppActivitiesComponent } from './contents/activities/activities.component'
