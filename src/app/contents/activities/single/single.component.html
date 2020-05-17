@@ -9,17 +9,23 @@
       <app-status-card
       [data]="fertCount"
       title="ใส่ปุ๋ยทั่้งหมด (ครั้ง)"
-      card_hint="จำนวนครั้งในการใส่ปุ๋ย">
+      card_hint="จำนวนครั้งในการใส่ปุ๋ย"
+      format="number"
+      unit="ครั้ง">
     </app-status-card>
     <app-status-card
       [data]="embedCount"
       title="ฝังปุ๋ยทั่้งหมด (ครั้ง)"
-      card_hint="จำนวนครั้งในการใส่ปุ๋ยแบบฝัง">
+      card_hint="จำนวนครั้งในการใส่ปุ๋ยแบบฝัง"
+      format="number"
+      unit="ครั้ง">>
     </app-status-card>
     <app-status-card
       [data]="sprayCount"
       title="ทางใบทั่้งหมด (ครั้ง)"
-      card_hint="จำนวนครั้งในการใส่ปุ๋ยทางใบ">
+      card_hint="จำนวนครั้งในการใส่ปุ๋ยทางใบ"
+      format="number"
+      unit="ครั้ง">>
     </app-status-card>
     </div>
     <div class="menu-warpper" *ngIf="_crop.status != 'Closed'">

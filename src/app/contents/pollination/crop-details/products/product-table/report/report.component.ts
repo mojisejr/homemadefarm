@@ -27,13 +27,13 @@ export class AppReportComponent implements OnInit {
 
   ngOnInit() {
     if(this.dataValidation()) {
-      this.avgWeight = this.calcSumWeight();
-      this.netWeight = this.calcAvgWeight();
+      this.avgWeight = this.calcAvgWeight();
+      this.netWeight = this.calcSumWeight();
       this.counter = this._datasource.data.length;
       this.aaa = this.gradeSorting();
     } else {
-      this.avgWeight = "N/A";
-      this.netWeight = "N/A";
+      this.avgWeight = "ยังชั่งไม่ครบ";
+      this.netWeight = "ยังชั่งไม่ครบ";
       this.counter = this._datasource.data.length;
       this.aaa = this.gradeSorting();
     }

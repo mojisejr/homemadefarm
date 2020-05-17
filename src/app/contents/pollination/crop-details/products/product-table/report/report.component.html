@@ -3,21 +3,25 @@
 [title]="'น้ำหนักเฉลี่ย'"
 [data]="avgWeight"
 [card_hint]="'น้ำหนักเฉลี่ยในคอร์ปนี้'"
+format="floating"
 [unit]="'กก.'"></app-status-card>
 <app-status-card
 [title]="'น้ำหนักรวม'"
 [data]="netWeight"
 [card_hint]="'น้ำหนักรวมในคอร์ปนี้'"
+format="floating"
 [unit]="'กก.'"></app-status-card>
 <app-status-card
 [title]="'จำนวนทั้งหมด'"
 [data]="counter"
 [card_hint]="'จำนวนผลผลิตทั้งหมด'"
+format="number"
 [unit]="'ลูก'"></app-status-card>
 <app-status-card
 [title]="'จำนวน aaa และ aa'"
 [data]="aaa"
 [card_hint]="'จำนวนผลผลิต aaa / aa ทั้งหมด'"
+format="number"
 [unit]="'ลูก'"></app-status-card>
 </div>
 

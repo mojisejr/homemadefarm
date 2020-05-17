@@ -18,7 +18,8 @@
                                 <app-status-card
                                 [data]="crop.createdAt"
                                 title="วันที่เริ่มปลูก"
-                                card_hint="เร่ิมต้นตั้งแต่เพาะเมล็ด">
+                                card_hint="เร่ิมต้นตั้งแต่เพาะเมล็ด"
+                                format="date">
                               </app-status-card>
                             </div>
                             <div class="totray">
@@ -26,7 +27,8 @@
                                 *ngIf="crop.toTrayAt != null; else trayUpdate;"
                                 [data]="crop.toTrayAt"
                                 title="วันที่ลงถาดเพาะชำ"
-                                card_hint="วันที่ลงถาดเพาะชำ">
+                                card_hint="วันที่ลงถาดเพาะชำ"
+                                format="date">
                               </app-status-card>
                             </div>
                             <div *ngIf="crop.status != 'Initial'" class="tobag">
@@ -34,21 +36,26 @@
                                 *ngIf="crop.toBagAt != null; else bagUpdate;"
                                 [data]="crop.toBagAt"
                                 title="วันที่ปลูกลงแปลง"
-                                card_hint="วันที่ปลูกลงแปลงเพาะปลูก">
+                                card_hint="วันที่ปลูกลงแปลงเพาะปลูก"
+                                format="date">
                               </app-status-card>
                             </div>
                             <div *ngIf="crop.status === 'Closed'" class="crop-dayCount">
                                 <app-status-card
                                 [data]="crop.fromStartCount"
                                 title="ระยะเวลาปลูก (วัน)"
-                                card_hint="จำนวนวันทั้งหมดที่ใช้ในการปลูกคอร์ปนี้">
+                                card_hint="จำนวนวันทั้งหมดที่ใช้ในการปลูกคอร์ปนี้"
+                                unit="วัน"
+                                format="number">
                               </app-status-card>
                             </div>
                             <div *ngIf="crop.status === 'Closed'" class="crop-dayCount">
                                 <app-status-card
                                 [data]="crop.fromTrayToBag"
                                 title="ระยะการเพาะกล้า (วัน)"
-                                card_hint="เริ่มต้นจากลงถาดจนถึงลงแปลงปลูก">
+                                card_hint="เริ่มต้นจากลงถาดจนถึงลงแปลงปลูก"
+                                unit="วัน"
+                                format="number">
                               </app-status-card>
                             </div>
                             <div class="crop-dayCount">
@@ -56,21 +63,26 @@
                                 *ngIf="crop.status != 'Closed'"
                                 [data]="dayCount"
                                 title="ระยะเวลาปลูกหลังจากลงแปลง (วัน)"
-                                card_hint="นับตั้งแต่ลงแปลงปลูก">
+                                card_hint="นับตั้งแต่ลงแปลงปลูก"
+                                format="number"
+                                unit="วัน">
                               </app-status-card>
 
                               <app-status-card
                                 *ngIf="crop.status === 'Closed'"
                                 [data]="crop.fromToBagCount"
                                 title="ระยะเวลาปลูกหลังจากลงแปลง (วัน)"
-                                card_hint="นับตั้งแต่ลงแปลงปลูก">
+                                card_hint="นับตั้งแต่ลงแปลงปลูก"
+                                format="number"
+                                unit="วัน">
                               </app-status-card>
                             </div>
                         </div>
                         <app-status-card
                                 [data]="crop.status"
                                 title="สถานะ"
-                                card_hint="ตอนนี้ถึงขั้นตอนไหนแล้ว">
+                                card_hint="ตอนนี้ถึงขั้นตอนไหนแล้ว"
+                                format="string">
                               </app-status-card>
                         <mat-card *ngIf="crop.status != 'Initial'  && crop.status != 'Closed'" class="tagTable">
                             <div class="tagTable-selector">
@@ -95,29 +107,29 @@
                                 </form>
                                 <mat-table *ngIf="dataSource.length > 0;" [dataSource]="dataSource">
                                     <ng-container matColumnDef="tagColor">
-                                        <mat-header-cell *matHeaderCellDef>tagColor</mat-header-cell>
+                                        <mat-header-cell *matHeaderCellDef>สี</mat-header-cell>
                                         <mat-cell *matCellDef="let element" [style.color]="element.tagColor">{{ element.tagColor }}</mat-cell>
                                     </ng-container>
 
-                                    <ng-container matColumnDef="createdAt">
+                                    <!-- <ng-container matColumnDef="createdAt">
                                         <mat-header-cell *matHeaderCellDef>createdAt</mat-header-cell>
                                         <mat-cell *matCellDef="let element">{{ element.createdAt }}</mat-cell>
-                                    </ng-container>
+                                    </ng-container> -->
 
                                     <ng-container matColumnDef="currentDay">
-                                        <mat-header-cell *matHeaderCellDef>currentDay</mat-header-cell>
+                                        <mat-header-cell *matHeaderCellDef>หลังผสม(วัน)</mat-header-cell>
                                         <mat-cell *matCellDef="let element">{{ element.currentDay }}</mat-cell>
                                     </ng-container>
 
                                     <ng-container matColumnDef="dayLeft">
-                                        <mat-header-cell *matHeaderCellDef>dayLeft</mat-header-cell>
+                                        <mat-header-cell *matHeaderCellDef>เหลืออีก(วัน)</mat-header-cell>
                                         <mat-cell *matCellDef="let element">{{ element.dayLeft }}</mat-cell>
                                     </ng-container>
 
-                                    <ng-container matColumnDef="estHarvestDate">
+                                    <!-- <ng-container matColumnDef="estHarvestDate">
                                         <mat-header-cell *matHeaderCellDef>estHarvestDate</mat-header-cell>
                                         <mat-cell *matCellDef="let element">{{ element.estHarvestDate }}</mat-cell>
-                                    </ng-container>
+                                    </ng-container> -->
 
                                     <ng-container matColumnDef="actions">
                                         <mat-header-cell *matHeaderCellDef><mat-icon>more_vert</mat-icon></mat-header-cell>

@@ -3,7 +3,10 @@
       <h1>{{ _title }}</h1>
     </div>
     <div class="card-content">
-      <h4>{{ _data }} {{ _unit }}</h4>
+      <h4 *ngIf="_format == 'date' ">{{ _data | date }}</h4>
+      <h4 *ngIf="_format == 'floating' ">{{ _data | number: '1.1-2' }} {{ _unit }}</h4>
+      <h4 *ngIf="_format == 'number' ">{{ _data | number: '1.0-0' }} {{ _unit }}</h4>
+      <h4 *ngIf="_format == 'string' ">{{ _data }}</h4>
     </div>
     <div class="card-footer">
       <div class="small">{{ _hint }}</div>

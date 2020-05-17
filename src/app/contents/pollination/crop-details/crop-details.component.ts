@@ -43,8 +43,9 @@ export class CropDetailsComponent implements OnInit {
 
 
 
-    displayedColumns = ['tagColor', 'createdAt', 'currentDay', 'dayLeft', 'estHarvestDate', 'actions'];
- 
+    // displayedColumns = ['tagColor', 'createdAt', 'currentDay', 'dayLeft', 'estHarvestDate', 'actions'];
+       displayedColumns = ['tagColor', 'currentDay', 'dayLeft',  'actions'];
+
 
     constructor(private ps: PollinationService,
         private fb: FirebaseService,
@@ -57,7 +58,7 @@ export class CropDetailsComponent implements OnInit {
         private router: Router) {}
 
     ngOnInit() {
-    
+
         this.afAuth.authState.subscribe(state => {
             if(state == null) {
                 this.router.navigateByUrl('/');
@@ -100,7 +101,7 @@ export class CropDetailsComponent implements OnInit {
     //                 return types.map(type => {
     //                     return {
     //                         ...type,
-    //                         currentDay: this.diffTilNow(type.createdAt), 
+    //                         currentDay: this.diffTilNow(type.createdAt),
     //                         estHarvestDate: this.estHarvestCalc(type.createdAt, melon.harvestdays),
     //                         dayLeft: melon.harvestdays - this.diffTilNow(type.createdAt)
     //                     }
@@ -164,10 +165,10 @@ export class CropDetailsComponent implements OnInit {
     onTagCreate() {
         const value = new Object();
         Object.assign(value, this.tagCreateForm.value,
-            { 
+            {
                 docId: this.docId,
                 createdAt: this.dp.transform(new Date(), "yyyy-MM-dd")
-            } 
+            }
         );
         if(this.tagCreateForm.valid) {
             this.ps.addPollination(value).then(result => {
@@ -233,7 +234,7 @@ export class CropDetailsComponent implements OnInit {
                 fromToBagCount: this.helper.diffTilNow(crop.toBagAt),
                 fromStartCount: this.helper.diffTilNow(crop.createdAt),
                 fromTrayToBag: this.helper.dateDiff(crop.toBagAt, crop.toTrayAt),
-                status: 'Closed' 
+                status: 'Closed'
             })
 
             if(docId) {
