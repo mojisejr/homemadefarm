@@ -1,0 +1,12 @@
+.stock-card-container {
+    margin: 1rem auto;
+    height: 70vh;
+    @media only screen and (max-height: 375px) {
+        height: 60vh;
+        margin: 1rem auto;
+    }
+}
+
+.edit-container {
+    height: 100%;
+}
