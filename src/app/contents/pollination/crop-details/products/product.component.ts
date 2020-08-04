@@ -113,7 +113,7 @@ export class ProductComponent implements OnInit {
         }
     }
 
-    onSorted() {
+    onSorted(event) {
         if(this.sorted === true && this._crop != null && this._crop.status === 'postPollination') {
             this.ps.updateCropStatus(this._cropId, "Harvesting")
             .then(res => {

@@ -15,15 +15,15 @@ import { pollination } from 'src/app/contents/pollination/pollination.model';
 
 export class AppShowCardComponent implements OnInit {
 
-    private showMore = false;
+    showMore = false;
 
-    private _crop: Crop;
-    private dayCount: number;
-    private melon$: Observable<Melon>;
-    private harvestDate: any;
-    private harvestday;
-    private loaded = false;
-    private NoImage;
+    _crop: Crop;
+    dayCount: number;
+    melon$: Observable<Melon>;
+    harvestDate: any;
+    harvestday;
+    loaded = false;
+    NoImage;
     constructor(private hp: Helper,
         private ps: PollinationService) {}
 

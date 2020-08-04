@@ -31,15 +31,15 @@ export class ProductTableComponent implements OnInit, AfterViewInit, OnDestroy {
     // displayedColumns = ["status", "row", "tagColor", "species", "grade", "weight", "estHarvestDate", 'id' ];
     displayedColumns = this.columns.map(c => c.columnDef);
     dataSource: MatTableDataSource<Product>;
-    private productSubscription: Subscription;
+    productSubscription: Subscription;
     // private rawData: Observable<Product[]>;
 
     // dataSource: ProductDataSource;
 
     // @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
-    private docId: string;
-    private isLoaded = false;
+    docId: string;
+    isLoaded = false;
 
 
 

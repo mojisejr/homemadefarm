@@ -14,10 +14,10 @@ import { Activity } from '../activity.model'
 })
 
 export class AppMultiActivitiesComponent implements OnInit {
-    private activityForm: FormGroup;
-    private _crop: Crop;
-    private _fertData = [];
-    private _docId;
+    activityForm: FormGroup;
+    _crop: Crop;
+    _fertData = [];
+    _docId;
 
     @Input()
     set croplist(croplist: Crop) {

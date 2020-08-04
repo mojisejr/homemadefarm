@@ -10,7 +10,7 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog'
 export class AppDatepickerDialogComponent {
 
 
-    private date: any;
+    date: any;
     
-    constructor(@Inject(MAT_DIALOG_DATA) private input: any) {}
+    constructor(@Inject(MAT_DIALOG_DATA) public input: any) {}
 }

@@ -11,7 +11,7 @@ import { Observable } from 'rxjs';
 })
 export class MainComponent implements OnInit {
 
-  private cropList$: Observable<Crop[]>;
+  cropList$: Observable<Crop[]>;
 
   constructor(private ps: PollinationService) { }
 

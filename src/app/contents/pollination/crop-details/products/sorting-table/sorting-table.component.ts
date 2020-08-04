@@ -16,16 +16,16 @@ import { uniq } from 'lodash'
 
 export class SortingTableComponent implements OnInit, AfterViewInit {
 
-    private _docId: string;
-    private dataSource$: Observable<Product[]>;
-    private speciesList: string[];
+    _docId: string;
+    dataSource$: Observable<Product[]>;
+    speciesList: string[];
 
 
-    private displayedColumns;
-    private columns;
+    displayedColumns;
+    columns;
 
-    private _groupby: string;
-    private sortedDate: Date;
+    _groupby: string;
+    sortedDate: Date;
 
     @Input()
     set docId(docId: string) {

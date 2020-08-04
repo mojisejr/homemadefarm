@@ -15,7 +15,7 @@ import { Seed } from '../../../contents/stock/stock.model'
 //no imgurl link
 export class AppStockCreateComponent implements OnInit {
 
-    private xsStyle = "{'width': '90%'}";
+    xsStyle = "{'width': '90%'}";
 
     public addSeedForm: FormGroup;
 

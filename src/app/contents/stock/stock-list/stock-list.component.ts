@@ -11,7 +11,7 @@ import { Seed } from '../stock.model';
 
 export class AppStockListComponent implements OnInit {
 
-    private _seedStock$: Observable<Seed[]>;
+    _seedStock$: Observable<Seed[]>;
 
     constructor(private stock: StockService) {}
 

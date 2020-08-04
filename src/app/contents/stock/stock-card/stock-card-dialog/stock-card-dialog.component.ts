@@ -10,11 +10,11 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
 export class AppStockCardDialogComponent implements OnInit {
 
-    private amount: number;
-    private _seed: Seed;
-    private editForm: FormGroup;
+    amount: number;
+    _seed: Seed;
+    editForm: FormGroup;
     constructor(private fb: FormBuilder,
-        @Inject(MAT_DIALOG_DATA) private input: any
+        @Inject(MAT_DIALOG_DATA) public input: any
     ) {
 
     }
